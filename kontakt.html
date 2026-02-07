@@ -18,6 +18,7 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
         
         /* Feuerwehr Hintergrundmuster */
@@ -33,6 +34,16 @@
                 linear-gradient(45deg, #E62B1E 1px, transparent 1px),
                 linear-gradient(-45deg, #E62B1E 1px, transparent 1px);
             background-size: 60px 60px;
+            animation: bgMove 120s linear infinite;
+        }
+        
+        @keyframes bgMove {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 120px 120px;
+            }
         }
         
         /* Akzent-Muster */
@@ -44,75 +55,169 @@
                 radial-gradient(circle at 20% 30%, rgba(230, 43, 30, 0.03) 2px, transparent 2px),
                 radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.03) 2px, transparent 2px);
             background-size: 80px 80px;
+            animation: patternPulse 20s ease-in-out infinite;
+        }
+
+        @keyframes patternPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
         }
 
         /* Disclaimer-Banner */
         .disclaimer-banner {
             background-color: #333;
             color: white;
-            padding: 12px 0;
+            padding: 12px 15px;
             text-align: center;
             font-size: 0.9rem;
+            animation: slideDown 0.5s ease-out;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+        }
+
+        @media (max-width: 576px) {
+            .disclaimer-banner {
+                font-size: 0.8rem;
+                padding: 10px 12px;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .disclaimer-banner p {
             margin: 0;
-            padding: 0 15px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .disclaimer-banner strong {
             color: #ff9999;
+            animation: pulseWarning 2s infinite;
+        }
+
+        @keyframes pulseWarning {
+            0%, 100% {
+                text-shadow: 0 0 5px rgba(255, 153, 153, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 15px rgba(255, 153, 153, 0.8);
+            }
         }
         
         /* Header */
         header {
             background-color: #E62B1E;
-            padding: 20px 0;
+            padding: 15px 0;
             border-bottom: 4px solid #333;
             position: relative;
             z-index: 100;
+            animation: fadeInHeader 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 0;
+            }
+        }
+
+        @keyframes fadeInHeader {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
         }
         
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: nowrap;
         }
         
         .logo {
             display: flex;
             align-items: center;
+            flex-shrink: 0;
         }
         
         .logo-container {
             display: flex;
             align-items: center;
-            margin-right: 15px;
+            margin-right: 10px;
         }
         
         .logo-image {
-            max-height: 60px;
+            max-height: 50px;
             width: auto;
             display: block;
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .logo-image {
+                max-height: 45px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo-image {
+                max-height: 40px;
+            }
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05) rotate(2deg);
         }
         
-        /* Hamburger Menu */
+        /* ALTER HAMBURGER-MENÜ-STIL */
         .menu-toggle {
             display: none;
             width: 35px;
             height: 30px;
             position: relative;
             cursor: pointer;
-            flex-direction: column;
-            justify-content: space-between;
             z-index: 1001;
+            background: none;
+            border: none;
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
         }
         
         .menu-toggle span {
@@ -122,19 +227,122 @@
             background-color: white;
             border-radius: 3px;
             transition: all 0.3s ease;
+            position: absolute;
+            left: 0;
+        }
+        
+        .menu-toggle span:nth-child(1) {
+            top: 0;
+        }
+        
+        .menu-toggle span:nth-child(2) {
+            top: 13px;
+        }
+        
+        .menu-toggle span:nth-child(3) {
+            top: 26px;
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            top: 13px;
+            transform: rotate(45deg);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            top: 13px;
+            transform: rotate(-45deg);
         }
         
         nav {
-            transition: all 0.5s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background-color: #E62B1E;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: right 0.4s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            /* Overlay für Hintergrund */
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            
+            .nav-overlay.active {
+                display: block;
+            }
         }
         
         nav ul {
             display: flex;
             list-style: none;
         }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 20px;
+                height: 100%;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
         
         nav ul li {
-            margin-left: 20px;
+            margin-left: 15px;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            nav ul li {
+                margin: 0;
+                width: 100%;
+                text-align: center;
+                animation: slideInRight 0.5s ease-out forwards;
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            
+            nav ul li:nth-child(1) { animation-delay: 0.1s; }
+            nav ul li:nth-child(2) { animation-delay: 0.2s; }
+            nav ul li:nth-child(3) { animation-delay: 0.3s; }
+            nav ul li:nth-child(4) { animation-delay: 0.4s; }
+            nav ul li:nth-child(5) { animation-delay: 0.5s; }
+            
+            @keyframes slideInRight {
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
         }
         
         nav ul li a {
@@ -145,51 +353,184 @@
             border: 2px solid transparent;
             border-radius: 4px;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: block;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul li a {
+                padding: 15px 20px;
+                font-size: 1.2rem;
+                border-radius: 8px;
+                margin: 5px 0;
+                background: rgba(255,255,255,0.1);
+            }
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 80%;
         }
         
         nav ul li a:hover,
         nav ul li a.active {
-            border-color: white;
             background-color: rgba(255, 255, 255, 0.1);
         }
+
+        @media (max-width: 768px) {
+            nav ul li a:hover,
+            nav ul li a.active {
+                background-color: rgba(255, 255, 255, 0.2);
+                transform: translateX(10px);
+            }
+        }
         
-        /* Hero Section für Kontakt */
+        /* Hero Section */
         .hero-contact {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1582236820862-c3e9e121c242?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 100px 0;
+            padding: 60px 20px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .hero-contact {
+                padding: 40px 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-contact {
+                padding: 30px 10px;
+            }
+        }
+
+        .hero-contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: heroShine 8s infinite;
+        }
+
+        @keyframes heroShine {
+            0% {
+                left: -100%;
+            }
+            20%, 100% {
+                left: 100%;
+            }
         }
         
         .hero-contact h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .hero-contact h1 {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-contact h1 {
+                font-size: 1.8rem;
+                margin-bottom: 12px;
+            }
         }
         
         .hero-contact p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto 30px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @media (max-width: 768px) {
+            .hero-contact p {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-contact p {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* Kontakt-Sektion */
         .contact-section {
-            padding: 80px 0;
+            padding: 50px 20px;
             background-color: rgba(255, 255, 255, 0.95);
             position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 40px 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-section {
+                padding: 30px 10px;
+            }
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                margin-bottom: 30px;
+            }
         }
         
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #E62B1E;
             margin-bottom: 15px;
             display: inline-block;
@@ -198,54 +539,176 @@
             position: relative;
             z-index: 2;
             background-color: white;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .section-title h2 {
+                font-size: 1.8rem;
+                padding: 0 10px 8px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 1.6rem;
+                padding: 0 8px 6px;
+                margin-bottom: 10px;
+            }
         }
         
         .section-intro {
             text-align: center;
             max-width: 900px;
-            margin: 0 auto 60px;
-            font-size: 1.2rem;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
             color: #555;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            padding: 0 15px;
+        }
+
+        @media (max-width: 768px) {
+            .section-intro {
+                font-size: 1rem;
+                margin-bottom: 30px;
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-intro {
+                font-size: 0.95rem;
+                margin-bottom: 25px;
+                line-height: 1.5;
+            }
         }
         
-        /* Kontakt-Grid */
+        /* Kontakt-Grid - ALLE BUTTONS ZENTRIERT */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                gap: 20px;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-bottom: 30px;
+            }
         }
         
         .contact-card {
             background-color: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 25px 20px;
             text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cardAppear 0.6s ease-out forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .contact-card {
+                padding: 20px 15px;
+            }
+        }
+
+        .contact-card:nth-child(1) { animation-delay: 0.1s; }
+        .contact-card:nth-child(2) { animation-delay: 0.2s; }
+        .contact-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .contact-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(230, 43, 30, 0.12);
+        }
+
+        @media (max-width: 768px) {
+            .contact-card:hover {
+                transform: translateY(-5px) scale(1.01);
+            }
         }
         
         .contact-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #E62B1E;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .contact-icon {
+                font-size: 2.2rem;
+                margin-bottom: 12px;
+            }
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1) rotate(3deg);
+            animation: iconBounce 0.6s ease;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
         }
         
         .contact-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #333;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .contact-title {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
         }
         
         .contact-info {
             margin-bottom: 20px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #555;
+            line-height: 1.5;
+            text-align: center;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .contact-info {
+                font-size: 0.95rem;
+                margin-bottom: 15px;
+            }
         }
         
         .contact-info a {
@@ -253,10 +716,12 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
+            word-break: break-word;
         }
         
         .contact-info a:hover {
             color: #333;
+            text-decoration: underline;
         }
         
         .contact-button {
@@ -264,139 +729,471 @@
             background-color: #E62B1E;
             color: white;
             text-decoration: none;
-            padding: 12px 25px;
+            padding: 10px 20px;
             border-radius: 50px;
             font-weight: bold;
             transition: all 0.3s;
             margin-top: 10px;
+            font-size: 0.95rem;
+            border: 2px solid #E62B1E;
+            min-width: 180px;
+            text-align: center;
+            align-self: center;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .contact-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+                min-width: 160px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-button {
+                width: 100%;
+                max-width: 250px;
+            }
         }
         
         .contact-button:hover {
             background-color: #333;
+            border-color: #333;
             transform: scale(1.05);
+            animation: buttonPulse 0.5s ease;
+        }
+
+        @keyframes buttonPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(51, 51, 51, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(51, 51, 51, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(51, 51, 51, 0);
+            }
         }
         
-        /* Formular-Bereich */
+        /* Formular-Bereich - ALLE BUTTONS ZENTRIERT */
         .form-section {
             background-color: #f8f8f8;
-            padding: 80px 0;
+            padding: 50px 20px;
             position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .form-section {
+                padding: 40px 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-section {
+                padding: 30px 10px;
+            }
         }
         
         .form-container {
             background-color: white;
             border-radius: 10px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 30px;
             max-width: 900px;
             margin: 0 auto;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-container {
+                padding: 20px 15px;
+                border-radius: 8px;
+            }
         }
         
         .form-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #333;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .form-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-title {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
         }
         
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        @media (max-width: 576px) {
+            .form-group {
+                margin-bottom: 12px;
+            }
         }
         
         .form-label {
             display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
+            font-weight: 600;
+            margin-bottom: 6px;
             color: #555;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .form-label {
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+            }
         }
         
         .form-control {
             width: 100%;
-            padding: 15px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 16px;
             transition: border-color 0.3s;
+            -webkit-appearance: none;
+            appearance: none;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .form-control {
+                padding: 10px 12px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-control {
+                padding: 10px;
+            }
         }
         
         .form-control:focus {
             border-color: #E62B1E;
             outline: none;
+            box-shadow: 0 0 0 2px rgba(230, 43, 30, 0.1);
+            animation: inputFocus 0.3s ease;
+        }
+
+        @keyframes inputFocus {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.01);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
         
         textarea.form-control {
-            min-height: 150px;
+            min-height: 120px;
             resize: vertical;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            textarea.form-control {
+                min-height: 100px;
+            }
         }
         
         .form-button {
             background-color: #E62B1E;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 1.1rem;
+            padding: 12px 25px;
+            font-size: 1rem;
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
             display: block;
-            margin: 30px auto 0;
-            min-width: 200px;
+            margin: 25px auto 0;
+            min-width: 180px;
+            text-align: center;
+            align-self: center;
+        }
+
+        @media (max-width: 768px) {
+            .form-button {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                min-width: 160px;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-button {
+                width: 100%;
+                max-width: 250px;
+                padding: 12px;
+            }
         }
         
         .form-button:hover {
             background-color: #333;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 43, 30, 0.2);
+            animation: formButtonPulse 0.5s ease;
+        }
+
+        @keyframes formButtonPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(230, 43, 30, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(230, 43, 30, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(230, 43, 30, 0);
+            }
+        }
+        
+        /* KARTEN-BEREICH - AUF MOBILE GANZ RAUS */
+        .map-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .map-section {
+                padding: 50px 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .map-section {
+                display: none; /* Karte komplett raus auf Mobile */
+            }
+        }
+        
+        .map-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 992px) {
+            .map-wrapper {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        .map-info-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-top: 5px solid #E62B1E;
+            transition: transform 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .map-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(230, 43, 30, 0.15);
+        }
+        
+        .map-info-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            width: 100%;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .map-info-header i {
+            font-size: 3rem;
+            color: #E62B1E;
+            background: rgba(230, 43, 30, 0.1);
+            padding: 20px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        
+        .map-info-header h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .map-info-header h3 {
+                font-size: 1.3rem;
+            }
+        }
+        
+        .map-info-content {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .map-info-content p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 1rem;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        
+        .map-info-content i {
+            color: #E62B1E;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .map-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        @media (max-width: 576px) {
+            .map-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        .map-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: #E62B1E;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 160px;
+            text-align: center;
+            border: 2px solid #E62B1E;
+            margin: 0 auto;
+        }
+        
+        .map-button:hover {
+            background: white;
+            color: #E62B1E;
+            transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(230, 43, 30, 0.3);
         }
         
-        /* Karten-Bereich */
-        .map-section {
-            padding: 0;
-            position: relative;
+        .map-button.secondary {
+            background: #333;
+            border-color: #333;
+        }
+        
+        .map-button.secondary:hover {
+            background: white;
+            color: #333;
         }
         
         .map-container {
-            height: 450px;
-            width: 100%;
             position: relative;
+            border-radius: 15px;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            height: 450px;
+        }
+
+        @media (max-width: 768px) {
+            .map-container {
+                height: 400px;
+            }
         }
         
-        .map-overlay {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            background-color: white;
-            padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            z-index: 10;
-            max-width: 350px;
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
         }
         
-        .map-title {
-            font-size: 1.5rem;
-            color: #E62B1E;
-            margin-bottom: 15px;
-        }
-        
-        .map-address {
-            margin-bottom: 15px;
-            color: #555;
-        }
-        
-        /* FAQ Sektion */
+        /* VERBESSERTE FAQ-SEKTION MIT MEHR ANIMATIONEN */
         .faq-section {
-            padding: 80px 0;
+            padding: 60px 20px;
             background-color: rgba(255, 255, 255, 0.95);
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .faq-section {
+                padding: 50px 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .faq-section {
+                padding: 40px 10px;
+            }
         }
         
         .accordion {
@@ -406,11 +1203,33 @@
         
         .accordion-item {
             margin-bottom: 15px;
-            border-radius: 8px;
-            overflow: visible; /* Wichtig: Geändert zu "visible" */
+            border-radius: 10px;
+            overflow: hidden;
             border: 1px solid #eee;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             background-color: white;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: accordionAppear 0.6s ease-out forwards;
+        }
+
+        .accordion-item:nth-child(1) { animation-delay: 0.1s; }
+        .accordion-item:nth-child(2) { animation-delay: 0.2s; }
+        .accordion-item:nth-child(3) { animation-delay: 0.3s; }
+        .accordion-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes accordionAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .accordion-item {
+                margin-bottom: 12px;
+                border-radius: 8px;
+            }
         }
         
         .accordion-header {
@@ -418,142 +1237,448 @@
             background-color: #f9f9f9;
             cursor: pointer;
             position: relative;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.1rem;
             color: #333;
             transition: all 0.3s;
+            text-align: left;
+            width: 100%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        
+
         .accordion-header:hover {
             background-color: #f0f0f0;
+            transform: translateX(5px);
         }
-        
-        .accordion-header::after {
-            content: '\f107';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            position: absolute;
-            right: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: transform 0.3s;
+
+        .accordion-header.active {
+            background-color: #ffecec;
             color: #E62B1E;
         }
         
-        .accordion-header.active::after {
-            transform: translateY(-50%) rotate(180deg);
+        .accordion-icon {
+            font-size: 1.2rem;
+            color: #E62B1E;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+            color: #ff3333;
+        }
+
+        @media (max-width: 768px) {
+            .accordion-header {
+                padding: 18px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .accordion-header {
+                padding: 16px 18px;
+                font-size: 0.95rem;
+            }
         }
         
         .accordion-body {
-            display: none; /* Geändert zu display: none statt max-height */
-            padding: 0; 
+            display: none;
+            padding: 0;
             background-color: white;
+            overflow: hidden;
         }
         
         .accordion-body.active {
-            display: block; /* Wird nun sichtbar, wenn aktiv */
-            padding: 20px 25px;
+            display: block;
+            animation: accordionOpen 0.5s ease-out;
+        }
+
+        @keyframes accordionOpen {
+            from {
+                max-height: 0;
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                max-height: 1000px;
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .accordion-content {
             color: #666;
             line-height: 1.6;
+            font-size: 1rem;
+            padding: 25px;
+            animation: contentFadeIn 0.5s ease-out 0.2s both;
+        }
+
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .accordion-content {
+                font-size: 0.95rem;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .accordion-content {
+                font-size: 0.9rem;
+                padding: 18px;
+            }
         }
         
         .accordion-content ul {
             margin-left: 20px;
-            margin-top: 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .accordion-content li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        .accordion-content li:before {
+            content: '•';
+            color: #E62B1E;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            animation: bulletPoint 0.3s ease-out forwards;
+            opacity: 0;
+        }
+
+        .accordion-body.active .accordion-content li:before {
+            animation: bulletPoint 0.5s ease-out forwards;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+
+        @keyframes bulletPoint {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .accordion-content ul {
+                margin-left: 15px;
+            }
         }
         
         /* Notruf-Banner */
         .emergency-banner {
             background-color: #E62B1E;
             color: white;
-            padding: 40px 0;
+            padding: 40px 20px;
             text-align: center;
-            margin-top: 80px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emergency-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: emergencyShine 3s infinite;
+        }
+
+        @keyframes emergencyShine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .emergency-banner {
+                padding: 30px 15px;
+                margin-top: 50px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .emergency-banner {
+                padding: 25px 10px;
+                margin-top: 40px;
+            }
         }
         
         .emergency-banner h3 {
             font-size: 1.8rem;
             margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .emergency-banner h3 {
+                font-size: 1.5rem;
+                margin-bottom: 12px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .emergency-banner h3 {
+                font-size: 1.3rem;
+            }
         }
         
         .emergency-banner p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto 20px;
             opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .emergency-banner p {
+                font-size: 1rem;
+                margin-bottom: 15px;
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .emergency-banner p {
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
         }
         
         .emergency-number-large {
             font-size: 3.5rem;
             font-weight: bold;
-            margin: 15px 0;
+            margin: 20px 0;
             letter-spacing: 2px;
             display: inline-block;
             background-color: white;
             color: #E62B1E;
-            padding: 5px 30px;
-            border-radius: 10px;
+            padding: 10px 40px;
+            border-radius: 15px;
+            animation: pulseEmergency 1.5s infinite;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        @keyframes pulseEmergency {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .emergency-number-large {
+                font-size: 2.8rem;
+                padding: 8px 30px;
+                margin: 15px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .emergency-number-large {
+                font-size: 2.2rem;
+                padding: 6px 20px;
+                margin: 12px 0;
+                display: block;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
         
-        /* Footer */
+        /* Footer - ALLE BUTTONS ZENTRIERT */
         footer {
             background-color: #333;
             color: white;
-            padding: 40px 0 20px;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 30px 15px 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            footer {
+                padding: 25px 10px 12px;
+            }
         }
         
         .footer-content {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
             margin-bottom: 30px;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                margin-bottom: 25px;
+                gap: 30px;
+                align-items: center;
+            }
         }
         
         .footer-section {
             flex: 1;
             min-width: 250px;
             margin-bottom: 30px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .footer-section {
+                width: 100%;
+                margin-bottom: 25px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-section {
+                margin-bottom: 20px;
+            }
         }
         
         .footer-section h3 {
             font-size: 1.3rem;
             margin-bottom: 20px;
             color: #E62B1E;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .footer-section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
         }
         
         .footer-links ul {
             list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
         
         .footer-links ul li {
             margin-bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .footer-links ul li {
+                margin-bottom: 8px;
+            }
         }
         
         .footer-links ul li a {
             color: #ddd;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 1rem;
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.1);
+            width: 200px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .footer-links ul li a {
+                font-size: 0.95rem;
+                width: 180px;
+            }
         }
         
         .footer-links ul li a:hover {
             color: #E62B1E;
+            transform: translateX(5px);
+            background: rgba(255,255,255,0.15);
         }
         
         .emergency-box {
             background-color: #E62B1E;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 10px;
             text-align: center;
             margin-top: 20px;
+            animation: emergencyBoxPulse 2s infinite;
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes emergencyBoxPulse {
+            0%, 100% {
+                box-shadow: 0 5px 15px rgba(230, 43, 30, 0.3);
+            }
+            50% {
+                box-shadow: 0 5px 25px rgba(230, 43, 30, 0.5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .emergency-box {
+                padding: 15px;
+                margin-top: 15px;
+            }
         }
         
         .emergency-number {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: bold;
             margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .emergency-number {
+                font-size: 1.8rem;
+            }
         }
         
         .copyright {
@@ -564,308 +1689,28 @@
             color: #aaa;
         }
 
-        /* Legal Modals */
-        .legal-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            z-index: 2000;
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background-color: white;
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 30px 30px 60px; /* Mehr Platz am unteren Rand */
-            border-radius: 10px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
-            position: relative;
-            color: #333;
-            max-height: 85vh; /* Höheres Maximum */
-            overflow-y: auto;
-        }
-
-        /* Scrollbar Styling für die Modals */
-        .modal-content::-webkit-scrollbar {
-            width: 14px; /* Etwas breiter für bessere Sichtbarkeit */
-        }
-
-        .modal-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb {
-            background-color: #E62B1E;
-            border-radius: 10px;
-            border: 3px solid #f1f1f1;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #E62B1E;
-            padding-bottom: 15px;
-            position: sticky;
-            top: 0;
-            background-color: white;
-            z-index: 1;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            color: #333;
-            font-size: 1.8rem;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
-            transition: color 0.3s;
-        }
-
-        .close-modal:hover {
-            color: #E62B1E;
-        }
-
-        .modal-body {
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        .modal-body h3 {
-            color: #E62B1E;
-            margin-top: 25px;
-            margin-bottom: 12px;
-        }
-
-        .modal-body h4 {
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        .modal-body p {
-            margin-bottom: 12px;
-        }
-
-        .modal-body ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        .legal-links a {
-            color: #E62B1E;
-            text-decoration: none;
-            margin-right: 15px;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .legal-links a:hover {
-            color: #333;
-            text-decoration: underline;
-        }
-
-        /* Kleiner Pfeil nach unten für lange Modals */
-        .modal-scroll-hint {
-            text-align: center;
-            color: #999;
-            font-size: 0.8rem;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: bounce 2s infinite;
-        }
-
-        .modal-scroll-hint i {
-            margin-left: 5px;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-5px);}
-            60% {transform: translateY(-3px);}
-        }
-        
-        /* Responsive Design */
         @media (max-width: 768px) {
-            /* Header-Layout ändern */
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo {
-                margin-bottom: 10px;
-                justify-content: center;
-            }
-            
-            /* Hamburger-Menü anzeigen */
-            .menu-toggle {
-                display: flex;
-                margin: 15px auto 0;
-            }
-            
-            /* Navigation im Vollbild-Stil */
-            nav {
-                position: fixed;
-                top: -100%;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background-color: #E62B1E;
-                z-index: 1000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: top 0.5s ease;
-            }
-            
-            nav.active {
-                top: 0;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-                margin-top: 0;
-                justify-content: center;
-                flex-wrap: nowrap;
-            }
-            
-            nav ul li {
-                margin: 15px 0;
-                width: 100%;
-                text-align: center;
-            }
-            
-            nav ul li a {
-                display: block;
-                padding: 15px;
-                font-size: 1.2rem;
-            }
-            
-            /* Animation für das Hamburger-Menü zum X */
-            .menu-toggle.active span:nth-child(1) {
-                transform: translateY(13px) rotate(45deg);
-            }
-            
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-            
-            .menu-toggle.active span:nth-child(3) {
-                transform: translateY(-13px) rotate(-45deg);
-            }
-            
-            .hero-contact h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-contact p {
-                font-size: 1.1rem;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            
-            .map-overlay {
-                position: relative;
-                top: 0;
-                left: 0;
-                max-width: 100%;
-                margin-bottom: 20px;
-            }
-            
-            .map-container {
-                height: 350px;
-            }
-            
-            .emergency-number-large {
-                font-size: 2.8rem;
-                padding: 5px 20px;
-            }
-
-            .modal-content {
-                padding: 20px 15px 40px;
-                margin: 20px auto;
-                max-height: 90vh;
-                width: 95%;
-            }
-
-            .modal-body {
-                font-size: 0.9rem;
-            }
-
-            .modal-header h2 {
-                font-size: 1.4rem;
+            .copyright {
+                padding-top: 15px;
+                font-size: 0.85rem;
             }
         }
-        
-        @media (max-width: 576px) {
-            .disclaimer-banner {
-                padding: 15px 0;
-                font-size: 0.8rem;
-            }
 
-            .logo-image {
-                max-height: 50px;
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .contact-button, .form-button, nav ul li a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
-            .hero-contact h1 {
-                font-size: 2rem;
+            .form-control {
+                font-size: 16px;
             }
             
-            .hero-contact p {
-                font-size: 1rem;
-                padding: 0 15px;
-            }
-            
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-            
-            .section-intro {
-                font-size: 1rem;
-                padding: 0 15px;
-            }
-            
-            .contact-card {
-                padding: 20px;
-            }
-            
-            .form-container {
-                padding: 25px;
-            }
-            
-            .emergency-number-large {
-                font-size: 2.2rem;
-            }
-
-            .modal-content {
-                padding: 15px 10px 30px;
-                border-radius: 8px;
-                max-height: 85vh;
-            }
-
-            .modal-body {
-                font-size: 0.85rem;
+            input, textarea, select {
+                font-size: 16px;
             }
         }
     </style>
@@ -895,11 +1740,11 @@
                 </div>
                 
                 <!-- Hamburger Menu für Mobile -->
-                <div class="menu-toggle">
+                <button class="menu-toggle" aria-label="Menü öffnen">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
                 
                 <nav>
                     <ul>
@@ -910,6 +1755,9 @@
                         <li><a href="/ff/kontakt" class="active">Kontakt</a></li>
                     </ul>
                 </nav>
+                
+                <!-- Overlay für Mobile Navigation -->
+                <div class="nav-overlay"></div>
             </div>
         </div>
     </header>
@@ -940,7 +1788,7 @@
                     </div>
                     <div class="contact-title">Adresse</div>
                     <div class="contact-info">
-                        <p>Feuerwache 19 Gelsenkirchen</p>
+                        <p>Feuerwache 3 Gelsenkirchen</p>
                         <p>An der Landwehr 5</p>
                         <p>45883 Gelsenkirchen</p>
                     </div>
@@ -966,7 +1814,7 @@
                     <div class="contact-title">E-Mail</div>
                     <div class="contact-info">
                         <p>Allgemeine Anfragen</p>
-                        <p><a href="mailto:fflz19zugfuehrer@gelsenkirchen.de">fflz19zugfuehrer (at) gelsenkirchen (dot) de</a></p>
+                        <p><a href="mailto:fflz19zugfuehrer@gelsenkirchen.de">fflz19zugfuehrer@gelsenkirchen.de</a></p>
                     </div>
                     <a href="#" onclick="alert('Bitte entnehmen Sie die E-Mail-Adresse dem Text und ersetzen Sie (at) durch @ und (dot) durch .')" class="contact-button">E-Mail-Adresse kopieren</a>
                 </div>
@@ -1016,24 +1864,51 @@
         </div>
     </section>
 
-    <!-- Google Maps Karte -->
+    <!-- Google Maps Karte - NUR AUF DESKTOP SICHTBAR -->
     <section class="map-section">
-        <div class="map-container">
-            <div class="map-overlay">
-                <h3 class="map-title">Unser Standort</h3>
-                <div class="map-address">
-                    <p>Feuerwache 19 Gelsenkirchen</p>
-                    <p>An der Landwehr 5</p>
-                    <p>45883 Gelsenkirchen</p>
+        <div class="container">
+            <div class="map-wrapper">
+                <div class="map-info-card">
+                    <div class="map-info-header">
+                        <i class="fas fa-fire-extinguisher"></i>
+                        <h3>Feuerwache 3 Gelsenkirchen</h3>
+                    </div>
+                    <div class="map-info-content">
+                        <p><i class="fas fa-map-marker-alt"></i> An der Landwehr 5, 45883 Gelsenkirchen</p>
+                        <p><i class="fas fa-clock"></i> 24/7 einsatzbereit</p>
+                        <p><i class="fas fa-phone"></i> Verwaltung: 0209 1704-346</p>
+                        <div class="map-actions">
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=An+der+Landwehr+5+45883+Gelsenkirchen" 
+                               target="_blank" 
+                               class="map-button">
+                                <i class="fas fa-route"></i> Route planen
+                            </a>
+                            <a href="tel:+492091704346" class="map-button secondary">
+                                <i class="fas fa-phone"></i> Anrufen
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <a href="https://maps.google.com" target="_blank" class="contact-button">In Google Maps öffnen</a>
+                
+                <div class="map-container">
+                    <!-- Google Maps Iframe -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2488.724512124426!2d7.078232376487713!3d51.40215157180998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b9c7b8f7a5a5a5%3A0x6b5c5b5b5b5b5b5b!2sAn%20der%20Landwehr%205%2C%2045883%20Gelsenkirchen!5e0!3m2!1sde!2sde!4v1690000000000!5m2!1sde!2sde"
+                        width="100%" 
+                        height="100%"
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        aria-label="Standort der Feuerwache 3 Gelsenkirchen"
+                        title="Feuerwache 3 Gelsenkirchen auf Google Maps">
+                    </iframe>
+                </div>
             </div>
-            <!-- Dies ist ein Platzhalter für eine Google Maps-Integration -->
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2480.915032909472!2d7.056213776678357!3d51.545764971835915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8e780992c6e51%3A0xf1e534a3d2990d0!2sGelsenkirchen!5e0!3m2!1sen!2sde!4v1698240766304!5m2!1sen!2sde" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
 
-    <!-- FAQ-Sektion -->
+    <!-- FAQ-Sektion mit verbesserten Animationen -->
     <section class="faq-section">
         <div class="container">
             <div class="section-title">
@@ -1046,7 +1921,10 @@
             
             <div class="accordion">
                 <div class="accordion-item">
-                    <div class="accordion-header">Wie kann ich Mitglied bei der Freiwilligen Feuerwehr werden?</div>
+                    <button class="accordion-header">
+                        Wie kann ich Mitglied bei der Freiwilligen Feuerwehr werden?
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </button>
                     <div class="accordion-body">
                         <div class="accordion-content">
                             <p>Der Weg zur Freiwilligen Feuerwehr ist einfacher als Sie denken. Wir freuen uns über jeden, der sich engagieren möchte. Folgende Voraussetzungen sollten Sie mitbringen:</p>
@@ -1062,7 +1940,10 @@
                 </div>
                 
                 <div class="accordion-item">
-                    <div class="accordion-header">Kann man die Feuerwache besichtigen?</div>
+                    <button class="accordion-header">
+                        Kann man die Feuerwache besichtigen?
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </button>
                     <div class="accordion-body">
                         <div class="accordion-content">
                             <p>Ja, wir bieten regelmäßig Führungen durch unsere Feuerwache an. Diese sind besonders für Schulklassen, Kindergärten und interessierte Bürger geeignet.</p>
@@ -1072,7 +1953,10 @@
                 </div>
                 
                 <div class="accordion-item">
-                    <div class="accordion-header">Ab welchem Alter kann man zur Jugendfeuerwehr?</div>
+                    <button class="accordion-header">
+                        Ab welchem Alter kann man zur Jugendfeuerwehr?
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </button>
                     <div class="accordion-body">
                         <div class="accordion-content">
                             <p>Unsere Jugendfeuerwehr nimmt Kinder und Jugendliche ab 10 Jahren auf. Hier lernen sie spielerisch die Grundlagen der Feuerwehrarbeit und werden an die Aufgaben herangeführt.</p>
@@ -1083,7 +1967,10 @@
                 </div>
                 
                 <div class="accordion-item">
-                    <div class="accordion-header">Was kostet der Einsatz der Feuerwehr?</div>
+                    <button class="accordion-header">
+                        Was kostet der Einsatz der Feuerwehr?
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </button>
                     <div class="accordion-body">
                         <div class="accordion-content">
                             <p>Generell gilt: Im Notfall sollte man nie zögern, die 112 zu wählen, aus Angst vor Kosten.</p>
@@ -1123,7 +2010,7 @@
                             <li><a href="/ff/mann">Mannschaft</a></li>
                             <li><a href="/ff/jugend">Jugendfeuerwehr</a></li>
                             <li><a href="/ff/auto">Fahrzeuge</a></li>
-                            <li><a href="ff/impres">Impressum</a></li>
+                            <li><a href="/ff/kontakt">Kontakt</a></li>
                         </ul>
                     </div>
                     
@@ -1136,258 +2023,92 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen. Alle Rechte vorbehalten.</p>
-                <div class="legal-links">
-                    <a href="#" id="impressumLink">Impressum</a>
-                    <a href="#" id="datenschutzLink">Datenschutzerklärung</a>
-                </div>
+                <p>&copy; 2026 Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen</p>
             </div>
         </div>
     </footer>
-
-    <!-- Impressum Modal -->
-    <div id="impressumModal" class="legal-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Impressum</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-scroll-hint">
-                    Scrollen Sie für den vollständigen Text <i class="fas fa-arrow-down"></i>
-                </div>
-                
-                <h3>Diensteanbieter</h3>
-                <p>Freiwillige Feuerwehr Gelsenkirchen<br>
-                Löschzug Heßler (19)<br>
-                An der Landwehr 5<br>
-                45883 Gelsenkirchen<br>
-                Deutschland</p>
-                
-                <p>Telefon: 0209 1704-346</p>
-                <p>E-Mail: fflz19zugfuehrer (at) gelsenkirchen (dot) de</p>
-
-                <h3>Redaktionelle Angebote</h3>
-                <p>Für den Inhalt zeichnet sich der Zugführer verantwortlich.</p>
-
-                <h3>Social Media und andere Onlinepräsenzen</h3>
-                <p>Dieses Impressum gilt auch für die Social-Media-Präsenzen und Onlineprofile, die mit dieser Website verbunden sind.</p>
-
-                <h3>Haftungs- und Schutzrechtshinweise</h3>
-                <h4>Haftungsausschluss</h4>
-                <p>Die Inhalte dieses Onlineangebotes wurden sorgfältig und nach unserem aktuellen Kenntnisstand erstellt, dienen jedoch nur der Information und entfalten keine rechtlich bindende Wirkung, sofern es sich nicht um gesetzlich verpflichtende Informationen (z.B. das Impressum, die Datenschutzerklärung, AGB oder verpflichtende Belehrungen von Verbrauchern) handelt. Wir behalten uns vor, die Inhalte vollständig oder teilweise zu ändern oder zu löschen, soweit vertragliche Verpflichtungen unberührt bleiben. Alle Angebote sind freibleibend und unverbindlich.</p>
-
-                <h4>Links auf fremde Webseiten</h4>
-                <p>Die Inhalte fremder Webseiten, auf die wir direkt oder indirekt verweisen, liegen außerhalb unseres Verantwortungsbereiches und wir machen sie uns nicht zu Eigen. Für alle Inhalte und Nachteile, die aus der Nutzung der in den verlinkten Webseiten aufrufbaren Informationen entstehen, übernehmen wir keine Verantwortung.</p>
-
-                <h4>Urheberrechte und Markenrechte</h4>
-                <p>Alle auf dieser Website dargestellten Inhalte, wie Texte, Fotografien, Grafiken, Marken und Warenzeichen sind durch die jeweiligen Schutzrechte (Urheberrechte, Markenrechte) geschützt. Die Verwendung, Vervielfältigung usw. unterliegen unseren Rechten oder den Rechten der jeweiligen Urheber bzw. Rechteinhaber.</p>
-
-                <h4>Hinweise auf Rechtsverstöße</h4>
-                <p>Sollten Sie innerhalb unseres Internetauftritts Rechtsverstöße bemerken, bitten wir Sie uns auf diese hinzuweisen. Wir werden rechtswidrige Inhalte und Links nach Kenntnisnahme und Prüfung unverzüglich entfernen.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Datenschutz Modal -->
-    <div id="datenschutzModal" class="legal-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Datenschutzerklärung</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-scroll-hint">
-                    Scrollen Sie für den vollständigen Text <i class="fas fa-arrow-down"></i>
-                </div>
-                
-                <h3>Datenschutz auf einen Blick</h3>
-                <h4>Allgemeine Hinweise</h4>
-                <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.</p>
-
-                <h4>Datenerfassung auf dieser Website</h4>
-                <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Abschnitt „Hinweis zur Verantwortlichen Stelle" in dieser Datenschutzerklärung entnehmen.</p>
-
-                <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben.</p>
-
-                <p>Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.</p>
-
-                <p>Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.</p>
-
-                <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.</p>
-
-                <p>Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden.</p>
-
-                <h3>Hosting</h3>
-                <p>Wir hosten die Inhalte unserer Website beim Anbieter Strato AG, Otto-Ostrowski-Straße 7, 10249 Berlin (nachfolgend Strato). Wenn Sie unsere Website besuchen, erfasst Strato verschiedene Logfiles inklusive Ihrer IP-Adressen.</p>
-
-                <p>Weitere Informationen entnehmen Sie der Datenschutzerklärung von Strato: <a href="https://www.strato.de/datenschutz/" target="_blank">https://www.strato.de/datenschutz/</a>.</p>
-
-                <p>Die Verwendung von Strato erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer möglichst zuverlässigen Darstellung unserer Website. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TTDSG, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des Nutzers (z.B. Device-Fingerprinting) im Sinne des TTDSG umfasst. Die Einwilligung ist jederzeit widerrufbar.</p>
-
-                <p>Wir haben einen Vertrag über Auftragsverarbeitung (AVV) zur Nutzung des oben genannten Dienstes geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen Vertrag, der gewährleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach unseren Weisungen und unter Einhaltung der DSGVO verarbeitet.</p>
-
-                <h3>Allgemeine Hinweise und Pflichtinformationen</h3>
-                <h4>Datenschutz</h4>
-                <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
-
-                <p>Wenn Sie diese Website benutzen, werden verschiedene personenbezogene Daten erhoben. Personenbezogene Daten sind Daten, mit denen Sie persönlich identifiziert werden können. Die vorliegende Datenschutzerklärung erläutert, welche Daten wir erheben und wofür wir sie nutzen. Sie erläutert auch, wie und zu welchem Zweck das geschieht.</p>
-
-                <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
-
-                <h4>Hinweis zur verantwortlichen Stelle</h4>
-                <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
-                <p>Freiwillige Feuerwehr Gelsenkirchen<br>
-                Löschzug Heßler (19)<br>
-                Der Zugführer<br>
-                An der Landwehr 5<br>
-                45883 Gelsenkirchen<br>
-                Deutschland</p>
-
-                <p>Telefon: 0209 1704-346</p>
-                <p>E-Mail: fflz19zugfuehrer (at) gelsenkirchen (dot) de</p>
-
-                <p>Die verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, E-Mail o.Ä.) entscheidet.</p>
-
-                <h4>Speicherdauer</h4>
-                <p>Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z.B. steuer- oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall dieser Gründe.</p>
-
-                <h4>Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung auf dieser Website</h4>
-                <p>Sofern Sie in die Datenverarbeitung eingewilligt haben, verarbeiten wir Ihre personenbezogenen Daten auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO bzw. Art. 9 Abs. 2 lit. a DSGVO, sofern besondere Datenkategorien nach Art. 9 Abs. 1 DSGVO verarbeitet werden. Im Falle einer ausdrücklichen Einwilligung in die Übertragung personenbezogener Daten in Drittstaaten erfolgt die Datenverarbeitung außerdem auf Grundlage von Art. 49 Abs. 1 lit. a DSGVO. Sofern Sie in die Speicherung von Cookies oder in den Zugriff auf Informationen in Ihr Endgerät (z.B. via Device-Fingerprinting) eingewilligt haben, erfolgt die Datenverarbeitung zusätzlich auf Grundlage von § 25 Abs. 1 TTDSG. Die Einwilligung ist jederzeit widerrufbar.</p>
-
-                <p>Sind Ihre Daten zur Vertragserfüllung oder zur Durchführung vorvertraglicher Maßnahmen erforderlich, verarbeiten wir Ihre Daten auf Grundlage des Art. 6 Abs. 1 lit. b DSGVO. Des Weiteren verarbeiten wir Ihre Daten, sofern diese zur Erfüllung einer rechtlichen Verpflichtung erforderlich sind auf Grundlage von Art. 6 Abs. 1 lit. c DSGVO. Die Datenverarbeitung kann ferner auf Grundlage unseres berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO erfolgen. Über die jeweils im Einzelfall einschlägigen Rechtsgrundlagen wird in den folgenden Absätzen dieser Datenschutzerklärung informiert.</p>
-
-                <h4>Widerruf Ihrer Einwilligung zur Datenverarbeitung</h4>
-                <p>Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</p>
-
-                <h4>Widerspruchsrecht gegen die Datenerhebung in besonderen Fällen sowie gegen Direktwerbung (Art. 21 DSGVO)</h4>
-                <p>WENN DIE DATENVERARBEITUNG AUF GRUNDLAGE VON ART. 6 ABS. 1 LIT. E ODER F DSGVO ERFOLGT, HABEN SIE JEDERZEIT DAS RECHT, AUS GRÜNDEN, DIE SICH AUS IHRER BESONDEREN SITUATION ERGEBEN, GEGEN DIE VERARBEITUNG IHRER PERSONENBEZOGENEN DATEN WIDERSPRUCH EINZULEGEN; DIES GILT AUCH FÜR EIN AUF DIESE BESTIMMUNGEN GESTÜTZTES PROFILING. DIE JEWEILIGE RECHTSGRUNDLAGE, AUF DENEN EINE VERARBEITUNG BERUHT, ENTNEHMEN SIE DIESER DATENSCHUTZERKLÄRUNG. WENN SIE WIDERSPRUCH EINLEGEN, WERDEN WIR IHRE BETROFFENEN PERSONENBEZOGENEN DATEN NICHT MEHR VERARBEITEN, ES SEI DENN, WIR KÖNNEN ZWINGENDE SCHUTZWÜRDIGE GRÜNDE FÜR DIE VERARBEITUNG NACHWEISEN, DIE IHRE INTERESSEN, RECHTE UND FREIHEITEN ÜBERWIEGEN ODER DIE VERARBEITUNG DIENT DER GELTENDMACHUNG, AUSÜBUNG ODER VERTEIDIGUNG VON RECHTSANSPRÜCHEN (WIDERSPRUCH NACH ART. 21 ABS. 1 DSGVO).</p>
-
-                <p>WERDEN IHRE PERSONENBEZOGENEN DATEN VERARBEITET, UM DIREKTWERBUNG ZU BETREIBEN, SO HABEN SIE DAS RECHT, JEDERZEIT WIDERSPRUCH GEGEN DIE VERARBEITUNG SIE BETREFFENDER PERSONENBEZOGENER DATEN ZUM ZWECKE DERARTIGER WERBUNG EINZULEGEN; DIES GILT AUCH FÜR DAS PROFILING, SOWEIT ES MIT SOLCHER DIREKTWERBUNG IN VERBINDUNG STEHT. WENN SIE WIDERSPRECHEN, WERDEN IHRE PERSONENBEZOGENEN DATEN ANSCHLIESSEND NICHT MEHR ZUM ZWECKE DER DIREKTWERBUNG VERWENDET (WIDERSPRUCH NACH ART. 21 ABS. 2 DSGVO).</p>
-
-                <h4>Beschwerderecht bei der zuständigen Aufsichtsbehörde</h4>
-                <p>Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes zu. Das Beschwerderecht besteht unbeschadet anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe.</p>
-
-                <h4>Recht auf Datenübertragbarkeit</h4>
-                <p>Sie haben das Recht, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an einen Dritten in einem gängigen, maschinenlesbaren Format aushändigen zu lassen. Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch machbar ist.</p>
-
-                <h4>Auskunft, Löschung und Berichtigung</h4>
-                <p>Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung oder Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit an uns wenden.</p>
-
-                <h4>Recht auf Einschränkung der Verarbeitung</h4>
-                <p>Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Hierzu können Sie sich jederzeit an uns wenden. Das Recht auf Einschränkung der Verarbeitung besteht in folgenden Fällen:</p>
-
-                <ul>
-                    <li>Wenn Sie die Richtigkeit Ihrer bei uns gespeicherten personenbezogenen Daten bestreiten, benötigen wir in der Regel Zeit, um dies zu überprüfen. Für die Dauer der Prüfung haben Sie das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</li>
-                    <li>Wenn die Verarbeitung Ihrer personenbezogenen Daten unrechtmäßig geschah/geschieht, können Sie statt der Löschung die Einschränkung der Datenverarbeitung verlangen.</li>
-                    <li>Wenn wir Ihre personenbezogenen Daten nicht mehr benötigen, Sie sie jedoch zur Ausübung, Verteidigung oder Geltendmachung von Rechtsansprüchen benötigen, haben Sie das Recht, statt der Löschung die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</li>
-                    <li>Wenn Sie einen Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben, muss eine Abwägung zwischen Ihren und unseren Interessen vorgenommen werden. Solange noch nicht feststeht, wessen Interessen überwiegen, haben Sie das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</li>
-                </ul>
-
-                <p>Wenn Sie die Verarbeitung Ihrer personenbezogenen Daten eingeschränkt haben, dürfen diese Daten – von ihrer Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen oder zum Schutz der Rechte einer anderen natürlichen oder juristischen Person oder aus Gründen eines wichtigen öffentlichen Interesses der Europäischen Union oder eines Mitgliedstaats verarbeitet werden.</p>
-
-                <h4>SSL- bzw. TLS-Verschlüsselung</h4>
-                <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie z.B. Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
-
-                <p>Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
-
-                <h3>Datenerfassung auf dieser Website</h3>
-                <h4>Cookies</h4>
-                <p>Unsere Internetseiten verwenden so genannte Cookies. Cookies sind kleine Datenpakete und richten auf Ihrem Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung (Session-Cookies) oder dauerhaft (permanente Cookies) auf Ihrem Endgerät gespeichert. Session-Cookies werden nach Ende Ihres Besuchs automatisch gelöscht. Permanente Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese selbst löschen oder eine automatische Löschung durch Ihren Webbrowser erfolgt.</p>
-
-                <p>Cookies können von uns (First-Party-Cookies) oder von Drittunternehmen stammen (sog. Third-Party-Cookies). Third-Party-Cookies ermöglichen die Einbindung bestimmter Dienstleistungen von Drittunternehmen innerhalb von Webseiten (z.B. Cookies zur Abwicklung von Zahlungsdienstleistungen).</p>
-
-                <p>Cookies haben verschiedene Funktionen. Zahlreiche Cookies sind technisch notwendig, da bestimmte Webseitenfunktionen ohne diese nicht funktionieren würden (z.B. die Warenkorbfunktion oder die Anzeige von Videos). Andere Cookies können zur Auswertung des Nutzerverhaltens oder zu Werbezwecken verwendet werden.</p>
-
-                <p>Cookies, die zur Durchführung des elektronischen Kommunikationsvorgangs, zur Bereitstellung bestimmter, von Ihnen erwünschter Funktionen (z.B. für die Warenkorbfunktion) oder zur Optimierung der Website (z.B. Cookies zur Messung des Webpublikums) erforderlich sind (notwendige Cookies), werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO gespeichert, sofern keine andere Rechtsgrundlage angegeben wird. Der Websitebetreiber hat ein berechtigtes Interesse an der Speicherung von notwendigen Cookies zur technisch fehlerfreien und optimierten Bereitstellung seiner Dienste. Sofern eine Einwilligung zur Speicherung von Cookies und vergleichbaren Wiedererkennungstechnologien abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage dieser Einwilligung (Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TTDSG); die Einwilligung ist jederzeit widerrufbar.</p>
-
-                <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.</p>
-
-                <p>Welche Cookies und Dienste auf dieser Website eingesetzt werden, können Sie dieser Datenschutzerklärung entnehmen.</p>
-
-                <h4>Server-Log-Dateien</h4>
-                <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
-
-                <ul>
-                    <li>Browsertyp und Browserversion</li>
-                    <li>verwendetes Betriebssystem</li>
-                    <li>Referrer URL</li>
-                    <li>Hostname des zugreifenden Rechners</li>
-                    <li>Uhrzeit der Serveranfrage</li>
-                    <li>IP-Adresse</li>
-                </ul>
-
-                <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.</p>
-
-                <p>Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website – hierzu müssen die Server-Log-Files erfasst werden.</p>
-
-                <h4>Kontaktformular</h4>
-                <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
-
-                <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde; die Einwilligung ist jederzeit widerrufbar.</p>
-
-                <p>Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z.B. nach abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben unberührt.</p>
-
-                <h4>Anfrage per E-Mail, Telefon oder Telefax</h4>
-                <p>Wenn Sie uns per E-Mail, Telefon oder Telefax kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
-
-                <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde; die Einwilligung ist jederzeit widerrufbar.</p>
-
-                <p>Die von Ihnen an uns per Kontaktanfragen übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z.B. nach abgeschlossener Bearbeitung Ihres Anliegens). Zwingende gesetzliche Bestimmungen – insbesondere gesetzliche Aufbewahrungsfristen – bleiben unberührt.</p>
-            </div>
-        </div>
-    </div>
 
     <script>
         // Mobile Navigation Toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('nav');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const body = document.body;
         
         menuToggle.addEventListener('click', function() {
             this.classList.toggle('active');
             nav.classList.toggle('active');
-            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+            navOverlay.classList.toggle('active');
+            
+            if (nav.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+                this.setAttribute('aria-label', 'Menü schließen');
+            } else {
+                body.style.overflow = '';
+                this.setAttribute('aria-label', 'Menü öffnen');
+            }
         });
         
-        // Komplett überarbeitetes Akkordeon-Script mit einfachem Ein-/Ausblenden
+        // Menü schließen bei Klick auf Overlay
+        navOverlay.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            nav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            body.style.overflow = '';
+            menuToggle.setAttribute('aria-label', 'Menü öffnen');
+        });
+        
+        // Menü schließen bei Klick auf einen Link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                navOverlay.classList.remove('active');
+                body.style.overflow = '';
+                menuToggle.setAttribute('aria-label', 'Menü öffnen');
+            });
+        });
+        
+        // VERBESSERTES Akkordeon-Script mit Animationen
         document.addEventListener('DOMContentLoaded', function() {
             const accordionHeaders = document.querySelectorAll('.accordion-header');
             
-            // Initial alle schließen
-            accordionHeaders.forEach(header => {
+            accordionHeaders.forEach((header, index) => {
                 const accordionBody = header.nextElementSibling;
                 accordionBody.style.display = 'none';
-            });
-            
-            // Click-Handler für jede Überschrift
-            accordionHeaders.forEach(header => {
+                
+                // Bullet points verzögern
+                const listItems = accordionBody.querySelectorAll('li');
+                listItems.forEach((item, i) => {
+                    item.style.setProperty('--i', i);
+                });
+                
                 header.addEventListener('click', function() {
-                    // Toggle active class auf dem Header
-                    this.classList.toggle('active');
-                    
-                    // Referenz zum zugehörigen Body
-                    const accordionBody = this.nextElementSibling;
-                    
-                    // Prüfen, ob dieser Header aktiv ist
                     const isActive = this.classList.contains('active');
                     
-                    // Erst alle anderen schließen
+                    // Alle anderen schließen
                     accordionHeaders.forEach(otherHeader => {
                         if (otherHeader !== this) {
                             otherHeader.classList.remove('active');
                             const otherBody = otherHeader.nextElementSibling;
-                            otherBody.classList.remove('active');
                             otherBody.style.display = 'none';
+                            otherBody.classList.remove('active');
                         }
                     });
                     
-                    // Dann den aktuellen öffnen oder schließen
+                    // Aktuellen umschalten
                     if (isActive) {
-                        accordionBody.classList.add('active');
-                        accordionBody.style.display = 'block';
-                    } else {
+                        this.classList.remove('active');
                         accordionBody.classList.remove('active');
-                        accordionBody.style.display = 'none';
+                        setTimeout(() => {
+                            accordionBody.style.display = 'none';
+                        }, 500); // Warten bis Animation fertig ist
+                    } else {
+                        this.classList.add('active');
+                        accordionBody.style.display = 'block';
+                        // Trigger reflow für Animation
+                        accordionBody.offsetHeight;
+                        accordionBody.classList.add('active');
                     }
                 });
             });
@@ -1399,31 +2120,84 @@
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                // Hier könnte AJAX-Code für die Form-Übermittlung stehen
                 
-                // Einfache Form-Validierung
                 let valid = true;
                 const formControls = contactForm.querySelectorAll('.form-control');
                 
                 formControls.forEach(control => {
                     if (control.hasAttribute('required') && !control.value) {
                         control.style.borderColor = '#E62B1E';
+                        control.style.animation = 'shake 0.5s ease';
                         valid = false;
+                        
+                        // Animation zurücksetzen
+                        setTimeout(() => {
+                            control.style.animation = '';
+                        }, 500);
                     } else {
                         control.style.borderColor = '#ddd';
                     }
                 });
                 
                 if (valid) {
-                    // Simulation eines Formularversands
                     const formButton = contactForm.querySelector('.form-button');
                     const originalText = formButton.textContent;
                     
                     formButton.textContent = 'Wird gesendet...';
                     formButton.disabled = true;
                     
+                    // Erfolgsanimation
                     setTimeout(() => {
-                        alert('Vielen Dank für Ihre Nachricht. Wir werden uns baldmöglichst bei Ihnen melden.');
+                        // Erfolgsmeldung mit Animation
+                        const successMsg = document.createElement('div');
+                        successMsg.style.cssText = `
+                            position: fixed;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            background: white;
+                            padding: 30px;
+                            border-radius: 15px;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                            text-align: center;
+                            z-index: 10000;
+                            animation: popIn 0.5s ease-out;
+                            max-width: 400px;
+                            width: 90%;
+                        `;
+                        
+                        successMsg.innerHTML = `
+                            <div style="color: #E62B1E; font-size: 3rem; margin-bottom: 15px;">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3 style="color: #333; margin-bottom: 10px;">Nachricht gesendet!</h3>
+                            <p style="color: #555; margin-bottom: 20px;">Vielen Dank für Ihre Nachricht. Wir werden uns baldmöglichst bei Ihnen melden.</p>
+                            <button onclick="this.parentElement.remove()" 
+                                    style="background: #E62B1E; color: white; border: none; padding: 10px 20px; 
+                                           border-radius: 5px; cursor: pointer; font-weight: bold;">
+                                OK
+                            </button>
+                        `;
+                        
+                        document.body.appendChild(successMsg);
+                        
+                        // Overlay
+                        const overlay = document.createElement('div');
+                        overlay.style.cssText = `
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: rgba(0,0,0,0.5);
+                            z-index: 9999;
+                        `;
+                        overlay.onclick = () => {
+                            successMsg.remove();
+                            overlay.remove();
+                        };
+                        document.body.appendChild(overlay);
+                        
                         contactForm.reset();
                         formButton.textContent = originalText;
                         formButton.disabled = false;
@@ -1432,7 +2206,29 @@
             });
         }
         
-        // Smooth scrolling for anchor links
+        // Shake Animation für Formular-Validierung
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+            
+            @keyframes popIn {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.8);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Smooth scrolling für Anchor Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
@@ -1445,78 +2241,9 @@
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu after clicking
-                    if(window.innerWidth <= 768 && nav.classList.contains('active')) {
-                        menuToggle.classList.remove('active');
-                        nav.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
                 }
             });
         });
-
-        // Modal functionality
-        const impressumLink = document.getElementById('impressumLink');
-        const datenschutzLink = document.getElementById('datenschutzLink');
-        const impressumModal = document.getElementById('impressumModal');
-        const datenschutzModal = document.getElementById('datenschutzModal');
-        const closeButtons = document.querySelectorAll('.close-modal');
-
-        // Öffne Impressum-Modal
-        impressumLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            impressumModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        });
-
-        // Öffne Datenschutz-Modal
-        datenschutzLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            datenschutzModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        });
-
-        // Schließe Modals mit X-Button
-        closeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                impressumModal.style.display = 'none';
-                datenschutzModal.style.display = 'none';
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Schließe Modals beim Klick außerhalb
-        window.addEventListener('click', function(e) {
-            if (e.target === impressumModal) {
-                impressumModal.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-            if (e.target === datenschutzModal) {
-                datenschutzModal.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Schließe Modals mit ESC-Taste
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                impressumModal.style.display = 'none';
-                datenschutzModal.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Scroll-Hinweis nach 3 Sekunden ausblenden
-        setTimeout(() => {
-            const scrollHints = document.querySelectorAll('.modal-scroll-hint');
-            scrollHints.forEach(hint => {
-                hint.style.opacity = '0';
-                setTimeout(() => {
-                    hint.style.display = 'none';
-                }, 500);
-            });
-        }, 3000);
     </script>
 </body>
 </html>

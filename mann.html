@@ -18,9 +18,10 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
         
-        /* Feuerwehr Hintergrundmuster */
+        /* Feuerwehr Hintergrundmuster mit Animation */
         .fw-bg {
             position: fixed;
             top: 0;
@@ -33,19 +34,62 @@
                 linear-gradient(45deg, #E62B1E 1px, transparent 1px),
                 linear-gradient(-45deg, #E62B1E 1px, transparent 1px);
             background-size: 60px 60px;
+            animation: bgMove 120s linear infinite;
         }
         
-        /* Header */
+        @keyframes bgMove {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 120px 120px;
+            }
+        }
+        
+        /* Akzent-Muster */
+        .accent-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(230, 43, 30, 0.03) 2px, transparent 2px),
+                radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.03) 2px, transparent 2px);
+            background-size: 80px 80px;
+            animation: patternPulse 20s ease-in-out infinite;
+        }
+
+        @keyframes patternPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        
+        /* Header mit Animationen */
         header {
             background-color: #E62B1E;
-            padding: 20px 0;
+            padding: 15px 0;
             border-bottom: 4px solid #333;
             position: relative;
             z-index: 100;
+            animation: fadeInHeader 0.8s ease-out;
+        }
+
+        @keyframes fadeInHeader {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -55,39 +99,44 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: nowrap;
         }
         
         .logo {
             display: flex;
             align-items: center;
+            flex-shrink: 0;
         }
         
         .logo-container {
             display: flex;
             align-items: center;
-            margin-right: 15px;
+            margin-right: 10px;
         }
         
         .logo-image {
-            max-height: 60px;
+            max-height: 50px;
             width: auto;
             display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05) rotate(2deg);
         }
         
-        .logo-link {
-            display: block;
-        }
-        
-        /* Hamburger Menu */
+        /* Neues Hamburger-Menü */
         .menu-toggle {
             display: none;
             width: 35px;
             height: 30px;
             position: relative;
             cursor: pointer;
-            flex-direction: column;
-            justify-content: space-between;
             z-index: 1001;
+            background: none;
+            border: none;
+            padding: 5px;
+            margin-left: 10px;
         }
         
         .menu-toggle span {
@@ -97,10 +146,38 @@
             background-color: white;
             border-radius: 3px;
             transition: all 0.3s ease;
+            position: absolute;
+            left: 0;
+        }
+        
+        .menu-toggle span:nth-child(1) {
+            top: 0;
+        }
+        
+        .menu-toggle span:nth-child(2) {
+            top: 13px;
+        }
+        
+        .menu-toggle span:nth-child(3) {
+            top: 26px;
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            top: 13px;
+            transform: rotate(45deg);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            top: 13px;
+            transform: rotate(-45deg);
         }
         
         nav {
-            transition: all 0.5s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
         
         nav ul {
@@ -109,7 +186,8 @@
         }
         
         nav ul li {
-            margin-left: 20px;
+            margin-left: 15px;
+            position: relative;
         }
         
         nav ul li a {
@@ -120,51 +198,107 @@
             border: 2px solid transparent;
             border-radius: 4px;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: block;
+            font-size: 1rem;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 80%;
         }
         
         nav ul li a:hover,
         nav ul li a.active {
-            border-color: white;
             background-color: rgba(255, 255, 255, 0.1);
         }
         
-        /* Hero Section für Mannschaft */
+        /* Hero Section mit Animationen */
         .hero-crew {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1589659764353-3c8d8a608cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589659764353-3c8d8a608cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 80px 0;
+            padding: 60px 20px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-crew::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: heroShine 8s infinite;
+        }
+
+        @keyframes heroShine {
+            0% {
+                left: -100%;
+            }
+            20%, 100% {
+                left: 100%;
+            }
         }
         
         .hero-crew h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
+            line-height: 1.2;
         }
         
         .hero-crew p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto 30px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* Mannschaftsbereich */
         .crew-section {
-            padding: 80px 0;
+            padding: 50px 20px;
             background-color: rgba(255, 255, 255, 0.95);
             position: relative;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             position: relative;
         }
         
         .section-title h2 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #E62B1E;
             margin-bottom: 15px;
             display: inline-block;
@@ -173,17 +307,20 @@
             position: relative;
             z-index: 2;
             background-color: white;
+            animation: fadeInUp 0.8s ease-out;
         }
         
         .section-intro {
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto 60px;
+            max-width: 900px;
+            margin: 0 auto 40px;
             font-size: 1.1rem;
             color: #555;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            padding: 0 15px;
         }
         
-        /* Mannschafts-Grid */
+        /* Mannschafts-Grid mit Animationen */
         .crew-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -194,14 +331,34 @@
             background-color: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border-top: 4px solid #E62B1E;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cardAppear 0.6s ease-out forwards;
+        }
+
+        .member-card:nth-child(1) { animation-delay: 0.1s; }
+        .member-card:nth-child(2) { animation-delay: 0.2s; }
+        .member-card:nth-child(3) { animation-delay: 0.3s; }
+        .member-card:nth-child(4) { animation-delay: 0.4s; }
+        .member-card:nth-child(5) { animation-delay: 0.5s; }
+        .member-card:nth-child(6) { animation-delay: 0.6s; }
+        .member-card:nth-child(7) { animation-delay: 0.7s; }
+        .member-card:nth-child(8) { animation-delay: 0.8s; }
+        .member-card:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .member-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(230, 43, 30, 0.12);
         }
         
         .member-header {
@@ -223,6 +380,21 @@
             color: white;
             font-size: 2.5rem;
             font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .member-card:hover .member-avatar {
+            transform: scale(1.1) rotate(3deg);
+            animation: avatarBounce 0.6s ease;
+        }
+
+        @keyframes avatarBounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
         }
         
         .member-name {
@@ -266,6 +438,16 @@
         .detail-item i {
             margin-right: 5px;
             color: #E62B1E;
+            animation: iconPulse 2s infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
         }
         
         .member-skills {
@@ -291,6 +473,12 @@
             border-radius: 20px;
             font-size: 0.8rem;
             color: #555;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
         .skill-tag.medical {
@@ -313,13 +501,35 @@
             color: #166534;
         }
         
-        /* Statistik-Bereich */
+        /* Statistik-Bereich mit Animationen */
         .crew-stats {
             background-color: #E62B1E;
             color: white;
             padding: 60px 0;
             margin: 80px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .crew-stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: statShine 5s infinite;
+        }
+
+        @keyframes statShine {
+            0% {
+                left: -100%;
+            }
+            20%, 100% {
+                left: 100%;
+            }
         }
         
         .stats-grid {
@@ -331,12 +541,42 @@
         
         .stat-item {
             padding: 20px;
+            animation: statFadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.2s; }
+        .stat-item:nth-child(2) { animation-delay: 0.4s; }
+        .stat-item:nth-child(3) { animation-delay: 0.6s; }
+        .stat-item:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes statFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .stat-number {
             font-size: 2.8rem;
             font-weight: bold;
             margin-bottom: 10px;
+            animation: countUp 2s ease-out forwards;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .stat-label {
@@ -344,60 +584,93 @@
             opacity: 0.9;
         }
         
-        /* Footer */
+        /* Footer mit Hover-Effekten */
         footer {
             background-color: #333;
             color: white;
-            padding: 40px 0 20px;
+            padding: 40px 20px 20px;
+            text-align: center;
         }
         
         .footer-content {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
             margin-bottom: 30px;
+            gap: 40px;
         }
         
         .footer-section {
             flex: 1;
             min-width: 250px;
             margin-bottom: 30px;
+            max-width: 400px;
+            text-align: center;
         }
         
         .footer-section h3 {
             font-size: 1.3rem;
             margin-bottom: 20px;
             color: #E62B1E;
+            text-align: center;
         }
         
         .footer-links ul {
             list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
         
         .footer-links ul li {
             margin-bottom: 10px;
+            width: 100%;
+            text-align: center;
         }
         
         .footer-links ul li a {
             color: #ddd;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 1rem;
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.1);
+            width: 200px;
+            text-align: center;
         }
         
         .footer-links ul li a:hover {
             color: #E62B1E;
+            transform: translateX(5px);
+            background: rgba(255,255,255,0.15);
         }
         
         .emergency-box {
             background-color: #E62B1E;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 10px;
             text-align: center;
             margin-top: 20px;
+            animation: emergencyBoxPulse 2s infinite;
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes emergencyBoxPulse {
+            0%, 100% {
+                box-shadow: 0 5px 15px rgba(230, 43, 30, 0.3);
+            }
+            50% {
+                box-shadow: 0 5px 25px rgba(230, 43, 30, 0.5);
+            }
         }
         
         .emergency-number {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: bold;
             margin: 10px 0;
         }
@@ -410,110 +683,234 @@
             color: #aaa;
         }
         
-        /* Responsive Design - überarbeitet für Vollbild-Menü */
+        /* Responsive Design mit verbesserten Menü-Animationen */
         @media (max-width: 768px) {
-            /* Header-Layout ändern */
-            .header-content {
-                flex-direction: column;
-                text-align: center;
+            header {
+                padding: 10px 0;
             }
             
-            .logo {
-                margin-bottom: 10px;
-                justify-content: center;
+            .logo-image {
+                max-height: 45px;
             }
             
-            /* Hamburger-Menü anzeigen */
             .menu-toggle {
-                display: flex;
-                margin: 15px auto 0;
+                display: block;
             }
             
-            /* Navigation im Vollbild-Stil */
             nav {
                 position: fixed;
-                top: -100%;
-                left: 0;
-                width: 100%;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
                 height: 100vh;
                 background-color: #E62B1E;
                 z-index: 1000;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: top 0.5s ease;
+                transition: right 0.4s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
             }
             
             nav.active {
+                right: 0;
+            }
+            
+            /* Overlay für Hintergrund */
+            .nav-overlay {
+                display: none;
+                position: fixed;
                 top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            
+            .nav-overlay.active {
+                display: block;
             }
             
             nav ul {
                 flex-direction: column;
                 align-items: center;
                 width: 100%;
-                margin-top: 0;
+                padding: 20px;
+                height: 100%;
                 justify-content: center;
-                flex-wrap: nowrap;
+                gap: 10px;
             }
             
             nav ul li {
-                margin: 15px 0;
+                margin: 0;
                 width: 100%;
                 text-align: center;
+                animation: slideInRight 0.5s ease-out forwards;
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            
+            nav ul li:nth-child(1) { animation-delay: 0.1s; }
+            nav ul li:nth-child(2) { animation-delay: 0.2s; }
+            nav ul li:nth-child(3) { animation-delay: 0.3s; }
+            nav ul li:nth-child(4) { animation-delay: 0.4s; }
+            nav ul li:nth-child(5) { animation-delay: 0.5s; }
+            
+            @keyframes slideInRight {
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
             }
             
             nav ul li a {
-                display: block;
-                padding: 15px;
+                padding: 15px 20px;
                 font-size: 1.2rem;
+                border-radius: 8px;
+                margin: 5px 0;
+                background: rgba(255,255,255,0.1);
             }
             
-            /* Animation für das Hamburger-Menü zum X */
-            .menu-toggle.active span:nth-child(1) {
-                transform: translateY(13px) rotate(45deg);
+            nav ul li a:hover,
+            nav ul li a.active {
+                background-color: rgba(255,255,255,0.2);
+                transform: translateX(10px);
             }
             
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-            
-            .menu-toggle.active span:nth-child(3) {
-                transform: translateY(-13px) rotate(-45deg);
+            .hero-crew {
+                padding: 40px 15px;
             }
             
             .hero-crew h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
+                margin-bottom: 15px;
             }
             
             .hero-crew p {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+                padding: 0 10px;
+            }
+            
+            .crew-section {
+                padding: 40px 15px;
+            }
+            
+            .section-title {
+                margin-bottom: 30px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+                padding: 0 10px 8px;
+            }
+            
+            .section-intro {
                 font-size: 1rem;
+                margin-bottom: 30px;
+                padding: 0 10px;
             }
             
             .crew-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .member-card:hover {
+                transform: translateY(-5px) scale(1.01);
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                margin-bottom: 25px;
+                gap: 30px;
+                align-items: center;
+            }
+            
+            .footer-section {
+                width: 100%;
+                margin-bottom: 25px;
             }
         }
         
         @media (max-width: 576px) {
             .logo-image {
-                max-height: 50px;
+                max-height: 40px;
+            }
+            
+            .hero-crew {
+                padding: 30px 10px;
             }
             
             .hero-crew h1 {
                 font-size: 1.8rem;
+                margin-bottom: 12px;
             }
             
-            nav ul li a {
-                margin: 5px 0;
+            .hero-crew p {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+            
+            .crew-section {
+                padding: 30px 10px;
             }
             
             .section-title h2 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+                padding: 0 8px 6px;
+                margin-bottom: 10px;
             }
             
             .section-intro {
-                font-size: 1rem;
+                font-size: 0.95rem;
+                margin-bottom: 25px;
+                line-height: 1.5;
+            }
+            
+            .crew-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .member-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+            
+            .member-name {
+                font-size: 1.2rem;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .footer-links ul li a {
+                font-size: 0.95rem;
+                width: 180px;
+            }
+            
+            .emergency-number {
+                font-size: 1.8rem;
+            }
+            
+            .copyright {
+                padding-top: 15px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            nav ul li a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     </style>
@@ -521,6 +918,7 @@
 <body>
     <!-- Feuerwehr Hintergrundmuster -->
     <div class="fw-bg"></div>
+    <div class="accent-pattern"></div>
     
     <header>
         <div class="container">
@@ -534,11 +932,11 @@
                 </div>
                 
                 <!-- Hamburger Menu für Mobile -->
-                <div class="menu-toggle">
+                <button class="menu-toggle" aria-label="Menü öffnen">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
                 
                 <nav>
                     <ul>
@@ -549,6 +947,9 @@
                         <li><a href="/ff/kontakt">Kontakt</a></li>
                     </ul>
                 </nav>
+                
+                <!-- Overlay für Mobile Navigation -->
+                <div class="nav-overlay"></div>
             </div>
         </div>
     </header>
@@ -740,6 +1141,70 @@
             </div>
         </div>
     </section>
+    
+    <!-- Anwärter-Bereich im gleichen Stil wie die Mannschaft -->
+    <section class="crew-section" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-title" style="margin-top: 20px;">
+                <h2>Unser Nachwuchs</h2>
+            </div>
+
+            <div class="section-intro">
+                <p>Mit 17 Jahren wechseln unsere engagierten Jugendlichen aus der Jugendfeuerwehr in den aktiven Dienst. Als Anwärter unterstützen sie bereits bei vielen Aufgaben und bereiten sich auf ihre Grundausbildung vor, die sie mit 18 Jahren beginnen können.</p>
+            </div>
+
+            <!-- Anwärter-Grid mit zentrierten Kacheln -->
+            <div class="crew-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); justify-content: center; margin-bottom: 40px;">
+                <!-- Anwärter 1 -->
+                <div class="member-card" style="border-top-color: #4a7fb5;">
+                    <div class="member-header" style="background-color: #f0f7ff;">
+                        <div class="member-avatar" style="background-color: #4a7fb5;">JM</div>
+                        <div class="member-name">Jonas Müller</div>
+                        <div class="member-role" style="color: #4a7fb5;">Anwärter (17 Jahre)</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Nach mehreren Jahren in der Jugendfeuerwehr nun im aktiven Dienst. Bereitet sich auf die Grundausbildung vor, die er mit 18 Jahren beginnen wird.</p>
+                        <div class="member-details">
+                            <div class="detail-item"><i class="fas fa-calendar-alt"></i> In der JF seit: 05.2020</div>
+                            <div class="detail-item"><i class="fas fa-calendar-plus"></i> Im aktiven Dienst seit: 09.2023</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Anwärter 2 -->
+                <div class="member-card" style="border-top-color: #4a7fb5;">
+                    <div class="member-header" style="background-color: #f0f7ff;">
+                        <div class="member-avatar" style="background-color: #4a7fb5;">LK</div>
+                        <div class="member-name">Lisa Kleinert</div>
+                        <div class="member-role" style="color: #4a7fb5;">Anwärterin (17 Jahre)</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Hat in der Jugendfeuerwehr viel gelernt und unterstützt jetzt bereits das Team. Freut sich darauf, im nächsten Jahr ihre Grundausbildung zu beginnen.</p>
+                        <div class="member-details">
+                            <div class="detail-item"><i class="fas fa-calendar-alt"></i> In der JF seit: 09.2019</div>
+                            <div class="detail-item"><i class="fas fa-calendar-plus"></i> Im aktiven Dienst seit: 11.2023</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Anwärter 3 -->
+                <div class="member-card" style="border-top-color: #4a7fb5;">
+                    <div class="member-header" style="background-color: #f0f7ff;">
+                        <div class="member-avatar" style="background-color: #4a7fb5;">TS</div>
+                        <div class="member-name">Tim Schmidt</div>
+                        <div class="member-role" style="color: #4a7fb5;">Anwärter (17 Jahre)</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Frisch aus der Jugendfeuerwehr in den aktiven Dienst gewechselt. Lernt bereits die Grundlagen und wird bald seine vollständige Ausbildung beginnen können.</p>
+                        <div class="member-details">
+                            <div class="detail-item"><i class="fas fa-calendar-alt"></i> In der JF seit: 03.2020</div>
+                            <div class="detail-item"><i class="fas fa-calendar-plus"></i> Im aktiven Dienst seit: 01.2024</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -782,7 +1247,7 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen. Alle Rechte vorbehalten.</p>
+                <p>&copy; 2026 Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen</p>
             </div>
         </div>
     </footer>
@@ -791,46 +1256,70 @@
         // Mobile Navigation Toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('nav');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const body = document.body;
         
         menuToggle.addEventListener('click', function() {
             this.classList.toggle('active');
             nav.classList.toggle('active');
-            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+            navOverlay.classList.toggle('active');
+            
+            if (nav.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+                this.setAttribute('aria-label', 'Menü schließen');
+            } else {
+                body.style.overflow = '';
+                this.setAttribute('aria-label', 'Menü öffnen');
+            }
         });
         
-        // Smooth scrolling for anchor links
+        // Menü schließen bei Klick auf Overlay
+        navOverlay.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            nav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            body.style.overflow = '';
+            menuToggle.setAttribute('aria-label', 'Menü öffnen');
+        });
+        
+        // Menü schließen bei Klick auf einen Link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                navOverlay.classList.remove('active');
+                body.style.overflow = '';
+                menuToggle.setAttribute('aria-label', 'Menü öffnen');
+            });
+        });
+        
+        // Card Animationen verbessern
+        document.querySelectorAll('.member-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+                this.style.boxShadow = '0 15px 30px rgba(230, 43, 30, 0.12)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            });
+        });
+        
+        // Smooth scrolling für Anchor Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 if(targetId === '#') return;
                 
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
+                    e.preventDefault();
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu after clicking
-                    if(window.innerWidth <= 768) {
-                        menuToggle.classList.remove('active');
-                        nav.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
                 }
-            });
-        });
-        
-        // Card hover effects
-        document.querySelectorAll('.member-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
             });
         });
     </script>

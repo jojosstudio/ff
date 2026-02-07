@@ -18,8 +18,10 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
         
+        /* Feuerwehr Hintergrundmuster mit Animation */
         .fw-bg {
             position: fixed;
             top: 0;
@@ -32,8 +34,19 @@
                 linear-gradient(45deg, #E62B1E 1px, transparent 1px),
                 linear-gradient(-45deg, #E62B1E 1px, transparent 1px);
             background-size: 60px 60px;
+            animation: bgMove 120s linear infinite;
         }
         
+        @keyframes bgMove {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 120px 120px;
+            }
+        }
+        
+        /* Akzent-Muster */
         .accent-pattern {
             position: absolute;
             width: 100%;
@@ -42,6 +55,16 @@
                 radial-gradient(circle at 20% 30%, rgba(230, 43, 30, 0.03) 2px, transparent 2px),
                 radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.03) 2px, transparent 2px);
             background-size: 80px 80px;
+            animation: patternPulse 20s ease-in-out infinite;
+        }
+
+        @keyframes patternPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
         }
         
         .fw-border {
@@ -61,6 +84,7 @@
             transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
+            animation: fadeInUp 1s ease-out 0.7s both;
         }
         
         .fw-button:hover {
@@ -73,6 +97,20 @@
             position: relative;
             background-color: white;
             transition: all 0.3s ease;
+            animation: cardAppear 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .fw-card:nth-child(1) { animation-delay: 0.1s; }
+        .fw-card:nth-child(2) { animation-delay: 0.3s; }
+        .fw-card:nth-child(3) { animation-delay: 0.5s; }
+        
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .fw-card::after {
@@ -88,16 +126,29 @@
             border-radius: 4px;
         }
         
+        /* Header mit Animationen */
         header {
             background-color: #E62B1E;
-            padding: 20px 0;
+            padding: 15px 0;
             border-bottom: 4px solid #333;
             position: relative;
             z-index: 100;
+            animation: fadeInHeader 0.8s ease-out;
+        }
+
+        @keyframes fadeInHeader {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -107,55 +158,85 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: nowrap;
         }
         
         .logo {
             display: flex;
             align-items: center;
+            flex-shrink: 0;
         }
         
-        .logo-icon {
-            font-size: 2.5rem;
-            color: white;
-            margin-right: 15px;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
         }
         
-        .logo-text {
-            color: white;
+        .logo-image {
+            max-height: 50px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05) rotate(2deg);
         }
         
-        .logo-text h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-        
-        .logo-text p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        .hamburger {
+        /* Neues Hamburger-Menü */
+        .menu-toggle {
             display: none;
             width: 35px;
             height: 30px;
             position: relative;
             cursor: pointer;
-            flex-direction: column;
-            justify-content: space-between;
             z-index: 1001;
-            margin: 15px auto 0;
+            background: none;
+            border: none;
+            padding: 5px;
+            margin-left: 10px;
         }
         
-        .hamburger span {
+        .menu-toggle span {
             display: block;
             height: 4px;
             width: 100%;
             background-color: white;
             border-radius: 3px;
+            transition: all 0.3s ease;
+            position: absolute;
+            left: 0;
+        }
+        
+        .menu-toggle span:nth-child(1) {
+            top: 0;
+        }
+        
+        .menu-toggle span:nth-child(2) {
+            top: 13px;
+        }
+        
+        .menu-toggle span:nth-child(3) {
+            top: 26px;
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            top: 13px;
+            transform: rotate(45deg);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            top: 13px;
+            transform: rotate(-45deg);
         }
         
         nav {
-            transition: all 0.5s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
         
         nav ul {
@@ -164,7 +245,8 @@
         }
         
         nav ul li {
-            margin-left: 25px;
+            margin-left: 15px;
+            position: relative;
         }
         
         nav ul li a {
@@ -175,15 +257,36 @@
             border: 2px solid transparent;
             border-radius: 4px;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: block;
+            font-size: 1rem;
         }
         
-        nav ul li a:hover {
-            border-color: white;
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 80%;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active {
             background-color: rgba(255, 255, 255, 0.1);
         }
         
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1589659764353-3c8d8a608cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589659764353-3c8d8a608cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             color: white;
@@ -197,28 +300,45 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background: 
-                repeating-linear-gradient(0deg, 
-                    transparent, 
-                    transparent 20px, 
-                    rgba(230, 43, 30, 0.05) 20px, 
-                    rgba(230, 43, 30, 0.05) 40px);
-            pointer-events: none;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: heroShine 8s infinite;
+        }
+
+        @keyframes heroShine {
+            0% {
+                left: -100%;
+            }
+            20%, 100% {
+                left: 100%;
+            }
         }
         
         .hero h2 {
             font-size: 2.8rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
         
         .hero p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto 30px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .main-content {
@@ -231,6 +351,7 @@
             text-align: center;
             margin-bottom: 50px;
             position: relative;
+            animation: fadeInUp 0.8s ease-out;
         }
         
         .section-title h2 {
@@ -257,6 +378,7 @@
             min-width: 300px;
             padding-right: 40px;
             position: relative;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
         
         .about-text h3 {
@@ -277,6 +399,7 @@
             padding: 20px;
             border-radius: 8px;
             position: relative;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
         
         .about-image img {
@@ -321,6 +444,16 @@
             font-size: 2.5rem;
             color: #E62B1E;
             margin-bottom: 20px;
+            animation: iconPulse 2s infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
         }
         
         .service h3 {
@@ -334,6 +467,28 @@
             padding: 60px 0;
             margin: 80px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: statShine 5s infinite;
+        }
+
+        @keyframes statShine {
+            0% {
+                left: -100%;
+            }
+            20%, 100% {
+                left: 100%;
+            }
         }
         
         .stat-numbers {
@@ -345,12 +500,41 @@
         
         .stat-item {
             margin: 20px;
+            animation: statFadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.2s; }
+        .stat-item:nth-child(2) { animation-delay: 0.4s; }
+        .stat-item:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes statFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .stat-number {
             font-size: 3rem;
             font-weight: bold;
             margin-bottom: 10px;
+            animation: countUp 2s ease-out forwards;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .stat-label {
@@ -374,6 +558,7 @@
             flex: 1;
             min-width: 300px;
             padding-right: 40px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
         
         .membership-text h3 {
@@ -398,6 +583,7 @@
             background-color: white;
             padding: 30px;
             border-radius: 8px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
         
         .form-group {
@@ -444,10 +630,18 @@
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s;
+            animation: cardAppear 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
         }
+
+        .vehicle-card:nth-child(1) { animation-delay: 0.1s; }
+        .vehicle-card:nth-child(2) { animation-delay: 0.3s; }
+        .vehicle-card:nth-child(3) { animation-delay: 0.5s; }
         
         .vehicle-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(230, 43, 30, 0.12);
         }
         
         .vehicle-image {
@@ -458,6 +652,21 @@
             justify-content: center;
             font-size: 4rem;
             color: #E62B1E;
+            transition: transform 0.3s ease;
+        }
+
+        .vehicle-card:hover .vehicle-image {
+            transform: scale(1.05) rotate(2deg);
+            animation: avatarBounce 0.6s ease;
+        }
+
+        @keyframes avatarBounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
         }
         
         .vehicle-info {
@@ -469,60 +678,93 @@
             color: #333;
         }
         
+        /* Footer mit Hover-Effekten */
         footer {
             background-color: #333;
             color: white;
-            padding: 40px 0 20px;
-            position: relative;
+            padding: 40px 20px 20px;
+            text-align: center;
         }
         
         .footer-content {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
             margin-bottom: 30px;
+            gap: 40px;
         }
         
         .footer-section {
             flex: 1;
             min-width: 250px;
             margin-bottom: 30px;
+            max-width: 400px;
+            text-align: center;
         }
         
         .footer-section h3 {
             font-size: 1.3rem;
             margin-bottom: 20px;
             color: #E62B1E;
+            text-align: center;
         }
         
         .footer-links ul {
             list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
         
         .footer-links ul li {
             margin-bottom: 10px;
+            width: 100%;
+            text-align: center;
         }
         
         .footer-links ul li a {
             color: #ddd;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 1rem;
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.1);
+            width: 200px;
+            text-align: center;
         }
         
         .footer-links ul li a:hover {
             color: #E62B1E;
+            transform: translateX(5px);
+            background: rgba(255,255,255,0.15);
         }
         
         .emergency-box {
             background-color: #E62B1E;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 10px;
             text-align: center;
             margin-top: 20px;
+            animation: emergencyBoxPulse 2s infinite;
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes emergencyBoxPulse {
+            0%, 100% {
+                box-shadow: 0 5px 15px rgba(230, 43, 30, 0.3);
+            }
+            50% {
+                box-shadow: 0 5px 25px rgba(230, 43, 30, 0.5);
+            }
         }
         
         .emergency-number {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: bold;
             margin: 10px 0;
         }
@@ -534,112 +776,124 @@
             font-size: 0.9rem;
             color: #aaa;
         }
-
-        .logo-image {
-            max-height: 60px;
-            width: auto;
-            display: block;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-        }
         
-        @media (max-width: 992px) {
-            .header-content {
-                flex-direction: column;
+        /* Responsive Design mit verbesserten Menü-Animationen */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 0;
             }
             
-            .logo {
-                margin-bottom: 10px;
-                justify-content: center;
+            .logo-image {
+                max-height: 45px;
             }
             
-            .hamburger {
-                display: flex;
+            .menu-toggle {
+                display: block;
             }
             
             nav {
                 position: fixed;
-                top: -100%;
-                left: 0;
-                width: 100%;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
                 height: 100vh;
                 background-color: #E62B1E;
                 z-index: 1000;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: top 0.5s ease;
+                transition: right 0.4s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
             }
             
             nav.active {
+                right: 0;
+            }
+            
+            /* Overlay für Hintergrund */
+            .nav-overlay {
+                display: none;
+                position: fixed;
                 top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            
+            .nav-overlay.active {
+                display: block;
             }
             
             nav ul {
                 flex-direction: column;
                 align-items: center;
                 width: 100%;
+                padding: 20px;
+                height: 100%;
+                justify-content: center;
+                gap: 10px;
             }
             
             nav ul li {
-                margin: 15px 0;
+                margin: 0;
                 width: 100%;
                 text-align: center;
+                animation: slideInRight 0.5s ease-out forwards;
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            
+            nav ul li:nth-child(1) { animation-delay: 0.1s; }
+            nav ul li:nth-child(2) { animation-delay: 0.2s; }
+            nav ul li:nth-child(3) { animation-delay: 0.3s; }
+            nav ul li:nth-child(4) { animation-delay: 0.4s; }
+            nav ul li:nth-child(5) { animation-delay: 0.5s; }
+            
+            @keyframes slideInRight {
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
             }
             
             nav ul li a {
-                display: block;
-                padding: 15px;
+                padding: 15px 20px;
                 font-size: 1.2rem;
+                border-radius: 8px;
+                margin: 5px 0;
+                background: rgba(255,255,255,0.1);
             }
             
-            .hamburger.active span:nth-child(1) {
-                transform: translateY(13px) rotate(45deg);
+            nav ul li a:hover,
+            nav ul li a.active {
+                background-color: rgba(255,255,255,0.2);
+                transform: translateX(10px);
             }
             
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
-            }
-            
-            .hamburger.active span:nth-child(3) {
-                transform: translateY(-13px) rotate(-45deg);
+            .hero {
+                padding: 70px 0;
             }
             
             .hero h2 {
-                font-size: 2.4rem;
-            }
-            
-            .about-text, 
-            .membership-text {
-                padding-right: 20px;
-            }
-            
-            .service {
-                min-width: 200px;
-                margin: 10px;
-                padding: 20px;
-            }
-            
-            .vehicle-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+                margin-bottom: 15px;
             }
             
             .hero p {
-                font-size: 1rem;
+                font-size: 1.1rem;
+                margin-bottom: 20px;
             }
             
-            .about-us, .membership-content {
-                flex-direction: column;
+            .main-content {
+                padding: 50px 15px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+                padding: 0 10px 8px;
             }
             
             .about-text, 
@@ -656,41 +910,35 @@
             .stat-number {
                 font-size: 2.5rem;
             }
-            
-            .services {
-                flex-direction: column;
-            }
-            
-            .service {
-                width: 100%;
-                margin: 10px 0;
-            }
         }
         
-        @media (max-width: 480px) {
-            .container {
-                width: 95%;
-                padding: 0 10px;
+        @media (max-width: 576px) {
+            .logo-image {
+                max-height: 40px;
             }
             
             .hero {
-                padding: 70px 0;
+                padding: 50px 10px;
             }
             
             .hero h2 {
                 font-size: 1.8rem;
+                margin-bottom: 12px;
             }
             
             .hero p {
-                font-size: 0.9rem;
+                font-size: 1rem;
+                margin-bottom: 15px;
             }
             
-            .fw-button {
-                padding: 10px 20px;
+            .main-content {
+                padding: 40px 10px;
             }
             
             .section-title h2 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+                padding: 0 8px 6px;
+                margin-bottom: 10px;
             }
             
             .about-text h3, 
@@ -708,6 +956,10 @@
                 height: 200px;
             }
             
+            .vehicle-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .stat-number {
                 font-size: 2rem;
             }
@@ -716,12 +968,23 @@
                 font-size: 1rem;
             }
             
-            .vehicle-grid {
-                grid-template-columns: 1fr;
+            .emergency-number {
+                font-size: 1.8rem;
             }
             
-            .emergency-number {
-                font-size: 2rem;
+            .copyright {
+                padding-top: 15px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            nav ul li a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     </style>
@@ -735,25 +998,31 @@
             <div class="header-content">
                 <div class="logo">
                     <div class="logo-container">
-                        <a href="/" class="logo-link">
+                        <a href="/ff/index" class="logo-link">
                             <img src="logot.png" alt="Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen" class="logo-image">
                         </a>
                     </div>
                 </div>
-                <div class="hamburger">
+                
+                <!-- Neues Hamburger Menü für Mobile -->
+                <button class="menu-toggle" aria-label="Menü öffnen">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
+                
                 <nav>
                     <ul>
-                        <li><a href="/ff/index">Start</a></li>
+                        <li><a href="/ff/index" class="active">Start</a></li>
                         <li><a href="/ff/mann">Mannschaft</a></li>
-                        <li><a href="/ff/jugend" class="active">Jugendfeuerwehr</a></li>
+                        <li><a href="/ff/jugend">Jugendfeuerwehr</a></li>
                         <li><a href="/ff/auto">Fahrzeuge</a></li>
                         <li><a href="/ff/kontakt">Kontakt</a></li>
                     </ul>
                 </nav>
+                
+                <!-- Overlay für Mobile Navigation -->
+                <div class="nav-overlay"></div>
             </div>
         </div>
     </header>
@@ -963,15 +1232,55 @@
     </footer>
 
     <script>
+        // Mobile Navigation Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const body = document.body;
+        
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            
+            if (nav.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+                this.setAttribute('aria-label', 'Menü schließen');
+            } else {
+                body.style.overflow = '';
+                this.setAttribute('aria-label', 'Menü öffnen');
+            }
+        });
+        
+        // Menü schließen bei Klick auf Overlay
+        navOverlay.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            nav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            body.style.overflow = '';
+            menuToggle.setAttribute('aria-label', 'Menü öffnen');
+        });
+        
+        // Menü schließen bei Klick auf einen Link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                navOverlay.classList.remove('active');
+                body.style.overflow = '';
+                menuToggle.setAttribute('aria-label', 'Menü öffnen');
+            });
+        });
+        
+        // Smooth scrolling für Anchor Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 if(targetId === '#') return;
                 
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
+                    e.preventDefault();
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
@@ -980,52 +1289,24 @@
             });
         });
         
+        // Card Animationen verbessern
+        document.querySelectorAll('.fw-card, .vehicle-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+                this.style.boxShadow = '0 15px 30px rgba(230, 43, 30, 0.12)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            });
+        });
+        
+        // Formular-Handling
         document.getElementById('membershipForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Vielen Dank für Ihr Interesse! Wir werden uns in Kürze bei Ihnen melden, um weitere Details zu besprechen.');
             this.reset();
-        });
-        
-        document.querySelectorAll('.fw-card, .vehicle-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
-        
-        const statNumbers = document.querySelectorAll('.stat-number');
-        statNumbers.forEach(stat => {
-            const target = parseInt(stat.textContent);
-            let current = 0;
-            const increment = target / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if(current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                stat.textContent = Math.floor(current);
-            }, 30);
-        });
-        
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('nav');
-        
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-        });
-        
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
         });
     </script>
 </body>
