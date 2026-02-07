@@ -20,7 +20,6 @@
             overflow-x: hidden;
         }
         
-        /* Feuerwehr Hintergrundmuster */
         .fw-bg {
             position: fixed;
             top: 0;
@@ -35,7 +34,6 @@
             background-size: 60px 60px;
         }
         
-        /* Akzent-Muster */
         .accent-pattern {
             position: absolute;
             width: 100%;
@@ -46,7 +44,6 @@
             background-size: 80px 80px;
         }
         
-        /* Feuerwehr-Design Elemente */
         .fw-border {
             border: 2px solid #333;
             border-radius: 4px;
@@ -91,7 +88,6 @@
             border-radius: 4px;
         }
         
-        /* Header */
         header {
             background-color: #E62B1E;
             padding: 20px 0;
@@ -138,6 +134,30 @@
             opacity: 0.9;
         }
         
+        .hamburger {
+            display: none;
+            width: 35px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1001;
+            margin: 15px auto 0;
+        }
+        
+        .hamburger span {
+            display: block;
+            height: 4px;
+            width: 100%;
+            background-color: white;
+            border-radius: 3px;
+        }
+        
+        nav {
+            transition: all 0.5s ease-in-out;
+        }
+        
         nav ul {
             display: flex;
             list-style: none;
@@ -162,7 +182,6 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
         
-        /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1589659764353-3c8d8a608cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
@@ -202,7 +221,6 @@
             margin: 0 auto 30px;
         }
         
-        /* Main Content */
         .main-content {
             padding: 80px 0;
             background-color: rgba(255, 255, 255, 0.95);
@@ -310,7 +328,6 @@
             color: #333;
         }
         
-        /* Einsatzstatistik */
         .stats {
             background-color: #E62B1E;
             color: white;
@@ -341,7 +358,6 @@
             opacity: 0.9;
         }
         
-        /* Mitglieder Section */
         .membership {
             background-color: rgba(240, 240, 240, 0.95);
             padding: 80px 0;
@@ -411,7 +427,6 @@
             outline: none;
         }
         
-        /* Fahrzeuge Section */
         .vehicles {
             padding: 80px 0;
         }
@@ -454,7 +469,6 @@
             color: #333;
         }
         
-        /* Footer */
         footer {
             background-color: #333;
             color: white;
@@ -520,77 +534,221 @@
             font-size: 0.9rem;
             color: #aaa;
         }
+
+        .logo-image {
+            max-height: 60px;
+            width: auto;
+            display: block;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
         
-        /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .header-content {
                 flex-direction: column;
-                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+                justify-content: center;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            nav {
+                position: fixed;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: #E62B1E;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: top 0.5s ease;
+            }
+            
+            nav.active {
+                top: 0;
             }
             
             nav ul {
-                margin-top: 20px;
-                justify-content: center;
-                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
             }
             
             nav ul li {
-                margin: 5px 10px;
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 1.2rem;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(13px) rotate(45deg);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-13px) rotate(-45deg);
             }
             
             .hero h2 {
-                font-size: 2.2rem;
+                font-size: 2.4rem;
+            }
+            
+            .about-text, 
+            .membership-text {
+                padding-right: 20px;
+            }
+            
+            .service {
+                min-width: 200px;
+                margin: 10px;
+                padding: 20px;
+            }
+            
+            .vehicle-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
             }
             
             .hero p {
                 font-size: 1rem;
             }
             
-            .about-text, .membership-text {
+            .about-us, .membership-content {
+                flex-direction: column;
+            }
+            
+            .about-text, 
+            .membership-text {
                 padding-right: 0;
                 margin-bottom: 40px;
+            }
+            
+            .about-image, 
+            .membership-form {
+                width: 100%;
             }
             
             .stat-number {
                 font-size: 2.5rem;
             }
+            
+            .services {
+                flex-direction: column;
+            }
+            
+            .service {
+                width: 100%;
+                margin: 10px 0;
+            }
         }
-
-        /* Logo Image Styles */
-.logo-image {
-    max-height: 60px;
-    width: auto;
-    display: block;
-}
-
-/* Anpassung des Logo-Containers */
-.logo-container {
-    display: flex;
-    align-items: center;
-    margin-right: 15px;
-}
+        
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+            
+            .hero {
+                padding: 70px 0;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .fw-button {
+                padding: 10px 20px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .about-text h3, 
+            .membership-text h3 {
+                font-size: 1.5rem;
+            }
+            
+            .about-text p, 
+            .membership-text p, 
+            .membership-text li {
+                font-size: 1rem;
+            }
+            
+            .image-placeholder {
+                height: 200px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .stat-label {
+                font-size: 1rem;
+            }
+            
+            .vehicle-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .emergency-number {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Feuerwehr Hintergrundmuster -->
     <div class="fw-bg"></div>
     <div class="accent-pattern"></div>
     
-    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
-              </div>
-              <div class="logo">
-    <div class="logo-container">
-        <a href="/" class="logo-link">
-            <img src="logot.png" alt="Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen" class="logo-image">
-        </a>
-    </div>
+                <div class="logo">
+                    <div class="logo-container">
+                        <a href="/" class="logo-link">
+                            <img src="logot.png" alt="Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen" class="logo-image">
+                        </a>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <nav>
                     <ul>
                         <li><a href="#home">Start</a></li>
-                        <li><a href="/man">Manschaft</a></li>
+                        <li><a href="/man">Mannschaft</a></li>
                         <li><a href="#services">Einsatzbereiche</a></li>
                         <li><a href="#membership">Mitglied werden</a></li>
                         <li><a href="#contact">Kontakt</a></li>
@@ -600,7 +758,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
             <h2>Ehrenamt. Engagement. Einsatzbereitschaft.</h2>
@@ -609,7 +766,6 @@
         </div>
     </section>
 
-    <!-- Über uns Section -->
     <section class="main-content" id="about">
         <div class="container">
             <div class="section-title">
@@ -660,8 +816,6 @@
         </div>
     </section>
 
-
-    <!-- Mitglied werden Section -->
     <section class="membership" id="membership">
         <div class="container">
             <div class="section-title">
@@ -723,7 +877,6 @@
         </div>
     </section>
 
-    <!-- Fahrzeuge Section -->
     <section class="vehicles">
         <div class="container">
             <div class="section-title">
@@ -757,14 +910,13 @@
                     </div>
                     <div class="vehicle-info">
                         <h3>Kats-LF</h3>
-                        <p>Katastrophen schutzt fahrzug</p>
+                        <p>Katastrophenschutzfahrzeug</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact">
         <div class="container">
             <div class="footer-content">
@@ -806,7 +958,6 @@
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -824,14 +975,12 @@
             });
         });
         
-        // Form submission
         document.getElementById('membershipForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Vielen Dank für Ihr Interesse! Wir werden uns in Kürze bei Ihnen melden, um weitere Details zu besprechen.');
             this.reset();
         });
         
-        // Card hover effects
         document.querySelectorAll('.fw-card, .vehicle-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-10px)';
@@ -842,7 +991,6 @@
             });
         });
         
-        // Dynamic statistic counter (optional animation)
         const statNumbers = document.querySelectorAll('.stat-number');
         statNumbers.forEach(stat => {
             const target = parseInt(stat.textContent);
@@ -856,6 +1004,23 @@
                 }
                 stat.textContent = Math.floor(current);
             }, 30);
+        });
+        
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('nav');
+        
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
     </script>
 </body>
