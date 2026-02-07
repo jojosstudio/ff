@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jugendfeuerwehr | FF Löschzug 19 Gelsenkirchen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Jugendfeuerwehr Hintergrundmuster - hellere Farben */
+        .youth-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(45deg, #FF6B35 1px, transparent 1px),
+                linear-gradient(-45deg, #4ECDC4 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #FF6B35; /* Orange für Jugendfeuerwehr */
+            padding: 20px 0;
+            border-bottom: 4px solid #333;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: white;
+            margin-right: 15px;
+        }
+        
+        .logo-text {
+            color: white;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Hamburger Menu - überarbeitet */
+        .menu-toggle {
+            display: none;
+            width: 35px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1001;
+            margin: 15px auto 0;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 4px;
+            width: 100%;
+            background-color: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        nav {
+            transition: all 0.5s ease-in-out;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active {
+            border-color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Hero Section für Jugendfeuerwehr */
+        .hero-youth {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1590334284665-f3a7678e5c40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero-youth h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-youth p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 0 15px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #FF6B35;
+            color: white;
+            border: 2px solid white;
+            border-radius: 4px;
+            padding: 15px 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            margin: 10px;
+        }
+        
+        .cta-button:hover {
+            background-color: white;
+            color: #FF6B35;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button.secondary {
+            background-color: transparent;
+            border-color: #4ECDC4;
+            color: #4ECDC4;
+        }
+        
+        .cta-button.secondary:hover {
+            background-color: #4ECDC4;
+            color: white;
+        }
+        
+        /* Jugendfeuerwehr-Bereich */
+        .youth-section {
+            padding: 80px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #FF6B35;
+            margin-bottom: 15px;
+            display: inline-block;
+            padding: 0 15px 10px;
+            border-bottom: 3px solid #333;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+        }
+        
+        .section-intro {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 60px;
+            font-size: 1.2rem;
+            color: #555;
+            padding: 0 15px;
+        }
+        
+        /* Features/Was wir machen */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+            padding: 0 15px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #4ECDC4;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #FF6B35;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        /* Termine/Übungszeiten */
+        .schedule-section {
+            background-color: #f0f9f8;
+            padding: 80px 0;
+            margin: 80px 0;
+        }
+        
+        .schedule-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .schedule-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 5px solid #FF6B35;
+            display: flex;
+            align-items: center;
+        }
+        
+        .schedule-date {
+            background-color: #FF6B35;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            min-width: 100px;
+            margin-right: 25px;
+        }
+        
+        .schedule-day {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .schedule-month {
+            font-size: 1rem;
+            display: block;
+        }
+        
+        .schedule-details h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .schedule-details p {
+            color: #666;
+        }
+        
+        /* Galerie */
+        .gallery-section {
+            padding: 80px 0;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+            padding: 0 15px;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-weight: bold;
+        }
+        
+        .gallery-item:nth-child(1) {
+            background: linear-gradient(135deg, #FF6B35, #FF9F1C);
+        }
+        
+        .gallery-item:nth-child(2) {
+            background: linear-gradient(135deg, #4ECDC4, #44A08D);
+        }
+        
+        .gallery-item:nth-child(3) {
+            background: linear-gradient(135deg, #FFD166, #FF9F1C);
+        }
+        
+        .gallery-item:nth-child(4) {
+            background: linear-gradient(135deg, #EF476F, #FF6B35);
+        }
+        
+        /* Jugendwarte */
+        .youth-leaders {
+            padding: 60px 0;
+            background-color: #f8f8f8;
+        }
+        
+        .leaders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            padding: 0 15px;
+        }
+        
+        .leader-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            padding-bottom: 25px;
+        }
+        
+        .leader-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #4ECDC4;
+            margin: 30px auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .leader-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .leader-role {
+            color: #FF6B35;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        /* Anmeldung */
+        .registration-section {
+            background-color: #FF6B35;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .registration-form {
+            max-width: 700px;
+            margin: 40px auto 0;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #FF6B35;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 107, 53, 0.3);
+        }
+        
+        .checkbox-group {
+            text-align: left;
+            margin: 25px 0;
+        }
+        
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #FF6B35;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: #FF6B35;
+        }
+        
+        .emergency-box {
+            background-color: #FF6B35;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .emergency-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive Design - überarbeitet für Vollbild-Menü */
+        @media (max-width: 992px) {
+            .hero-youth h1 {
+                font-size: 2.7rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Header-Layout ändern */
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+                justify-content: center;
+            }
+            
+            /* Hamburger-Menü anzeigen */
+            .menu-toggle {
+                display: flex;
+            }
+            
+            /* Navigation im Vollbild-Stil */
+            nav {
+                position: fixed;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: #FF6B35;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: top 0.5s ease;
+            }
+            
+            nav.active {
+                top: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 1.2rem;
+            }
+            
+            /* Animation für das Hamburger-Menü zum X */
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(13px) rotate(45deg);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-13px) rotate(-45deg);
+            }
+            
+            .hero-youth h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-youth p {
+                font-size: 1.1rem;
+            }
+            
+            .schedule-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .schedule-date {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .registration-form {
+                padding: 25px;
+            }
+            
+            .emergency-number {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-icon {
+                font-size: 2rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+            
+            .hero-youth {
+                padding: 70px 0;
+            }
+            
+            .hero-youth h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-youth p {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                width: 80%;
+                margin: 8px auto;
+                display: block;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+                padding: 0 10px 8px;
+            }
+            
+            .section-intro {
+                font-size: 1rem;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .schedule-day {
+                font-size: 1.5rem;
+            }
+            
+            .schedule-details h3 {
+                font-size: 1.2rem;
+            }
+            
+            .gallery-item {
+                height: 180px;
+            }
+            
+            .registration-form {
+                padding: 20px;
+            }
+            
+            .form-group {
+                min-width: 100%;
+            }
+            
+            .leader-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Jugendfeuerwehr Hintergrundmuster -->
+    <div class="youth-bg"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Jugendfeuerwehr</h1>
+                        <p>Löschzug 19 Gelsenkirchen</p>
+                    </div>
+                </div>
+                
+                <!-- Hamburger Menu für Mobile - überarbeitet -->
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="/">Start</a></li>
+                        <li><a href="/loeschzug/">Mannschaft</a></li>
+                        <li><a href="/jugendfeuerwehr/" class="active">Jugendfeuerwehr</a></li>
+                        <li><a href="/fahrzeuge/">Fahrzeuge</a></li>
+                        <li><a href="/kontakt/">Kontakt</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section für Jugendfeuerwehr -->
+    <section class="hero-youth">
+        <div class="container">
+            <h1>Teamwork. Technik. Abenteuer.</h1>
+            <p>Bei der Jugendfeuerwehr Löschzug 19 lernst du nicht nur Feuerwehrtechnik – hier findest du Freunde, erlebst Action und übernimmst Verantwortung!</p>
+            <div>
+                <a href="#anmeldung" class="cta-button">Jetzt mitmachen!</a>
+                <a href="#termine" class="cta-button secondary">Übungstermine</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Einleitung -->
+    <section class="youth-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Was ist die Jugendfeuerwehr?</h2>
+            </div>
+            
+            <div class="section-intro">
+                <p>Die Jugendfeuerwehr ist die Nachwuchsabteilung der Freiwilligen Feuerwehr. Bei uns können Mädchen und Jungen im Alter von 10 bis 17 Jahren spielerisch die Feuerwehrarbeit kennenlernen, Teamgeist entwickeln und sich auf den späteren Dienst in der Einsatzabteilung vorbereiten.</p>
+                <p>Nicht nur Feuerwehrtechnik steht auf dem Programm – bei uns gibt es auch Zeltlager, Wettbewerbe, Ausflüge und jede Menge Spaß!</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Teamwork & Freundschaft</h3>
+                    <p>Bei uns lernst du, im Team zu arbeiten und findest Freunde fürs Leben. Zusammenhalt wird bei uns groß geschrieben!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Spannende Ausbildung</h3>
+                    <p>Lerne Feuerwehrtechnik, Erste Hilfe, Knotenkunde und vieles mehr in praktischen Übungen und spannenden Theoriestunden.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-campground"></i>
+                    </div>
+                    <h3>Action & Abenteuer</h3>
+                    <p>Zeltlager, Wettbewerbe, Ausflüge und Veranstaltungen – bei uns wird es nie langweilig!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Termine/Übungszeiten -->
+    <section class="schedule-section" id="termine">
+        <div class="container">
+            <div class="section-title">
+                <h2>Unsere Übungstermine</h2>
+            </div>
+            
+            <div class="section-intro">
+                <p>Wir treffen uns regelmäßig zu Übungen und Aktivitäten. Neueinsteiger sind jederzeit willkommen – komm einfach vorbei und mach mit!</p>
+            </div>
+            
+            <div class="schedule-container">
+                <div class="schedule-item">
+                    <div class="schedule-date">
+                        <span class="schedule-day">Jeden</span>
+                        <span class="schedule-month">Montag</span>
+                    </div>
+                    <div class="schedule-details">
+                        <h3>Regelmäßige Gruppenübung</h3>
+                        <p>17:30 - 19:30 Uhr | Feuerwehrhaus Heßler</p>
+                        <p>Feuerwehrtechnische Grundausbildung, praktische Übungen, Teamtraining</p>
+                    </div>
+                </div>
+                
+                
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerie -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Galerie</h2>
+            </div>
+            
+            <div class="section-intro">
+                <p>Einblicke in unsere Aktivitäten, Übungen und Veranstaltungen</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <i class="fas fa-fire-extinguisher" style="font-size: 3rem; color: white;"></i>
+                </div>
+                
+                <div class="gallery-item">
+                    <i class="fas fa-trophy" style="font-size: 3rem; color: white;"></i>
+                </div>
+                
+                <div class="gallery-item">
+                    <i class="fas fa-campground" style="font-size: 3rem; color: white;"></i>
+                </div>
+                
+                <div class="gallery-item">
+                    <i class="fas fa-water" style="font-size: 3rem; color: white;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jugendwarte -->
+    <section class="youth-leaders">
+        <div class="container">
+            <div class="section-title">
+                <h2>Unsere Jugendwarte</h2>
+            </div>
+            
+            <div class="section-intro">
+                <p>Erfahrene Feuerwehrleute kümmern sich um die Ausbildung und Betreuung unserer Jugendlichen</p>
+            </div>
+            
+            <div class="leaders-grid">
+                <div class="leader-card">
+                    <div class="leader-avatar">RS</div>
+                    <div class="leader-name">Ronja Stein</div>
+                    <div class="leader-role">Jugendwart</div>
+                    <p style="padding: 0 20px; color: #666;">Ausbilderin für Knotenkunde und Erste Hilfe</p>
+                </div>
+                
+                <div class="leader-card">
+                    <div class="leader-avatar">JR</div>
+                    <div class="leader-name">Jan Richter</div>
+                    <div class="leader-role">Stellv. Jugendwart</div>
+                    <p style="padding: 0 20px; color: #666;">Spezialist für Fahrzeugkunde und Wettbewerbe</p>
+                </div>
+                
+                <div class="leader-card">
+                    <div class="leader-avatar">LS</div>
+                    <div class="leader-name">Lisa Schmidt</div>
+                    <div class="leader-role">Betreuerin</div>
+                    <p style="padding: 0 20px; color: #666;">Organisation von Ausflügen und Zeltlagern</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Anmeldung -->
+    <section class="registration-section" id="anmeldung">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: white;">Jetzt mitmachen!</h2>
+            </div>
+            
+            <div class="section-intro" style="color: rgba(255,255,255,0.9);">
+                <p>Interessiert? Komm einfach während unserer Übungszeiten vorbei oder fülle das Kontaktformular aus. Wir melden uns dann bei dir!</p>
+            </div>
+            
+            <div class="registration-form">
+                <h3 style="color: #333; margin-bottom: 30px;">Anmeldung zur Jugendfeuerwehr</h3>
+                <form id="youthRegistrationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="youth-name">Vor- und Nachname*</label>
+                            <input type="text" id="youth-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="youth-birthdate">Geburtsdatum*</label>
+                            <input type="date" id="youth-birthdate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="parent-name">Name der Eltern/Erziehungsberechtigten*</label>
+                            <input type="text" id="parent-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="parent-phone">Telefonnummer*</label>
+                            <input type="tel" id="parent-phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="parent-email">E-Mail Adresse*</label>
+                            <input type="email" id="parent-email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="youth-school">Aktuelle Schule/Klasse</label>
+                            <input type="text" id="youth-school">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Nachricht (optional)</label>
+                        <textarea id="message" rows="3" placeholder="Hast du Fragen oder möchtest du uns noch etwas mitteilen?"></textarea>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacy" required>
+                        <label for="privacy">Ich habe die Datenschutzerklärung gelesen und bin einverstanden*</label>
+                    </div>
+                    
+                    <button type="submit" class="cta-button" style="background-color: #FF6B35; color: white; border: none; padding: 15px 40px; font-size: 1.1rem;">Anmeldung absenden</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Jugendfeuerwehr</h3>
+                    <p>Löschzug 19 Gelsenkirchen</p>
+                    <p>Die Nachwuchsabteilung der Freiwilligen Feuerwehr – für Jugendliche von 10 bis 17 Jahren.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Kontakt & Übungszeiten</h3>
+                    <div class="footer-links">
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Feuerwehrhaus Heßler, Gelsenkirchen</li>
+                            <li><i class="fas fa-clock" style="margin-right: 10px;"></i> Jeden Dienstag, 17:30-19:30 Uhr</li>
+                            <li><i class="fas fa-phone" style="margin-right: 10px;"></i> 0209 12345-19 (Jugendwart)</li>
+                            <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> jugend@ff-lz19-ge.de</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <ul>
+                            <li><a href="/">Startseite</a></li>
+                            <li><a href="/loeschzug/">Erwachsenenabteilung</a></li>
+                            <li><a href="/fahrzeuge/">Unsere Fahrzeuge</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="emergency-box">
+                        <p>Im Notfall sofort wählen:</p>
+                        <div class="emergency-number">112</div>
+                        <p>Feuerwehr & Rettungsdienst</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 Jugendfeuerwehr Löschzug 19 Gelsenkirchen. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu after clicking
+                    if(window.innerWidth <= 768) {
+                        menuToggle.classList.remove('active');
+                        nav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+        });
+        
+        // Form submission
+        document.getElementById('youthRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Vielen Dank für dein Interesse! Wir werden uns in Kürze bei dir bzw. deinen Eltern melden, um weitere Details zu besprechen.');
+            this.reset();
+        });
+        
+        // Set minimum date for birthdate (10 years ago) and maximum (17 years ago)
+        const birthdateInput = document.getElementById('youth-birthdate');
+        const today = new Date();
+        const minDate = new Date(today.getFullYear() - 17, today.getMonth(), today.getDate());
+        const maxDate = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
+        
+        birthdateInput.min = minDate.toISOString().split('T')[0];
+        birthdateInput.max = maxDate.toISOString().split('T')[0];
+    </script>
+</body>
+</html>
