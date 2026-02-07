@@ -82,6 +82,32 @@
             opacity: 0.9;
         }
         
+        /* Hamburger Menu - überarbeitet */
+        .menu-toggle {
+            display: none;
+            width: 35px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1001;
+            margin: 15px auto 0;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 4px;
+            width: 100%;
+            background-color: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        nav {
+            transition: all 0.5s ease-in-out;
+        }
+        
         nav ul {
             display: flex;
             list-style: none;
@@ -101,7 +127,8 @@
             transition: all 0.3s;
         }
         
-        nav ul li a:hover {
+        nav ul li a:hover,
+        nav ul li a.active {
             border-color: white;
             background-color: rgba(255, 255, 255, 0.1);
         }
@@ -388,21 +415,75 @@
             color: #aaa;
         }
         
-        /* Responsive Design */
+        /* Responsive Design - überarbeitet für Vollbild-Menü */
         @media (max-width: 768px) {
+            /* Header-Layout ändern */
             .header-content {
                 flex-direction: column;
                 text-align: center;
             }
             
-            nav ul {
-                margin-top: 20px;
+            .logo {
+                margin-bottom: 10px;
                 justify-content: center;
-                flex-wrap: wrap;
+            }
+            
+            /* Hamburger-Menü anzeigen */
+            .menu-toggle {
+                display: flex;
+            }
+            
+            /* Navigation im Vollbild-Stil */
+            nav {
+                position: fixed;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: #E62B1E;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: top 0.5s ease;
+            }
+            
+            nav.active {
+                top: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                margin-top: 0;
+                justify-content: center;
+                flex-wrap: nowrap;
             }
             
             nav ul li {
-                margin: 5px 10px;
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 1.2rem;
+            }
+            
+            /* Animation für das Hamburger-Menü zum X */
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(13px) rotate(45deg);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-13px) rotate(-45deg);
             }
             
             .hero-crew h1 {
@@ -417,32 +498,60 @@
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
         }
+        
+        @media (max-width: 576px) {
+            .logo-icon {
+                font-size: 2rem;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+            
+            .hero-crew h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav ul li a {
+                margin: 5px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-intro {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Feuerwehr Hintergrundmuster -->
     <div class="fw-bg"></div>
     
-    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-fire-extinguisher"></i>
+                    <div class="logo-container">
+                        <a href="/" class="logo-link">
+                            <img src="logot.png" alt="Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen" class="logo-image">
+                        </a>
                     </div>
-                    <div class="logo-text">
-                        <h1>Freiwillige Feuerwehr</h1>
-                        <p>Löschzug 19 Gelsenkirchen</p>
-                    </div>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="/">Start</a></li>
-                        <li><a href="/loeschzug/" class="active">Mannschaft</a></li>
-                        <li><a href="/fahrzeuge/">Fahrzeuge</a></li>
-                        <li><a href="/einsaetze/">Einsätze</a></li>
-                        <li><a href="/kontakt/">Kontakt</a></li>
+                        <li><a href="/ff/index">Start</a></li>
+                        <li><a href="/ff/mann">Mannschaft</a></li>
+                        <li><a href="/ff/jugend" class="active">Jugendfeuerwehr</a></li>
+                        <li><a href="/ff/auto">Fahrzeuge</a></li>
+                        <li><a href="/ff/kontakt/">Kontakt</a></li>
                     </ul>
                 </nav>
             </div>
@@ -662,7 +771,6 @@
         </div>
     </section>
 
-
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -710,6 +818,16 @@
     </footer>
 
     <script>
+        // Mobile Navigation Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        });
+        
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -724,6 +842,13 @@
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
+                    
+                    // Close mobile menu after clicking
+                    if(window.innerWidth <= 768) {
+                        menuToggle.classList.remove('active');
+                        nav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
                 }
             });
         });
@@ -737,37 +862,6 @@
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0)';
             });
-        });
-        
-        // Einfache Animation für die Statistik-Zahlen
-        const statNumbers = document.querySelectorAll('.stat-number');
-        const observerOptions = {
-            threshold: 0.5
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    const stat = entry.target;
-                    const target = parseInt(stat.textContent);
-                    let current = 0;
-                    const increment = target / 50;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if(current >= target) {
-                            current = target;
-                            clearInterval(timer);
-                        }
-                        stat.textContent = Math.floor(current);
-                    }, 30);
-                    
-                    observer.unobserve(stat);
-                }
-            });
-        }, observerOptions);
-        
-        statNumbers.forEach(stat => {
-            observer.observe(stat);
         });
     </script>
 </body>
