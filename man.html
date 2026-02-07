@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsere Mannschaft | FF Löschzug 19 Gelsenkirchen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Feuerwehr Hintergrundmuster */
+        .fw-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(45deg, #E62B1E 1px, transparent 1px),
+                linear-gradient(-45deg, #E62B1E 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #E62B1E;
+            padding: 20px 0;
+            border-bottom: 4px solid #333;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: white;
+            margin-right: 15px;
+        }
+        
+        .logo-text {
+            color: white;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            border-color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hero Section für Mannschaft */
+        .hero-crew {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1589659764353-3c8d8a608cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero-crew h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-crew p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Mannschaftsbereich */
+        .crew-section {
+            padding: 80px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #E62B1E;
+            margin-bottom: 15px;
+            display: inline-block;
+            padding: 0 15px 10px;
+            border-bottom: 3px solid #333;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+        }
+        
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        /* Mannschafts-Grid */
+        .crew-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .member-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #E62B1E;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .member-header {
+            background-color: #f8f8f8;
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #E62B1E;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .member-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .member-role {
+            color: #E62B1E;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .member-body {
+            padding: 20px;
+        }
+        
+        .member-bio {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .member-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #777;
+        }
+        
+        .detail-item i {
+            margin-right: 5px;
+            color: #E62B1E;
+        }
+        
+        .member-skills {
+            margin-top: 15px;
+        }
+        
+        .skills-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .skill-tag {
+            background-color: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+        
+        .skill-tag.medical {
+            background-color: #ffeaea;
+            color: #c53030;
+        }
+        
+        .skill-tag.tech {
+            background-color: #e3f2fd;
+            color: #1e40af;
+        }
+        
+        .skill-tag.lead {
+            background-color: #f0f9ff;
+            color: #0369a1;
+        }
+        
+        .skill-tag.driver {
+            background-color: #f0fdf4;
+            color: #166534;
+        }
+        
+        /* Statistik-Bereich */
+        .crew-stats {
+            background-color: #E62B1E;
+            color: white;
+            padding: 60px 0;
+            margin: 80px 0;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #E62B1E;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: #E62B1E;
+        }
+        
+        .emergency-box {
+            background-color: #E62B1E;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .emergency-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero-crew h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-crew p {
+                font-size: 1rem;
+            }
+            
+            .crew-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Feuerwehr Hintergrundmuster -->
+    <div class="fw-bg"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-fire-extinguisher"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Freiwillige Feuerwehr</h1>
+                        <p>Löschzug 19 Gelsenkirchen</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="/">Start</a></li>
+                        <li><a href="/loeschzug/" class="active">Mannschaft</a></li>
+                        <li><a href="/fahrzeuge/">Fahrzeuge</a></li>
+                        <li><a href="/einsaetze/">Einsätze</a></li>
+                        <li><a href="/kontakt/">Kontakt</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section für Mannschaft -->
+    <section class="hero-crew">
+        <div class="container">
+            <h1>Unsere Mannschaft</h1>
+            <p>Das starke Team hinter den Einsätzen: engagierte Ehrenamtliche, die rund um die Uhr für Ihre Sicherheit da sind.</p>
+        </div>
+    </section>
+
+    <!-- Mannschaftsbereich -->
+    <section class="crew-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Das Team des Löschzuges 19</h2>
+            </div>
+            
+            <div class="section-intro">
+                <p>Hinter jedem erfolgreichen Einsatz steht ein eingespieltes Team von Fachleuten. Unsere Mannschaft setzt sich aus Ehrenamtlichen mit unterschiedlichsten beruflichen Hintergründen zusammen, die ihr Wissen und ihre Fähigkeiten in den Dienst der Gemeinschaft stellen.</p>
+            </div>
+            
+            <div class="crew-grid">
+                <!-- Mitglied 1 -->
+                <div class="member-card">
+                    <div class="member-header">
+                        <div class="member-avatar">BH</div>
+                        <div class="member-name">Benjamin Hensel</div>
+                        <div class="member-role">Gruppenführer & Atemschutzgeräteträger</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Verantwortlich für die Einsatzleitung der Gruppe und spezialisiert auf Innenangriff unter Atemschutz. Seit 2012 im Dienst.</p>
+                        <div class="member-details">
+                            <div class="detail-item"><i class="fas fa-calendar-alt"></i> Aktive Zeit: 12 Jahre</div>
+                            <div class="detail-item"><i class="fas fa-award"></i> Ausbildungen: 8</div>
+                        </div>
+                        <div class="member-skills">
+                            <div class="skills-title">Spezialgebiete:</div>
+                            <div class="skills-list">
+                                <span class="skill-tag lead">Führung</span>
+                                <span class="skill-tag tech">Atemschutz</span>
+                                <span class="skill-tag tech">Techn. Hilfe</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mitglied 2 -->
+                <div class="member-card">
+                    <div class="member-header">
+                        <div class="member-avatar">MvK</div>
+                        <div class="member-name">Miguel van Kluth</div>
+                        <div class="member-role">Maschinist & Gerätewart</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Verantwortlich für die technische Einsatzbereitschaft aller Fahrzeuge und Geräte. Immer mit einem Auge fürs Detail.</p>
+                        <div class="member-details">
+                            <div class="detail-item"><i class="fas fa-calendar-alt"></i> Aktive Zeit: 9 Jahre</div>
+                            <div class="detail-item"><i class="fas fa-award"></i> Ausbildungen: 6</div>
+                        </div>
+                        <div class="member-skills">
+                            <div class="skills-title">Spezialgebiete:</div>
+                            <div class="skills-list">
+                                <span class="skill-tag tech">Fahrzeugtechnik</span>
+                                <span class="skill-tag driver">Maschinist</span>
+                                <span class="skill-tag tech">Gerätekunde</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mitglied 3 -->
+                <div class="member-card">
+                    <div class="member-header">
+                        <div class="member-avatar">SH</div>
+                        <div class="member-name">Semy Harrathi</div>
+                        <div class="member-role">Truppführer & Sanitäter</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Verbindet feuerwehrtechnisches Wissen mit medizinischer Expertise. Zuständig für die Erstversorgung von Patienten.</p>
+                        <div class="member-details">
+                            <div class="detail-item"><i class="fas fa-calendar-alt"></i> Aktive Zeit: 7 Jahre</div>
+                            <div class="detail-item"><i class="fas fa-award"></i> Ausbildungen: 7</div>
+                        </div>
+                        <div class="member-skills">
+                            <div class="skills-title">Spezialgebiete:</div>
+                            <div class="skills-list">
+                                <span class="skill-tag medical">Erstversorgung</span>
+                                <span class="skill-tag tech">Atemschutz</span>
+                                <span class="skill-tag lead">Truppführung</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mitglied 4 -->
+                <div class="member-card">
+                    <div class="member-header">
+                        <div class="member-avatar">JR</div>
+                        <div class="member-name">Joyce Rokytta</div>
+                        <div class="member-role">Sprechfunkerin & Öffentlichkeitsarbeit</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Verantwortlich für die Kommunikation während Einsätzen und die Darstellung der Feuerwehrarbeit nach außen.</p>
+                        <div class="member-details">
+                            <div class="detail-item"><i class="fas fa-calendar-alt"></i> Aktive Zeit: 5 Jahre</div>
+                            <div class="detail-item"><i class="fas fa-award"></i> Ausbildungen: 5</div>
+                        </div>
+                        <div class="member-skills">
+                            <div class="skills-title">Spezialgebiete:</div>
+                            <div class="skills-list">
+                                <span class="skill-tag tech">Funk</span>
+                                <span class="skill-tag">Öffentlichkeitsarbeit</span>
+                                <span class="skill-tag">Jugendbetreuung</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mitglied 5 -->
+                <div class="member-card">
+                    <div class="member-header">
+                        <div class="member-avatar">MC</div>
+                        <div class="member-name">Michael Chrzon</div>
+                        <div class="member-role">Atemschutzgeräteträger & CSA-Träger</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Spezialist für Gefahrguteinsätze und Innenangriffe. Trägt die Chemikalienschutzanzug-Ausrüstung.</p>
+                        <div class="member-details">
+                            <div class="detail-item"><i class="fas fa-calendar-alt"></i> Aktive Zeit: 10 Jahre</div>
+                            <div class="detail-item"><i class="fas fa-award"></i> Ausbildungen: 9</div>
+                        </div>
+                        <div class="member-skills">
+                            <div class="skills-title">Spezialgebiete:</div>
+                            <div class="skills-list">
+                                <span class="skill-tag tech">Gefahrgut</span>
+                                <span class="skill-tag tech">CSA</span>
+                                <span class="skill-tag tech">Atemschutz</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mitglied 6 -->
+                <div class="member-card">
+                    <div class="member-header">
+                        <div class="member-avatar">CM</div>
+                        <div class="member-name">Christopher Meier</div>
+                        <div class="member-role">Jugendwart & Truppmann</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Kümmert sich um die Ausbildung des Nachwuchses und ist Motor für die Jugendfeuerwehr des Löschzuges.</p>
+                        <div class="member-details">
+                            <div class="detail-item"><i class="fas fa-calendar-alt"></i> Aktive Zeit: 8 Jahre</div>
+                            <div class="detail-item"><i class="fas fa-award"></i> Ausbildungen: 6</div>
+                        </div>
+                        <div class="member-skills">
+                            <div class="skills-title">Spezialgebiete:</div>
+                            <div class="skills-list">
+                                <span class="skill-tag">Jugendarbeit</span>
+                                <span class="skill-tag">Ausbildung</span>
+                                <span class="skill-tag tech">Techn. Hilfe</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Weitere Mitglieder mit kürzerer Darstellung -->
+                <div class="member-card">
+                    <div class="member-header">
+                        <div class="member-avatar">TN</div>
+                        <div class="member-name">Tobias Neumann</div>
+                        <div class="member-role">Truppführer</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Erfahrener Truppführer mit Schwerpunkt auf technischer Hilfeleistung und Wasserrettung.</p>
+                        <div class="skills-list">
+                            <span class="skill-tag lead">Truppführung</span>
+                            <span class="skill-tag tech">Wasserrettung</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-header">
+                        <div class="member-avatar">LP</div>
+                        <div class="member-name">Lucas Packeisen</div>
+                        <div class="member-role">Atemschutzgeräteträger</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Spezialisiert auf Innenangriffe und Personenrettung unter schwerem Atemschutz.</p>
+                        <div class="skills-list">
+                            <span class="skill-tag tech">Atemschutz</span>
+                            <span class="skill-tag">Personenrettung</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-header">
+                        <div class="member-avatar">MH</div>
+                        <div class="member-name">Maurice Heinrichs</div>
+                        <div class="member-role">Maschinist</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Verantwortlich für die Bedienung der Feuerlöschkreiselpumpe und technischer Aggregate.</p>
+                        <div class="skills-list">
+                            <span class="skill-tag driver">Maschinist</span>
+                            <span class="skill-tag tech">Löschwasserversorgung</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Freiwillige Feuerwehr</h3>
+                    <p>Löschzug 19 Gelsenkirchen</p>
+                    <p>Eine starke Gemeinschaft für Ihre Sicherheit.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Kontakt</h3>
+                    <div class="footer-links">
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Feuerwehrhaus Heßler</li>
+                            <li><i class="fas fa-phone" style="margin-right: 10px;"></i> 0209 12345-19</li>
+                            <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> lz19@feuerwehr-ge.de</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <ul>
+                            <li><a href="/">Startseite</a></li>
+                            <li><a href="/loeschzug/">Mannschaft</a></li>
+                            <li><a href="/fahrzeuge/">Fahrzeuge</a></li>
+                            <li><a href="/mitglied-werden/">Mitglied werden</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="emergency-box">
+                        <p>Im Notfall sofort wählen:</p>
+                        <div class="emergency-number">112</div>
+                        <p>Feuerwehr & Rettungsdienst</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Card hover effects
+        document.querySelectorAll('.member-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Einfache Animation für die Statistik-Zahlen
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const observerOptions = {
+            threshold: 0.5
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const stat = entry.target;
+                    const target = parseInt(stat.textContent);
+                    let current = 0;
+                    const increment = target / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if(current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = Math.floor(current);
+                    }, 30);
+                    
+                    observer.unobserve(stat);
+                }
+            });
+        }, observerOptions);
+        
+        statNumbers.forEach(stat => {
+            observer.observe(stat);
+        });
+    </script>
+</body>
+</html>
