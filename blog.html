@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | FF Löschzug 19 Gelsenkirchen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        /* Feuerwehr Hintergrundmuster mit Animation */
+        .fw-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(45deg, #E62B1E 1px, transparent 1px),
+                linear-gradient(-45deg, #E62B1E 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: bgMove 120s linear infinite;
+        }
+        
+        @keyframes bgMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 120px 120px; }
+        }
+        
+        /* Akzent-Muster */
+        .accent-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(230, 43, 30, 0.03) 2px, transparent 2px),
+                radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.03) 2px, transparent 2px);
+            background-size: 80px 80px;
+            animation: patternPulse 20s ease-in-out infinite;
+        }
+
+        @keyframes patternPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Header mit Animationen */
+        header {
+            background-color: #E62B1E;
+            padding: 15px 0;
+            border-bottom: 4px solid #333;
+            position: relative;
+            z-index: 100;
+            animation: fadeInHeader 0.8s ease-out;
+        }
+
+        @keyframes fadeInHeader {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+        
+        .logo-image {
+            max-height: 50px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+        
+        /* Neues Hamburger-Menü */
+        .menu-toggle {
+            display: none;
+            width: 35px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+            padding: 5px;
+            margin-left: 10px;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 4px;
+            width: 100%;
+            background-color: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            position: absolute;
+            left: 0;
+        }
+        
+        .menu-toggle span:nth-child(1) { top: 0; }
+        .menu-toggle span:nth-child(2) { top: 13px; }
+        .menu-toggle span:nth-child(3) { top: 26px; }
+        
+        .menu-toggle.active span:nth-child(1) { top: 13px; transform: rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { top: 13px; transform: rotate(-45deg); }
+        
+        nav {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 15px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: block;
+            font-size: 1rem;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 80%;
+        }
+        
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero-blog {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589659764353-3c8d8a608cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-blog::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: heroShine 8s infinite;
+        }
+
+        @keyframes heroShine {
+            0% { left: -100%; }
+            20%, 100% { left: 100%; }
+        }
+        
+        .hero-blog h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .hero-blog p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Blog-Sektion */
+        .blog-section {
+            padding: 80px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #E62B1E;
+            margin-bottom: 15px;
+            display: inline-block;
+            padding: 0 15px 10px;
+            border-bottom: 3px solid #333;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+        }
+
+        /* Blog Filter */
+        .blog-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            background-color: white;
+            border: 2px solid #E62B1E;
+            color: #E62B1E;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: #E62B1E;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 43, 30, 0.3);
+        }
+        
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        /* Blog Card */
+        .blog-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: cardAppear 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            cursor: pointer;
+        }
+
+        .blog-card:nth-child(1) { animation-delay: 0.1s; }
+        .blog-card:nth-child(2) { animation-delay: 0.2s; }
+        .blog-card:nth-child(3) { animation-delay: 0.3s; }
+        .blog-card:nth-child(4) { animation-delay: 0.4s; }
+        .blog-card:nth-child(5) { animation-delay: 0.5s; }
+        .blog-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes cardAppear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(230, 43, 30, 0.15);
+        }
+
+        .blog-card.hidden {
+            display: none;
+        }
+        
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, #E62B1E, #ff6b6b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .blog-card:hover .blog-image::after {
+            left: 100%;
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: #ffeaea;
+            color: #E62B1E;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        
+        .blog-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #333;
+            line-height: 1.3;
+        }
+        
+        .blog-content p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .blog-meta i {
+            margin-right: 5px;
+        }
+
+        .read-more {
+            color: #E62B1E;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 10px;
+        }
+        
+        /* Blog Detail Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: #E62B1E;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: #ff3d30;
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            height: 250px;
+            background: linear-gradient(135deg, #E62B1E, #ff6b6b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .modal-body .blog-category {
+            margin-bottom: 20px;
+        }
+
+        .modal-body h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-body .blog-meta {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .modal-body p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #E62B1E;
+            text-align: center;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .footer-links ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.1);
+            width: 200px;
+            text-align: center;
+        }
+        
+        .footer-links ul li a:hover {
+            color: #E62B1E;
+            transform: translateX(5px);
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .emergency-box {
+            background-color: #E62B1E;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            animation: emergencyBoxPulse 2s infinite;
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes emergencyBoxPulse {
+            0%, 100% { box-shadow: 0 5px 15px rgba(230, 43, 30, 0.3); }
+            50% { box-shadow: 0 5px 25px rgba(230, 43, 30, 0.5); }
+        }
+        
+        .emergency-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header { padding: 10px 0; }
+            .logo-image { max-height: 45px; }
+            .menu-toggle { display: block; }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background-color: #E62B1E;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: right 0.4s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+            
+            nav.active { right: 0; }
+            
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            
+            .nav-overlay.active { display: block; }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 20px;
+                height: 100%;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            nav ul li {
+                margin: 0;
+                width: 100%;
+                text-align: center;
+                animation: slideInRight 0.5s ease-out forwards;
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            
+            nav ul li:nth-child(1) { animation-delay: 0.1s; }
+            nav ul li:nth-child(2) { animation-delay: 0.2s; }
+            nav ul li:nth-child(3) { animation-delay: 0.3s; }
+            nav ul li:nth-child(4) { animation-delay: 0.4s; }
+            nav ul li:nth-child(5) { animation-delay: 0.5s; }
+            
+            @keyframes slideInRight {
+                to { opacity: 1; transform: translateX(0); }
+            }
+            
+            nav ul li a {
+                padding: 15px 20px;
+                font-size: 1.2rem;
+                border-radius: 8px;
+                margin: 5px 0;
+                background: rgba(255,255,255,0.1);
+            }
+            
+            nav ul li a:hover,
+            nav ul li a.active {
+                background-color: rgba(255,255,255,0.2);
+                transform: translateX(10px);
+            }
+
+            .hero-blog { padding: 70px 0; }
+            .hero-blog h1 { font-size: 2.2rem; }
+            .hero-blog p { font-size: 1.1rem; }
+            
+            .blog-grid { grid-template-columns: 1fr; }
+
+            .modal-body { padding: 25px; }
+            .modal-body h2 { font-size: 1.5rem; }
+            .modal-header { height: 180px; font-size: 3.5rem; }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-image { max-height: 40px; }
+            .hero-blog { padding: 50px 10px; }
+            .hero-blog h1 { font-size: 1.8rem; }
+            .hero-blog p { font-size: 1rem; }
+            
+            .blog-section { padding: 50px 15px; }
+            .section-title h2 { font-size: 1.6rem; }
+            
+            .blog-content { padding: 20px; }
+            .blog-content h3 { font-size: 1.2rem; }
+            
+            .emergency-number { font-size: 1.8rem; }
+            .copyright { font-size: 0.85rem; }
+
+            .blog-filter { gap: 10px; }
+            .filter-btn { padding: 8px 18px; font-size: 0.9rem; }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            nav ul li a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fw-bg"></div>
+    <div class="accent-pattern"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-container">
+                        <a href="/ff/index" class="logo-link">
+                            <img src="logot.png" alt="Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen" class="logo-image">
+                        </a>
+                    </div>
+                </div>
+                
+                <button class="menu-toggle" aria-label="Menü öffnen">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav>
+                    <ul>
+                        <li><a href="/ff/index">Start</a></li>
+                        <li><a href="/ff/jugend">Jugendfeuerwehr</a></li>
+                        <li><a href="/ff/auto">Fahrzeuge</a></li>
+                        <li><a href="/ff/blog" class="active">Blog</a></li>
+                        <li><a href="/ff/kontakt">Kontakt</a></li>
+                    </ul>
+                </nav>
+
+                <div class="nav-overlay"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-blog">
+        <div class="container">
+            <h1>Aktuelles aus dem Löschzug 19</h1>
+            <p>Erfahren Sie mehr über unsere Einsätze, Übungen und Events. Bleiben Sie auf dem Laufenden!</p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Neueste Beiträge</h2>
+            </div>
+
+            <!-- Filter -->
+            <div class="blog-filter">
+                <button class="filter-btn active" data-filter="all">Alle</button>
+                <button class="filter-btn" data-filter="einsatz">Einsätze</button>
+                <button class="filter-btn" data-filter="uebung">Übungen</button>
+                <button class="filter-btn" data-filter="event">Events</button>
+            </div>
+            
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <div class="blog-card" data-category="einsatz" onclick="openModal(0)">
+                    <div class="blog-image">
+                        <i class="fas fa-fire-extinguisher"></i>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Einsatz</span>
+                        <h3>Großbrand in Industriegebiet erfolgreich bekämpft</h3>
+                        <p>In der Nacht auf Donnerstag wurden wir zu einem Großbrand in einem Industriegebiet alarmiert. Gemeinsam mit anderen Löschzügen...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 02.04.2026</span>
+                            <span class="read-more">Mehr lesen <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 2 -->
+                <div class="blog-card" data-category="uebung" onclick="openModal(1)">
+                    <div class="blog-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Übung</span>
+                        <h3>Monatliche Atemschutzübung absolviert</h3>
+                        <p>Unsere Kameraden haben die monatliche Atemschutzübung erfolgreich absolviert. Schwerpunkt war diesmal die Suche in verrauchten Räumen...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 28.03.2026</span>
+                            <span class="read-more">Mehr lesen <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 3 -->
+                <div class="blog-card" data-category="event" onclick="openModal(2)">
+                    <div class="blog-image">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Event</span>
+                        <h3>Tag der offenen Tür war ein voller Erfolg</h3>
+                        <p>Über 500 Besucher nutzten die Gelegenheit, unsere Feuerwache zu besichtigen und die Arbeit der Feuerwehr hautnah zu erleben...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 15.03.2026</span>
+                            <span class="read-more">Mehr lesen <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 4 -->
+                <div class="blog-card" data-category="einsatz" onclick="openModal(3)">
+                    <div class="blog-image">
+                        <i class="fas fa-car-crash"></i>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Einsatz</span>
+                        <h3>Technische Hilfeleistung nach Verkehrsunfall</h3>
+                        <p>Schnelle Reaktion bei einem Verkehrsunfall auf der Autobahn. Unser HLF 20 war innerhalb von 8 Minuten vor Ort...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 10.03.2026</span>
+                            <span class="read-more">Mehr lesen <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 5 -->
+                <div class="blog-card" data-category="uebung" onclick="openModal(4)">
+                    <div class="blog-image">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Übung</span>
+                        <h3>Gemeinsame Übung mit Wasserwacht</h3>
+                        <p>Übungsszenario: Personensuche im See. Zusammen mit der Wasserwacht trainierten wir die Rettung aus dem Wasser...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 05.03.2026</span>
+                            <span class="read-more">Mehr lesen <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 6 -->
+                <div class="blog-card" data-category="event" onclick="openModal(5)">
+                    <div class="blog-image">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Event</span>
+                        <h3>Jugendfeuerwehr holt den Pokal</h3>
+                        <p>Unsere Jugendfeuerwehr hat beim Kreisentscheid den ersten Platz belegt. Stolz auf unsere Nachwuchskräfte!</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 22.02.2026</span>
+                            <span class="read-more">Mehr lesen <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Modal -->
+    <div class="modal-overlay" id="blogModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header" id="modalIcon">
+                <i class="fas fa-fire-extinguisher"></i>
+            </div>
+            <div class="modal-body">
+                <span class="blog-category" id="modalCategory">Einsatz</span>
+                <h2 id="modalTitle">Titel</h2>
+                <div class="blog-meta" id="modalMeta">
+                    <span><i class="fas fa-calendar"></i> Datum</span>
+                    <span><i class="fas fa-user"></i> Löschzug 19</span>
+                </div>
+                <div id="modalText">
+                    <p>Inhalt...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Freiwillige Feuerwehr</h3>
+                    <p>Löschzug 19 Gelsenkirchen</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <ul>
+                            <li><a href="/ff/index">Startseite</a></li>
+                            <li><a href="/ff/jugend">Jugendfeuerwehr</a></li>
+                            <li><a href="/ff/auto">Fahrzeuge</a></li>
+                            <li><a href="/ff/blog">Blog</a></li>
+                            <li><a href="/ff/recht">Impressum</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="emergency-box">
+                        <p>Im Notfall sofort wählen:</p>
+                        <div class="emergency-number">112</div>
+                        <p>Feuerwehr & Rettungsdienst</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 Löschzug 19 Gelsenkirchen. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const body = document.body;
+        
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        navOverlay.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            nav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            body.style.overflow = '';
+        });
+        
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                navOverlay.classList.remove('active');
+                body.style.overflow = '';
+            });
+        });
+
+        // Blog Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                
+                blogCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.classList.remove('hidden');
+                        card.style.animation = 'cardAppear 0.6s ease-out forwards';
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Blog Modal Data
+        const blogPosts = [
+            {
+                category: 'Einsatz',
+                icon: 'fa-fire-extinguisher',
+                title: 'Großbrand in Industriegebiet erfolgreich bekämpft',
+                date: '02.04.2026',
+                text: `<p>In der Nacht auf Donnerstag wurden wir zu einem Großbrand in einem Industriegebiet alarmiert. Gemeinsam mit anderen Löschzügen der Feuerwehr Gelsenkirchen kämpften wir gegen die Flammen.</p>
+                <p>Der Einsatz dauerte mehrere Stunden, bei dem wir unter schwierigen Bedingungen arbeiten mussten. Durch die gute Zusammenarbeit aller beteiligten Kräfte konnte das Feuer schließlich unter Kontrolle gebracht und vollständig gelöscht werden.</p>
+                <p>Verletzt wurde glücklicherweise niemand. Der Sachschaden ist jedoch erheblich. Die Ursache des Brandes wird noch ermittelt.</p>`
+            },
+            {
+                category: 'Übung',
+                icon: 'fa-graduation-cap',
+                title: 'Monatliche Atemschutzübung absolviert',
+                date: '28.03.2026',
+                text: `<p>Unsere Kameraden haben die monatliche Atemschutzübung erfolgreich absolviert. Schwerpunkt war diesmal die Suche in verrauchten Räumen unter Einsatz von Wärmebildkameras.</p>
+                <p>Die Übung fand in unserem Übungsturm statt, der speziell für Atemschutztraining vorbereitet wurde. Dabei mussten die Kameraden verschiedene Hindernisse überwinden und vermisste Personen lokalisieren.</p>
+                <p>Alle Teilnehmer haben die Übung erfolgreich bestanden und ihre Einsatzbereitschaft unter Beweis gestellt.</p>`
+            },
+            {
+                category: 'Event',
+                icon: 'fa-users',
+                title: 'Tag der offenen Tür war ein voller Erfolg',
+                date: '15.03.2026',
+                text: `<p>Über 500 Besucher nutzten die Gelegenheit, unsere Feuerwache zu besichtigen und die Arbeit der Feuerwehr hautnah zu erleben. Besonders beliebt waren die Vorführungen unserer Fahrzeuge.</p>
+                <p>Die Kinder konnten selbst Hand anlegen und kleine Feuerwehrmänner und -frauen spielen. Viele Interessierte informierten sich auch über eine mögliche Mitgliedschaft in unserem Löschzug.</p>
+                <p>Wir bedanken uns bei allen Besuchern für ihr Interesse und freuen uns auf den nächsten Tag der offenen Tür!</p>`
+            },
+            {
+                category: 'Einsatz',
+                icon: 'fa-car-crash',
+                title: 'Technische Hilfeleistung nach Verkehrsunfall',
+                date: '10.03.2026',
+                text: `<p>Schnelle Reaktion bei einem Verkehrsunfall auf der Autobahn. Unser HLF 20 war innerhalb von 8 Minuten vor Ort und konnte sofort mit der Rettung beginnen.</p>
+                <p>Zusammen mit dem Rettungsdienst befreiten wir die eingeklemmte Person aus ihrem Fahrzeug. Dazu mussten wir die Fahrzeugtür mit dem Spreizer öffnen.</p>
+                <p>Die Person wurde nach der Rettung vom Rettungsdienst versorgt und ins Krankenhaus transportiert. Der Einsatz zeigte wieder einmal, wie wichtig eine schnelle und professionelle Hilfe ist.</p>`
+            },
+            
+            {
+                category: 'Übung',
+                icon: 'fa-water',
+                title: 'Gemeinsame Übung mit Wasserwacht',
+                date: '05.03.2026',
+                text: `<p>Übungsszenario: Personensuche im See. Zusammen mit der Wasserwacht trainierten wir die Rettung aus dem Wasser unter erschwerten Bedingungen.</p>
+                <p>Die Übung fand bei kühlen Temperaturen statt, was die Sichtverhältnisse unter Wasser erschwerte. Mit Sonar und Tauchern suchten wir nach der vermissten Person.</p>
+                <p>Diese Übung war wichtig für die Vorbereitung auf reale Einsätze im Sommer, wenn viele Menschen an den Seen unterwegs sind.</p>`
+            },
+            {
+                category: 'Event',
+                icon: 'fa-trophy',
+                title: 'Jugendfeuerwehr holt den Pokal',
+                date: '22.02.2026',
+                text: `<p>Unsere Jugendfeuerwehr hat beim Kreisentscheid den ersten Platz belegt. Stolz auf unsere Nachwuchskräfte! Die Jugendlichen zeigten herausragende Leistungen in allen Disziplinen.</p>
+                <p>Besonders beeindruckend war die Teamarbeit beim Löschangriff und die Schnelligkeit bei der Knotenkunde. Die Trainer sind sehr zufrieden mit der Entwicklung der Gruppe.</p>
+                <p>Im nächsten Monat geht es zum Bezirksentscheid. Wir drücken unserer Jugend die Daumen!</p>`
+            }
+        ];
+
+        // Modal Functions
+        function openModal(index) {
+            const post = blogPosts[index];
+            const modal = document.getElementById('blogModal');
+            
+            document.getElementById('modalCategory').textContent = post.category;
+            document.getElementById('modalTitle').textContent = post.title;
+            document.getElementById('modalMeta').innerHTML = `
+                <span><i class="fas fa-calendar"></i> ${post.date}</span>
+                <span><i class="fas fa-user"></i> Löschzug 19</span>
+            `;
+            document.getElementById('modalText').innerHTML = post.text;
+            document.getElementById('modalIcon').innerHTML = `<i class="fas ${post.icon}"></i>`;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.id === 'blogModal' || event.target.classList.contains('modal-close')) {
+                document.getElementById('blogModal').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
