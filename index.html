@@ -1,392 +1,412 @@
+<!--
+=============================================================================
+FREIWILLIGE FEUERWEHR LÖSCHZUG 19 GEISENKIRCHEN - STARTSEITE
+===============================================================================
+Diese Datei ist die Hauptseite (Startseite) der Feuerwehr-Webseite.
+Hier finden Besucher eine Übersicht über den Löschzug, Statistiken und
+Informationen zur Mitgliedschaft.
+
+Für Anpassungen:
+- Texte und Inhalte können direkt im HTML geändert werden
+- Farben und Styles sind im <style>-Bereich definiert
+- Das CMS-System lädt dynamischen Content über config/cms-config.js
+-->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen</title>
+    <!-- Grundlegende HTML-Einstellungen -->
+    <meta charset="UTF-8"> <!-- Zeichencodierung für korrekte Darstellung -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsives Design für alle Bildschirmgrößen -->
+    <title>Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen</title> <!-- Titel der Seite (erscheint im Browser-Tab) -->
+    
+    <!-- Font Awesome Icons laden (für Symbole wie Feuerwehr-Logo, etc.) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* ============================================
+           GRUNDLEGENDE STYLES (Gilt für alle Elemente)
+           ============================================ */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;           /* Keine Außenabstände standardmäßig */
+            padding: 0;          /* Keine Innenabstände standardmäßig */
+            box-sizing: border-box; /* Padding und Border werden zur Breite hinzugerechnet */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Schriftart für die ganze Seite */
         }
         
+        /* ============================================
+           HAUPTKÖRPER DER SEITE
+           ============================================ */
         body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-text-size-adjust: 100%;
+            background-color: #f5f5f5; /* Hellgrauer Hintergrund */
+            color: #333;                  /* Dunkelgraue Schriftfarbe */
+            line-height: 1.6;            /* Zeilenabstand für bessere Lesbarkeit */
+            overflow-x: hidden;          /* Verhindert horizontales Scrollen */
+            -webkit-text-size-adjust: 100%; /* Verhindert automatische Schriftgröße auf iOS */
         }
         
-        /* Feuerwehr Hintergrundmuster mit Animation */
+        /* ============================================
+           HINTERGRUND-MUSTER (Feuerwehr-Design)
+           Erzeugt ein subtiles Gittermuster im Hintergrund
+           ============================================ */
         .fw-bg {
-            position: fixed;
+            position: fixed;       /* Fixiert den Hintergrund beim Scrollen */
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.03;
-            background-image: 
+            width: 100%;           /* Volle Breite */
+            height: 100%;          /* Volle Höhe */
+            z-index: -1;           /* Hinter allen anderen Inhalten */
+            opacity: 0.03;         /* Sehr transparent (kaum sichtbar) */
+            background-image:      /* Kreuzmuster aus roten Linien */
                 linear-gradient(45deg, #E62B1E 1px, transparent 1px),
                 linear-gradient(-45deg, #E62B1E 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: bgMove 120s linear infinite;
+            background-size: 60px 60px; /* Größe des Musters */
+            animation: bgMove 120s linear infinite; /* Langsame Animation */
         }
         
+        /* Animation für das Hintergrundmuster (langsame Bewegung) */
         @keyframes bgMove {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 120px 120px;
-            }
+            0% { background-position: 0 0; }           /* Startposition */
+            100% { background-position: 120px 120px; } /* Endposition nach 120 Sekunden */
         }
         
-        /* Akzent-Muster */
+        /* ============================================
+           AKZENT-MUSTER (Punkte im Hintergrund)
+           Ergänzende Dekoration mit subtilen Punkten
+           ============================================ */
         .accent-pattern {
-            position: absolute;
+            position: absolute;    /* Absolute Positionierung */
             width: 100%;
             height: 100%;
-            background: 
+            background:             /* Muster aus kleinen Punkten */
                 radial-gradient(circle at 20% 30%, rgba(230, 43, 30, 0.03) 2px, transparent 2px),
                 radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.03) 2px, transparent 2px);
             background-size: 80px 80px;
-            animation: patternPulse 20s ease-in-out infinite;
+            animation: patternPulse 20s ease-in-out infinite; /* Pulsierende Animation */
         }
 
+        /* Animation für das Akzent-Muster (Pulsieren) */
         @keyframes patternPulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.7;
-            }
+            0%, 100% { opacity: 1; }   /* Volle Sichtbarkeit */
+            50% { opacity: 0.7; }      /* Etwas weniger sichtbar */
         }
         
+        /* ============================================
+           WIEDERVERWENDBARE STYLE-KLASSEN
+           Diese Klassen können für verschiedene Elemente verwendet werden
+           ============================================ */
+        
+        /* Standard-Rahmen für Karten und Boxen */
         .fw-border {
-            border: 2px solid #333;
-            border-radius: 4px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 2px solid #333;           /* Dunkelgrauer Rahmen */
+            border-radius: 4px;               /* Abgerundete Ecken */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Schatten für Tiefe */
         }
         
+        /* Standard-Button im Feuerwehr-Stil */
         .fw-button {
-            background-color: #E62B1E;
-            color: white;
-            border: 2px solid #333;
-            border-radius: 4px;
-            padding: 12px 24px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            animation: fadeInUp 1s ease-out 0.7s both;
+            background-color: #E62B1E;  /* Feuerwehr-Rot */
+            color: white;                /* Weiße Schrift */
+            border: 2px solid #333;      /* Dunkelgrauer Rahmen */
+            border-radius: 4px;          /* Abgerundete Ecken */
+            padding: 12px 24px;          /* Innenabstände */
+            font-weight: bold;           /* Fette Schrift */
+            cursor: pointer;             /* Mauszeiger ändert sich bei Hover */
+            transition: all 0.3s;        /* Sanfter Übergang bei Hover */
+            text-transform: uppercase;   /* GROSSBUCHSTABEN */
+            letter-spacing: 1px;         /* Buchstabenabstand */
+            animation: fadeInUp 1s ease-out 0.7s both; /* Einblend-Animation */
         }
         
+        /* Button-Effekt bei Mausberührung (Hover) */
         .fw-button:hover {
-            background-color: #ff3d30;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            background-color: #ff3d30;    /* Helleres Rot bei Hover */
+            transform: translateY(-3px);  /* Button hebt sich leicht ab */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Stärkerer Schatten */
         }
         
+        /* Standard-Karte (für Info-Boxen, etc.) */
         .fw-card {
             position: relative;
-            background-color: white;
-            transition: all 0.3s ease;
-            animation: cardAppear 0.6s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
+            background-color: white;      /* Weißer Hintergrund */
+            transition: all 0.3s ease;    /* Sanfter Übergang */
+            animation: cardAppear 0.6s ease-out forwards; /* Erschein-Animation */
+            opacity: 0;                   /* Anfangs unsichtbar */
+            transform: translateY(20px);  /* Startet 20px tiefer */
         }
 
         .fw-card:nth-child(1) { animation-delay: 0.1s; }
         .fw-card:nth-child(2) { animation-delay: 0.3s; }
         .fw-card:nth-child(3) { animation-delay: 0.5s; }
         
+        /* Animation für das Erscheinen von Karten */
         @keyframes cardAppear {
             to {
-                opacity: 1;
-                transform: translateY(0);
+                opacity: 1;                 /* Wird sichtbar */
+                transform: translateY(0);   /* Bewegt sich an die finale Position */
             }
         }
         
+        /* Schatten-Effekt hinter der Karte (3D-Look) */
         .fw-card::after {
-            content: '';
-            position: absolute;
+            content: '';                 /* Leerer Inhalt */
+            position: absolute;          /* Absolute Positionierung */
             width: 100%;
             height: 100%;
-            top: 4px;
-            left: 4px;
-            background-color: inherit;
-            opacity: 0.7;
-            z-index: -1;
+            top: 4px;                    /* Leicht nach unten verschoben */
+            left: 4px;                   /* Leicht nach rechts verschoben */
+            background-color: inherit;   /* Gleiche Farbe wie Karte */
+            opacity: 0.7;                /* Transparenter Schatten */
+            z-index: -1;                 /* Hinter der Karte */
             border-radius: 4px;
         }
         
-        /* Header mit Animationen */
+        /* ============================================
+           HEADER (Kopfzeile der Seite)
+           Enthält Logo und Navigation
+           ============================================ */
         header {
-            background-color: #E62B1E;
-            padding: 15px 0;
-            border-bottom: 4px solid #333;
+            background-color: #E62B1E;   /* Feuerwehr-Rot */
+            padding: 15px 0;             /* Innenabstände oben/unten */
+            border-bottom: 4px solid #333; /* Dunkelgrauer unterer Rand */
             position: relative;
-            z-index: 100;
-            animation: fadeInHeader 0.8s ease-out;
+            z-index: 100;                /* Über anderen Elementen */
+            animation: fadeInHeader 0.8s ease-out; /* Einblend-Animation */
         }
 
+        /* Animation für das Einblenden des Headers */
         @keyframes fadeInHeader {
             from {
-                transform: translateY(-20px);
-                opacity: 0;
+                transform: translateY(-20px); /* Startet 20px höher */
+                opacity: 0;                   /* Unsichtbar */
             }
             to {
-                transform: translateY(0);
-                opacity: 1;
+                transform: translateY(0);     /* Endposition */
+                opacity: 1;                   /* Sichtbar */
             }
         }
         
+        /* Container für zentrierten Inhalt (max. 1200px breit) */
         .container {
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            max-width: 1200px;  /* Maximale Breite für große Bildschirme */
+            margin: 0 auto;     /* Horizontal zentriert */
+            padding: 0 20px;    /* Seitenabstände */
         }
         
+        /* Flexbox-Layout für Header-Inhalt (Logo links, Navigation rechts) */
         .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: nowrap;
+            display: flex;               /* Flexbox aktivieren */
+            justify-content: space-between; /* Abstand zwischen Elementen */
+            align-items: center;         /* Vertikal zentrieren */
+            flex-wrap: nowrap;           /* Kein Umbruch bei kleinen Bildschirmen */
         }
         
+        /* Logo-Bereich */
         .logo {
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
+            display: flex;       /* Flexbox für Logo-Layout */
+            align-items: center; /* Vertikal zentrieren */
+            flex-shrink: 0;      /* Nicht verkleinern */
         }
         
+        /* Container für das Logo-Bild */
         .logo-container {
             display: flex;
             align-items: center;
-            margin-right: 10px;
+            margin-right: 10px;    /* Abstand zur Navigation */
         }
         
+        /* Logo-Bild */
         .logo-image {
-            max-height: 50px;
-            width: auto;
-            display: block;
-            transition: transform 0.3s ease;
+            max-height: 50px;          /* Maximale Höhe */
+            width: auto;               /* Breite automatisch */
+            display: block;            /* Block-Element */
+            transition: transform 0.3s ease; /* Sanfter Übergang */
         }
 
+        /* Logo-Effekt bei Mausberührung */
         .logo-image:hover {
-            transform: scale(1.05) rotate(2deg);
+            transform: scale(1.05) rotate(2deg); /* Vergrößern und leicht drehen */
         }
         
-        /* Hamburger-Menü - einfaches und zuverlässiges Design */
+        /* ============================================
+           HAMBURGER-MENÜ (Mobile Navigation)
+           Drei Striche, die sich bei Klick zum X verwandeln
+           ============================================ */
         .menu-toggle {
-            display: none;
+            display: none;              /* Standardmäßig ausgeblendet */
             width: 40px;
             height: 40px;
-            background: transparent;
-            border: 2px solid white;
-            border-radius: 5px;
-            cursor: pointer;
+            background: transparent;    /* Transparenter Hintergrund */
+            border: 2px solid white;    /* Weißer Rahmen */
+            border-radius: 5px;         /* Abgerundete Ecken */
+            cursor: pointer;            /* Mauszeiger ändert sich */
             position: relative;
-            z-index: 1002;
+            z-index: 1002;              /* Über allen anderen Elementen */
             padding: 8px;
         }
         
+        /* Die drei Striche des Hamburger-Menüs (obere und untere Linie) */
         .menu-toggle::before,
         .menu-toggle::after {
-            content: '';
+            content: '';                 /* Leerer Inhalt für Pseudo-Elemente */
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 3px;
-            background-color: white;
-            transition: all 0.3s ease;
+            left: 50%;                    /* Horizontal zentriert */
+            transform: translateX(-50%);  /* Perfekte Zentrierung */
+            width: 20px;                  /* Breite der Striche */
+            height: 3px;                 /* Dicke der Striche */
+            background-color: white;      /* Weiße Farbe */
+            transition: all 0.3s ease;    /* Sanfter Übergang */
         }
         
         .menu-toggle::before {
-            top: 12px;
+            top: 12px;                   /* Position der oberen Linie */
         }
         
         .menu-toggle::after {
-            bottom: 12px;
+            bottom: 12px;                /* Position der unteren Linie */
         }
         
+        /* Die mittlere Linie des Hamburger-Menüs */
         .menu-toggle .bar {
             position: absolute;
             left: 50%;
             top: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); /* Perfekte Zentrierung */
             width: 20px;
             height: 3px;
             background-color: white;
             transition: all 0.3s ease;
         }
         
+        /* Animation: Drei Striche verwandeln sich in X */
         .menu-toggle.active::before {
-            transform: translateX(-50%) rotate(45deg);
-            top: 50%;
+            transform: translateX(-50%) rotate(45deg); /* Obere Linie dreht sich */
+            top: 50%;                   /* Bewegt sich zur Mitte */
         }
         
         .menu-toggle.active::after {
-            transform: translateX(-50%) rotate(-45deg);
-            bottom: 50%;
+            transform: translateX(-50%) rotate(-45deg); /* Untere Linie dreht sich */
+            bottom: 50%;                /* Bewegt sich zur Mitte */
         }
         
         .menu-toggle.active .bar {
-            opacity: 0;
+            opacity: 0;                 /* Mittlere Linie wird unsichtbar */
         }
         
+        /* ============================================
+           NAVIGATION (Menü)
+           ============================================ */
         nav {
-            transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out; /* Sanfter Übergang */
         }
         
+        /* Ungeordnete Liste für Menüpunkte */
         nav ul {
-            display: flex;
-            list-style: none;
+            display: flex;       /* Horizontal angeordnet */
+            list-style: none;    /* Keine Aufzählungspunkte */
         }
         
+        /* Einzelner Menüpunkt */
         nav ul li {
-            margin-left: 15px;
+            margin-left: 15px;    /* Abstand zwischen Menüpunkten */
             position: relative;
         }
         
+        /* Menü-Link */
         nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 12px;
-            border: 2px solid transparent;
-            border-radius: 4px;
-            transition: all 0.3s;
+            color: white;                /* Weiße Schrift */
+            text-decoration: none;       /* Keine Unterstreichung */
+            font-weight: bold;           /* Fette Schrift */
+            padding: 8px 12px;           /* Innenabstände */
+            border: 2px solid transparent; /* Transparenter Rahmen */
+            border-radius: 4px;          /* Abgerundete Ecken */
+            transition: all 0.3s;        /* Sanfter Übergang */
             position: relative;
             overflow: hidden;
             display: block;
             font-size: 1rem;
         }
         
+        /* Unterstreichungs-Effekt bei Hover */
         nav ul li a::after {
-            content: '';
+            content: '';                 /* Leerer Inhalt */
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: white;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
+            bottom: 0;                   /* Unten am Link */
+            left: 50%;                   /* Horizontal zentriert */
+            width: 0;                    /* Anfangs keine Breite */
+            height: 2px;                 /* Dicke der Linie */
+            background-color: white;      /* Weiße Farbe */
+            transition: all 0.3s ease;    /* Sanfter Übergang */
+            transform: translateX(-50%);  /* Perfekte Zentrierung */
         }
         
+        /* Unterstreichung erscheint bei Hover oder aktiver Seite */
         nav ul li a:hover::after,
         nav ul li a.active::after {
-            width: 80%;
+            width: 80%;                 /* Linie wird sichtbar */
         }
         
+        /* Hintergrund-Effekt bei Hover oder aktiver Seite */
         nav ul li a:hover,
         nav ul li a.active {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.1); /* Leicht transparenter weißer Hintergrund */
         }
         
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589659764353-3c8d8a608cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: heroShine 8s infinite;
-        }
-
-        @keyframes heroShine {
-            0% {
-                left: -100%;
-            }
-            20%, 100% {
-                left: 100%;
-            }
-        }
-        
-        .hero h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
             to {
-                opacity: 1;
-                transform: translateY(0);
+                opacity: 1;                /* Sichtbar */
+                transform: translateY(0);   /* Endposition */
             }
         }
         
+        /* ============================================
+           HAUPTINHALT
+           ============================================ */
         .main-content {
-            padding: 80px 0;
-            background-color: rgba(255, 255, 255, 0.95);
+            padding: 80px 0;             /* Große Innenabstände */
+            background-color: rgba(255, 255, 255, 0.95); /* Fast weißer Hintergrund */
             position: relative;
         }
         
+        /* Abschnittsüberschrift */
         .section-title {
-            text-align: center;
-            margin-bottom: 50px;
+            text-align: center;          /* Zentriert */
+            margin-bottom: 50px;         /* Abstand nach unten */
             position: relative;
-            animation: fadeInUp 0.8s ease-out;
+            animation: fadeInUp 0.8s ease-out; /* Einblend-Animation */
         }
         
+        /* Überschrift im Abschnitt */
         .section-title h2 {
-            font-size: 2.2rem;
-            color: #E62B1E;
+            font-size: 2.2rem;           /* Große Schrift */
+            color: #E62B1E;               /* Feuerwehr-Rot */
             margin-bottom: 15px;
-            display: inline-block;
-            padding: 0 15px 10px;
-            border-bottom: 3px solid #333;
+            display: inline-block;       /* Inline-Block für Rahmen */
+            padding: 0 15px 10px;        /* Innenabstände */
+            border-bottom: 3px solid #333; /* Dunkelgrauer unterer Rahmen */
             position: relative;
             z-index: 2;
-            background-color: white;
+            background-color: white;     /* Weißer Hintergrund für Rahmen */
         }
         
+        /* "Über uns" Sektion */
         .about-us {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-bottom: 70px;
+            display: flex;               /* Flexbox für Layout */
+            flex-wrap: wrap;             /* Umbruch bei kleinen Bildschirmen */
+            align-items: center;         /* Vertikal zentrieren */
+            margin-bottom: 70px;         /* Abstand nach unten */
         }
         
+        /* Text-Bereich in "Über uns" */
         .about-text {
-            flex: 1;
-            min-width: 300px;
-            padding-right: 40px;
+            flex: 1;                     /* Nimmt verfügbaren Platz */
+            min-width: 300px;           /* Minimale Breite */
+            padding-right: 40px;        /* Abstand zum Bild */
             position: relative;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
+            animation: fadeInUp 0.8s ease-out 0.2s both; /* Einblend-Animation */
         }
         
         .about-text h3 {

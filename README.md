@@ -11,6 +11,7 @@ Diese Webseite dient als digitale Informationsplattform für die Freiwillige Feu
 - **Responsive Design** - Optimiert für Desktop, Tablet und Mobile
 - **Moderne Animationen** - Smooth transitions und Hover-Effekte
 - **Mobile Navigation** - Hamburger-Menü mit Overlay für mobile Geräte
+- **CMS-System** - Dynamischer Content über Konfigurationsdateien
 - **Blog-System** - Filterbare Blogbeiträge nach Kategorien (Einsätze, Übungen, Events)
 - **Modal-Detailansicht** - Vollständige Artikelansicht im Popup
 - **Kontaktformular** - Direktes Kontaktformular für Anfragen
@@ -27,7 +28,12 @@ ff/
 ├── blog.html           # Blog mit aktuellen Beiträgen
 ├── kontakt.html        # Kontaktseite mit Formular
 ├── recht.html          # Impressum & Datenschutz
-├── logot.png           # Logo der Feuerwehr
+├── config/
+│   └── cms-config.js   # CMS-Konfiguration für dynamischen Content
+├── render/
+│   └── cms-renderer.js # CMS-Renderer für Content-Darstellung
+├── logos/
+│   └── logot.png       # Logo der Feuerwehr
 └── README.md           # Diese Datei
 ```
 
@@ -102,8 +108,35 @@ Die Hauptfarben sind im CSS definiert:
 - `#333` - Dunkelgrau
 - `#FF6B35` - Akzent-Orange
 
+### CMS-System verwenden
+
+Das Projekt verwendet ein einfaches CMS-System für dynamischen Content:
+
+**Konfiguration** (`config/cms-config.js`):
+- Definieren Sie Content-Blöcke für verschiedene Seiten
+- Jeder Block hat eine ID, einen Typ (hero, text, cards, etc.) und Inhalt
+- Content wird automatisch in den entsprechenden HTML-Elementen gerendert
+
+**Beispiel-Konfiguration**:
+```javascript
+const cmsContent = {
+    'hero': {
+        type: 'hero',
+        title: 'Willkommen',
+        subtitle: 'Freiwillige Feuerwehr Löschzug 19'
+    },
+    'stats': {
+        type: 'stats',
+        items: [
+            { number: '25+', label: 'Einsätze pro Jahr' },
+            { number: '45', label: 'Aktive Mitglieder' }
+        ]
+    }
+};
+```
+
 ### Blogbeiträge hinzufügen
-In `blog.html` die `blogPosts`-Array im JavaScript erweitern:
+Blogbeiträge werden über das CMS-System in `config/cms-config.js` verwaltet:
 
 ```javascript
 {

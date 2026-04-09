@@ -1,9 +1,23 @@
-// CMS-Konfiguration - Baukasten-System
-// Hier können Sie Seiten erstellen und Elemente hinzufügen/entfernen
+// =============================================================================
+// CMS-KONFIGURATION - BAUKASTEN-SYSTEM
+// =============================================================================
+// Diese Datei ist das Herzstück des CMS-Systems (Content Management System).
+// Hier können Sie Seiten erstellen und Inhalte verwalten, ohne programmieren zu müssen.
+//
+// FÜR ANPASSUNGEN:
+// - Neue Seiten im "pages"-Bereich hinzufügen
+// - Inhalte in den "data"-Bereichen ändern
+// - Neue Element-Typen im "elementTypes"-Bereich erstellen
+// =============================================================================
 
 const cmsConfig = {
-    // Verfügbare Element-Typen für den Baukasten
+    // ============================================================================
+    // ELEMENT-TYPEN (Bausteine für Seiten)
+    // Hier sind alle verfügbaren Bausteine definiert, die Sie auf Seiten verwenden können.
+    // Jeder Typ hat einen Namen, ein Icon und eine Vorlage (Template).
+    // ============================================================================
     elementTypes: {
+        // Hero-Bereich: Großer Titelbereich am Anfang einer Seite
         hero: {
             name: "Hero-Bereich",
             icon: "fa-heading",
@@ -17,6 +31,7 @@ const cmsConfig = {
                 </section>
             `
         },
+        // Text-Block: Einfacher Textabschnitt mit Überschrift
         text: {
             name: "Text-Block",
             icon: "fa-align-left",
@@ -29,6 +44,7 @@ const cmsConfig = {
                 </section>
             `
         },
+        // Karten: Mehrere Info-Karten nebeneinander (z.B. für Aufgaben oder Features)
         cards: {
             name: "Karten",
             icon: "fa-th-large",
@@ -49,6 +65,7 @@ const cmsConfig = {
                 </section>
             `
         },
+        // Bild: Ein einzelnes Bild mit optionaler Bildunterschrift
         image: {
             name: "Bild",
             icon: "fa-image",
@@ -61,6 +78,7 @@ const cmsConfig = {
                 </section>
             `
         },
+        // Statistiken: Zahlen und Kennzahlen (z.B. Mitgliederzahl, Einsätze)
         stats: {
             name: "Statistiken",
             icon: "fa-chart-bar",
@@ -79,6 +97,7 @@ const cmsConfig = {
                 </section>
             `
         },
+        // Kontakt: Kontaktinformationen (Adresse, Telefon, E-Mail)
         contact: {
             name: "Kontakt",
             icon: "fa-envelope",
@@ -99,6 +118,7 @@ const cmsConfig = {
                 </section>
             `
         },
+        // Formular: Kontaktformular oder anderes Eingabeformular
         form: {
             name: "Formular",
             icon: "fa-edit",
@@ -119,6 +139,7 @@ const cmsConfig = {
                 </section>
             `
         },
+        // Fahrzeug: Fahrzeug-Karte mit Beschreibung und Features
         vehicle: {
             name: "Fahrzeug",
             icon: "fa-truck",
@@ -146,12 +167,18 @@ const cmsConfig = {
         }
     },
 
-    // Seiten-Konfiguration
+    // ============================================================================
+    // SEITEN-KONFIGURATION
+    // Hier sind alle Seiten der Webseite definiert. Jede Seite hat einen Namen,
+    // eine URL und eine Liste von Elementen (Bausteine), die sie enthält.
+    // ============================================================================
     pages: {
+        // Startseite: Die Hauptseite der Webseite
         index: {
             name: "Startseite",
             url: "/ff/index",
             elements: [
+                // Hero-Bereich am Anfang der Startseite
                 {
                     type: "hero",
                     data: {
@@ -163,6 +190,7 @@ const cmsConfig = {
                         }
                     }
                 },
+                // Text-Block: "Über uns" Abschnitt
                 {
                     type: "text",
                     data: {
@@ -170,6 +198,7 @@ const cmsConfig = {
                         text: "Der Löschzug 19 ist ein traditionsreicher Teil der Freiwilligen Feuerwehr Gelsenkirchen. Seit 8 Jahren engagieren sich unsere Mitglieder ehrenamtlich für die Sicherheit der Bürgerinnen und Bürger unseres Stadtteils."
                     }
                 },
+                // Karten: "Unsere Aufgaben" Abschnitt
                 {
                     type: "cards",
                     data: {
@@ -198,6 +227,7 @@ const cmsConfig = {
                         ]
                     }
                 },
+                // Statistiken: Zahlen und Kennzahlen
                 {
                     type: "stats",
                     data: {
@@ -210,6 +240,7 @@ const cmsConfig = {
                 }
             ]
         },
+        // Jugendfeuerwehr-Seite
         jugend: {
             name: "Jugendfeuerwehr",
             url: "/ff/jugend",
@@ -262,6 +293,7 @@ const cmsConfig = {
                 }
             ]
         },
+        // Kontakt-Seite
         kontakt: {
             name: "Kontakt",
             url: "/ff/kontakt",
@@ -312,6 +344,7 @@ const cmsConfig = {
                 }
             ]
         },
+        // Fahrzeug-Seite
         auto: {
             name: "Fahrzeuge",
             url: "/ff/auto",
@@ -370,7 +403,10 @@ const cmsConfig = {
         }
     },
 
-    // Footer-Konfiguration (global)
+    // ============================================================================
+    // FOOTER-KONFIGURATION (Global für alle Seiten)
+    // Hier werden die Links im Footer und das Copyright definiert.
+    // ============================================================================
     footer: {
         links: [
             { name: "Startseite", url: "/ff/index" },

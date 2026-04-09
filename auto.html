@@ -1,105 +1,134 @@
+<!--
+=============================================================================
+FAHRZEUGE | FF LÖSCHZUG 19 GEISENKIRCHEN
+===============================================================================
+Diese Datei ist die Fahrzeug-Übersichtsseite der Feuerwehr-Webseite.
+Hier finden Besucher Informationen über alle Einsatzfahrzeuge des Löschzugs,
+einschließlich technischer Daten und Bilder.
+
+Für Anpassungen:
+- Texte und Inhalte können direkt im HTML geändert werden
+- Farben und Styles sind im <style>-Bereich definiert
+- Das CMS-System lädt dynamischen Content über config/cms-config.js
+-->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unsere Fahrzeuge | FF Löschzug 19 Gelsenkirchen</title>
+    <!-- Grundlegende HTML-Einstellungen -->
+    <meta charset="UTF-8"> <!-- Zeichencodierung für korrekte Darstellung -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsives Design für alle Bildschirmgrößen -->
+    <title>Unsere Fahrzeuge | FF Löschzug 19 Gelsenkirchen</title> <!-- Titel der Seite (erscheint im Browser-Tab) -->
+    
+    <!-- Font Awesome Icons laden (für Symbole) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* ============================================
+           GRUNDLEGENDE STYLES (Gilt für alle Elemente)
+           ============================================ */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;           /* Keine Außenabstände standardmäßig */
+            padding: 0;          /* Keine Innenabstände standardmäßig */
+            box-sizing: border-box; /* Padding und Border werden zur Breite hinzugerechnet */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Schriftart für die ganze Seite */
         }
         
+        /* ============================================
+           HAUPTKÖRPER DER SEITE
+           ============================================ */
         body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-text-size-adjust: 100%;
+            background-color: #f5f5f5; /* Hellgrauer Hintergrund */
+            color: #333;                  /* Dunkelgraue Schriftfarbe */
+            line-height: 1.6;            /* Zeilenabstand für bessere Lesbarkeit */
+            overflow-x: hidden;          /* Verhindert horizontales Scrollen */
+            -webkit-text-size-adjust: 100%; /* Verhindert automatische Schriftgröße auf iOS */
         }
         
-        /* Feuerwehr Hintergrundmuster mit Animation */
+        /* ============================================
+           HINTERGRUND-MUSTER (Feuerwehr-Design)
+           Erzeugt ein subtiles Gittermuster im Hintergrund
+           ============================================ */
         .fw-bg {
-            position: fixed;
+            position: fixed;       /* Fixiert den Hintergrund beim Scrollen */
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.03;
-            background-image: 
+            width: 100%;           /* Volle Breite */
+            height: 100%;          /* Volle Höhe */
+            z-index: -1;           /* Hinter allen anderen Inhalten */
+            opacity: 0.03;         /* Sehr transparent (kaum sichtbar) */
+            background-image:      /* Kreuzmuster aus roten Linien */
                 linear-gradient(45deg, #E62B1E 1px, transparent 1px),
                 linear-gradient(-45deg, #E62B1E 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: bgMove 120s linear infinite;
+            background-size: 60px 60px; /* Größe des Musters */
+            animation: bgMove 120s linear infinite; /* Langsame Animation */
         }
         
+        /* Animation für das Hintergrundmuster (langsame Bewegung) */
         @keyframes bgMove {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 120px 120px;
-            }
+            0% { background-position: 0 0; }           /* Startposition */
+            100% { background-position: 120px 120px; } /* Endposition nach 120 Sekunden */
         }
         
-        /* Akzent-Muster */
+        /* ============================================
+           AKZENT-MUSTER (Punkte im Hintergrund)
+           Ergänzende Dekoration mit subtilen Punkten
+           ============================================ */
         .accent-pattern {
-            position: absolute;
+            position: absolute;    /* Absolute Positionierung */
             width: 100%;
             height: 100%;
-            background: 
+            background:             /* Muster aus kleinen Punkten */
                 radial-gradient(circle at 20% 30%, rgba(230, 43, 30, 0.03) 2px, transparent 2px),
                 radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.03) 2px, transparent 2px);
             background-size: 80px 80px;
-            animation: patternPulse 20s ease-in-out infinite;
+            animation: patternPulse 20s ease-in-out infinite; /* Pulsierende Animation */
         }
 
+        /* Animation für das Akzent-Muster (Pulsieren) */
         @keyframes patternPulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.7;
-            }
+            0%, 100% { opacity: 1; }   /* Volle Sichtbarkeit */
+            50% { opacity: 0.7; }      /* Etwas weniger sichtbar */
         }
         
-        /* Header mit Animationen */
+        /* ============================================
+           HEADER (Kopfzeile der Seite)
+           Enthält Logo und Navigation
+           ============================================ */
         header {
-            background-color: #E62B1E;
-            padding: 15px 0;
-            border-bottom: 4px solid #333;
+            background-color: #E62B1E;   /* Feuerwehr-Rot */
+            padding: 15px 0;             /* Innenabstände oben/unten */
+            border-bottom: 4px solid #333; /* Dunkelgrauer unterer Rand */
             position: relative;
-            z-index: 100;
-            animation: fadeInHeader 0.8s ease-out;
+            z-index: 100;                /* Über anderen Elementen */
+            animation: fadeInHeader 0.8s ease-out; /* Einblend-Animation */
         }
 
+        /* Animation für das Einblenden des Headers */
         @keyframes fadeInHeader {
             from {
-                transform: translateY(-20px);
-                opacity: 0;
+                transform: translateY(-20px); /* Startet 20px höher */
+                opacity: 0;                   /* Unsichtbar */
             }
             to {
-                transform: translateY(0);
-                opacity: 1;
+                transform: translateY(0);     /* Endposition */
+                opacity: 1;                   /* Sichtbar */
             }
         }
         
+        /* Container für zentrierten Inhalt (max. 1200px breit) */
         .container {
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            max-width: 1200px;  /* Maximale Breite für große Bildschirme */
+            margin: 0 auto;     /* Horizontal zentriert */
+            padding: 0 20px;    /* Seitenabstände */
         }
         
+        /* Flexbox-Layout für Header-Inhalt (Logo links, Navigation rechts) */
         .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: nowrap;
+            display: flex;               /* Flexbox aktivieren */
+            justify-content: space-between; /* Abstand zwischen Elementen */
+            align-items: center;         /* Vertikal zentrieren */
+            flex-wrap: nowrap;           /* Kein Umbruch bei kleinen Bildschirmen */
         }
         
         .logo {
