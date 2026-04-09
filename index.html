@@ -184,55 +184,63 @@
             transform: scale(1.05) rotate(2deg);
         }
         
-        /* Neues Hamburger-Menü */
+        /* Hamburger-Menü - einfaches und zuverlässiges Design */
         .menu-toggle {
             display: none;
-            width: 35px;
-            height: 30px;
-            position: relative;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 2px solid white;
+            border-radius: 5px;
             cursor: pointer;
-            z-index: 1001;
-            background: none;
-            border: none;
-            padding: 5px;
-            margin-left: 10px;
+            position: relative;
+            z-index: 1002;
+            padding: 8px;
         }
         
-        .menu-toggle span {
-            display: block;
-            height: 4px;
-            width: 100%;
-            background-color: white;
-            border-radius: 3px;
-            transition: all 0.3s ease;
+        .menu-toggle::before,
+        .menu-toggle::after {
+            content: '';
             position: absolute;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background-color: white;
+            transition: all 0.3s ease;
         }
         
-        .menu-toggle span:nth-child(1) {
-            top: 0;
+        .menu-toggle::before {
+            top: 12px;
         }
         
-        .menu-toggle span:nth-child(2) {
-            top: 13px;
+        .menu-toggle::after {
+            bottom: 12px;
         }
         
-        .menu-toggle span:nth-child(3) {
-            top: 26px;
+        .menu-toggle .bar {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 3px;
+            background-color: white;
+            transition: all 0.3s ease;
         }
         
-        .menu-toggle.active span:nth-child(1) {
-            top: 13px;
-            transform: rotate(45deg);
+        .menu-toggle.active::before {
+            transform: translateX(-50%) rotate(45deg);
+            top: 50%;
         }
         
-        .menu-toggle.active span:nth-child(2) {
+        .menu-toggle.active::after {
+            transform: translateX(-50%) rotate(-45deg);
+            bottom: 50%;
+        }
+        
+        .menu-toggle.active .bar {
             opacity: 0;
-        }
-        
-        .menu-toggle.active span:nth-child(3) {
-            top: 13px;
-            transform: rotate(-45deg);
         }
         
         nav {
@@ -540,6 +548,448 @@
         .stat-label {
             font-size: 1.2rem;
             opacity: 0.9;
+        }
+
+        /* CMS-Elemente Styles - Altes Blog-Design */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1589659764353-3c8d8a608cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: heroShine 8s infinite;
+        }
+
+        @keyframes heroShine {
+            0% { left: -100%; }
+            20%, 100% { left: 100%; }
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .hero .fw-button {
+            background-color: #E62B1E;
+            color: white;
+            border: 2px solid #333;
+            border-radius: 4px;
+            padding: 12px 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .hero .fw-button:hover {
+            background-color: #ff3d30;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .text-section {
+            padding: 80px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            position: relative;
+        }
+
+        .text-section h2 {
+            font-size: 2.2rem;
+            color: #E62B1E;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 0 15px 10px;
+            border-bottom: 3px solid #333;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+        }
+
+        .text-section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .cards-section {
+            padding: 80px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            position: relative;
+        }
+
+        .cards-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #E62B1E;
+            margin-bottom: 50px;
+            display: inline-block;
+            padding: 0 15px 10px;
+            border-bottom: 3px solid #333;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+        }
+
+        .cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 50px;
+            gap: 15px;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 250px;
+            margin: 15px;
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: #E62B1E;
+            margin-bottom: 20px;
+            animation: iconPulse 2s infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .stats-section {
+            background-color: #E62B1E;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: statShine 5s infinite;
+        }
+
+        @keyframes statShine {
+            0% { left: -100%; }
+            20%, 100% { left: 100%; }
+        }
+
+        .stats-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 40px;
+            max-width: 1200px;
+            margin: 40px auto 0;
+        }
+
+        .stat-item {
+            margin: 20px;
+            animation: statFadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.2s; }
+        .stat-item:nth-child(2) { animation-delay: 0.4s; }
+        .stat-item:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes statFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: countUp 2s ease-out forwards;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .contact-section {
+            padding: 80px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            position: relative;
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #E62B1E;
+            margin-bottom: 50px;
+            display: inline-block;
+            padding: 0 15px 10px;
+            border-bottom: 3px solid #333;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+        }
+
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 50px;
+            gap: 15px;
+            max-width: 1000px;
+            margin: 50px auto 0;
+        }
+
+        .contact-card {
+            flex: 1;
+            min-width: 250px;
+            margin: 15px;
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: #E62B1E;
+            margin-bottom: 20px;
+            animation: iconPulse 2s infinite;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.3rem;
+        }
+
+        .contact-card p {
+            color: #666;
+            line-height: 1.6;
+            white-space: pre-line;
+            font-size: 1rem;
+        }
+
+        .form-section {
+            background-color: rgba(240, 240, 240, 0.95);
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .form-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #E62B1E;
+            margin-bottom: 50px;
+            display: inline-block;
+            padding: 0 15px 10px;
+            border-bottom: 3px solid #333;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+        }
+
+        .cms-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .cms-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .cms-form .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cms-form .form-group input,
+        .cms-form .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .cms-form .form-group input:focus,
+        .cms-form .form-group textarea:focus {
+            border-color: #E62B1E;
+            outline: none;
+        }
+
+        .cms-form button {
+            width: 100%;
+            padding: 12px 24px;
+            background-color: #E62B1E;
+            color: white;
+            border: 2px solid #333;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cms-form button:hover {
+            background-color: #ff3d30;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .vehicle-section {
+            padding: 80px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            position: relative;
+        }
+
+        .vehicle-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #E62B1E;
+            margin-bottom: 50px;
+            display: inline-block;
+            padding: 0 15px 10px;
+            border-bottom: 3px solid #333;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+        }
+
+        .vehicle-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(230, 43, 30, 0.12);
+        }
+
+        .vehicle-header {
+            background-color: #f0f0f0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .vehicle-header i {
+            font-size: 4rem;
+            color: #E62B1E;
+            transition: transform 0.3s ease;
+        }
+
+        .vehicle-card:hover .vehicle-header i {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .vehicle-header h3 {
+            margin-bottom: 0;
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        .vehicle-card p {
+            padding: 20px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+
+        .vehicle-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0 20px 20px;
+        }
+
+        .feature-item {
+            background-color: #E62B1E;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-item i {
+            font-size: 0.8rem;
         }
         
         .membership {
@@ -993,22 +1443,24 @@
     <div class="fw-bg"></div>
     <div class="accent-pattern"></div>
     
+    <!-- CMS-Content einbinden -->
+    <script src="config/cms-config.js"></script>
+    <script src="render/cms-renderer.js"></script>
+    
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
                     <div class="logo-container">
                         <a href="/ff/index" class="logo-link">
-                            <img src="logot.png" alt="Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen" class="logo-image">
+                            <img src="logos/logot.png" alt="Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen" class="logo-image">
                         </a>
                     </div>
                 </div>
                 
-                <!-- Neues Hamburger Menü für Mobile -->
+                <!-- Hamburger Menu für Mobile -->
                 <button class="menu-toggle" aria-label="Menü öffnen">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span class="bar"></span>
                 </button>
                 
                 <nav>
@@ -1027,164 +1479,8 @@
         </div>
     </header>
 
-    <section class="hero" id="home">
-        <div class="container">
-            <h2>Ehrenamt. Engagement. Einsatzbereitschaft.</h2>
-            <p>Wir sind der Löschzug 19 der Freiwilligen Feuerwehr Gelsenkirchen. Rund um die Uhr einsatzbereit, um unseren Mitbürgern in Notlagen zu helfen.</p>
-            <a href="#membership" class="fw-button">Mitglied werden</a>
-        </div>
-    </section>
-
-    <section class="main-content" id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>Über unseren Löschzug</h2>
-            </div>
-            
-            <div class="about-us">
-                <div class="about-text">
-                    <h3>Löschzug 19 - Einsatz für Gelsenkirchen</h3>
-                    <p>Die Freiwillige Feuerwehr Löschzug 19 ist ein wichtiger Bestandteil des Brandschutzes in Gelsenkirchen. Wir sind eine engagierte Gemeinschaft von Ehrenamtlichen, die sich dem Schutz von Menschen, Tieren und Sachwerten verschrieben hat.</p>
-                    <p>Unser Löschzug verfügt über moderne Ausrüstung und gut ausgebildetes Personal, um bei Bränden, technischen Hilfeleistungen und Unglücksfällen schnell und kompetent helfen zu können.</p>
-                    <p>Neben dem Einsatzdienst engagieren wir uns in der Brandschutzerziehung, bei Veranstaltungen in der Gemeinde und in der Nachwuchsförderung durch unsere Jugendfeuerwehr.</p>
-                </div>
-                
-                <div class="about-image fw-border">
-                    <div class="image-placeholder">
-                        <div>
-                            <i class="fas fa-users" style="font-size: 4rem; margin-bottom: 20px;"></i>
-                            <p>Gemeinsam für Sicherheit</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-title" id="services">
-                <h2>Unsere Einsatzbereiche</h2>
-            </div>
-            
-            <div class="services">
-                <div class="service fw-card">
-                    <i class="fas fa-fire"></i>
-                    <h3>Brandbekämpfung</h3>
-                    <p>Einsätze bei Bränden aller Art - von Kleinbränden bis zu Großschadenslagen. Moderne Löschtechnik und fundierte Ausbildung garantieren effektive Hilfe.</p>
-                </div>
-                
-                <div class="service fw-card">
-                    <i class="fas fa-car-crash"></i>
-                    <h3>Technische Hilfeleistung</h3>
-                    <p>Bei Verkehrsunfällen, eingeklemmten Personen oder Sturmschäden sind wir zur Stelle. Spezialwerkzeuge wie Schere und Spreizer gehören zu unserer Ausrüstung.</p>
-                </div>
-                
-                <div class="service fw-card">
-                    <i class="fas fa-house-flood-water"></i>
-                    <h3>Umwelt- & Wasserschäden</h3>
-                    <p>Ob Ölspuren, auslaufende Gefahrgüter oder Hochwasser - wir helfen bei Umweltgefahren und unterstützen bei der Schadensbegrenzung.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="membership" id="membership">
-        <div class="container">
-            <div class="section-title">
-                <h2>Mitglied werden</h2>
-            </div>
-            
-            <div class="membership-content">
-                <div class="membership-text">
-                    <h3>Werden Sie Teil unseres Teams</h3>
-                    <p>Die Freiwillige Feuerwehr sucht stets engagierte Menschen, die sich für ihre Mitbürger einsetzen wollen. Bei uns finden Sie:</p>
-                    <ul>
-                        <li>Fundierte Ausbildung zum Feuerwehrmann/-frau</li>
-                        <li>Moderne Ausrüstung und Schutzbekleidung</li>
-                        <li>Kameradschaft und Teamgeist</li>
-                        <li>Abwechslungsreiche und sinnstiftende Tätigkeit</li>
-                        <li>Unterstützung bei der Vereinbarkeit von Beruf und Feuerwehr</li>
-                    </ul>
-                    <p>Alter, Geschlecht oder Beruf spielen keine Rolle - Hauptsache Sie sind teamfähig, hilfsbereit und körperlich fit. Wir bieten auch eine Jugendfeuerwehr für Interessierte ab 10 Jahren an.</p>
-                </div>
-                
-                <div class="membership-form fw-border">
-                    <h3 style="margin-bottom: 20px;">Schnellanfrage zur Mitgliedschaft</h3>
-                    <form id="membershipForm">
-                        <div class="form-group">
-                            <label for="name">Vor- und Nachname</label>
-                            <input type="text" id="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">E-Mail Adresse</label>
-                            <input type="email" id="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Telefonnummer</label>
-                            <input type="tel" id="phone">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="interest">Ich interessiere mich für</label>
-                            <select id="interest" required>
-                                <option value="">Bitte auswählen</option>
-                                <option value="active">Aktive Einsatzabteilung</option>
-                                <option value="youth">Jugendfeuerwehr (10-17 Jahre)</option>
-                                <option value="support">Unterstützende Mitgliedschaft</option>
-                                <option value="info">Erstinformation</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Nachricht (optional)</label>
-                            <textarea id="message" rows="3"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="fw-button">Anfrage senden</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="vehicles">
-        <div class="container">
-            <div class="section-title">
-                <h2>Unsere Fahrzeuge</h2>
-            </div>
-            
-            <div class="vehicle-grid">
-                <div class="vehicle-card">
-                    <div class="vehicle-image">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <div class="vehicle-info">
-                        <h3>HLF 20</h3>
-                        <p>Hilfeleistungslöschgruppenfahrzeug - Unser Allrounder für Brandbekämpfung und technische Hilfeleistung.</p>
-                    </div>
-                </div>
-                
-                <div class="vehicle-card">
-                    <div class="vehicle-image">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="vehicle-info">
-                        <h3>MTF</h3>
-                        <p>Mannschaftstransportfahrzeug - Für den Transport unserer Einsatzkräfte zum Einsatzort.</p>
-                    </div>
-                </div>
-                
-                <div class="vehicle-card">
-                    <div class="vehicle-image">
-                        <i class="fas fa-toolbox"></i>
-                    </div>
-                    <div class="vehicle-info">
-                        <h3>Kats-LF</h3>
-                        <p>Katastrophenschutzfahrzeug</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- CMS Main Content Container -->
+    <div id="cms-main-content"></div>
 
     <footer id="contact">
         <div class="container">

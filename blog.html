@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | FF Löschzug 19 Gelsenkirchen</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="blog.js"></script>
+    <script src="config/blog.js"></script>
     <style>
         * {
             margin: 0;
@@ -301,20 +301,20 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
-            margin-top: 40px;
         }
-        
-        /* Blog Card */
+
         .blog-card {
-            background-color: white;
-            border-radius: 12px;
+            background: white;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.05);
             animation: cardAppear 0.6s ease-out forwards;
             opacity: 0;
             transform: translateY(20px);
-            cursor: pointer;
         }
 
         .blog-card:nth-child(1) { animation-delay: 0.1s; }
@@ -329,8 +329,9 @@
         }
         
         .blog-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(230, 43, 30, 0.15);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(230, 43, 30, 0.2);
+            border-color: rgba(230, 43, 30, 0.3);
         }
 
         .blog-card.hidden {
@@ -370,14 +371,15 @@
 
         .blog-category {
             display: inline-block;
-            padding: 5px 15px;
-            background-color: #ffeaea;
-            color: #E62B1E;
+            background: linear-gradient(135deg, #E62B1E, #ff6b6b);
+            color: white;
+            padding: 6px 18px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(230, 43, 30, 0.3);
         }
         
         .blog-content h3 {
@@ -400,12 +402,30 @@
             align-items: center;
             padding-top: 15px;
             border-top: 1px solid #eee;
-            font-size: 0.9rem;
-            color: #888;
+            font-size: 0.85rem;
+            color: #666;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .blog-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8f8f8;
+            padding: 4px 10px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .blog-meta span:hover {
+            background: #E62B1E;
+            color: white;
+            transform: translateY(-1px);
         }
 
         .blog-meta i {
-            margin-right: 5px;
+            font-size: 0.8rem;
         }
 
         .read-more {
@@ -415,18 +435,24 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            transition: gap 0.3s;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, rgba(230, 43, 30, 0.1), rgba(255, 107, 107, 0.1));
+            padding: 6px 14px;
+            border-radius: 20px;
         }
 
         .read-more:hover {
             gap: 10px;
+            background: linear-gradient(135deg, #E62B1E, #ff6b6b);
+            color: white;
+            box-shadow: 0 4px 12px rgba(230, 43, 30, 0.3);
         }
 
         .reading-time {
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            color: #888;
+            color: #666;
             font-size: 0.85rem;
         }
 
@@ -563,6 +589,229 @@
             font-size: 1.5rem;
             margin: 0;
             animation: fadeInDown 0.5s ease-out;
+        }
+
+        /* Suchfeld */
+        .search-container {
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 30px;
+            padding: 12px 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 500px;
+            width: 100%;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .search-box:focus-within {
+            border-color: #E62B1E;
+            box-shadow: 0 4px 25px rgba(230, 43, 30, 0.15);
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            padding: 5px;
+            color: #333;
+        }
+
+        .search-box input::placeholder {
+            color: #999;
+        }
+
+        .search-box button {
+            background: linear-gradient(135deg, #E62B1E, #ff6b6b);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 2px 8px rgba(230, 43, 30, 0.3);
+        }
+
+        .search-box button:hover {
+            background: linear-gradient(135deg, #ff3d30, #ff8a80);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 4px 15px rgba(230, 43, 30, 0.4);
+        }
+
+        /* Autoren-Anzeige */
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #E62B1E;
+            box-shadow: 0 2px 8px rgba(230, 43, 30, 0.2);
+        }
+
+        .author-details {
+            flex: 1;
+        }
+
+        .author-name {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .author-role {
+            color: #888;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tags */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
+            color: #666;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .tag:hover {
+            background: linear-gradient(135deg, #E62B1E, #ff6b6b);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 43, 30, 0.3);
+            border-color: transparent;
+        }
+
+        /* Social Sharing */
+        .social-share {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            justify-content: center;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .social-btn.facebook {
+            background: linear-gradient(135deg, #1877f2, #0d65d9);
+        }
+
+        .social-btn.twitter {
+            background: linear-gradient(135deg, #1da1f2, #0c85d0);
+        }
+
+        .social-btn.whatsapp {
+            background: linear-gradient(135deg, #25d366, #1da851);
+        }
+
+        .social-btn.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .social-btn.linkedin {
+            background: linear-gradient(135deg, #0077b5, #005585);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        /* Bildergalerie */
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-main {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-thumbs {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+            overflow-x: auto;
+        }
+
+        .gallery-thumb {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .gallery-thumb:hover,
+        .gallery-thumb.active {
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+
+        /* Video Container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         @keyframes fadeInDown {
@@ -919,7 +1168,7 @@
                 <div class="logo">
                     <div class="logo-container">
                         <a href="/ff/index" class="logo-link">
-                            <img src="logot.png" alt="Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen" class="logo-image">
+                            <img src="logos/logot.png" alt="Freiwillige Feuerwehr Löschzug 19 Gelsenkirchen" class="logo-image">
                         </a>
                     </div>
                 </div>
@@ -965,6 +1214,16 @@
                 <!-- Filter-Buttons werden dynamisch aus blog.js geladen -->
             </div>
             
+            <!-- Suchfeld -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Beiträge durchsuchen...">
+                    <button onclick="searchPosts()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
             <div class="blog-grid" id="blogGrid">
                 <!-- Blog-Karten werden dynamisch aus blog.json geladen -->
             </div>
@@ -987,6 +1246,25 @@
                 </div>
                 <div id="modalText">
                     <p>Inhalt...</p>
+                </div>
+                
+                <!-- Social Sharing -->
+                <div class="social-share" id="socialShare">
+                    <a href="#" class="social-btn facebook" target="_blank" title="Auf Facebook teilen">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-btn twitter" target="_blank" title="Auf Twitter teilen">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-btn whatsapp" target="_blank" title="Auf WhatsApp teilen">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="social-btn instagram" target="_blank" title="Auf Instagram teilen">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-btn linkedin" target="_blank" title="Auf LinkedIn teilen">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1246,12 +1524,25 @@
                     // Lesezeit berechnen
                     const readingTime = calculateReadingTime(post.content);
                     
-                    // Bild oder Icon
+                    // Bildergalerie oder Icon
                     let imageHtml;
-                    if (post.image) {
+                    if (post.images && post.images.length > 0) {
+                        imageHtml = `<img src="${post.images[0]}" alt="${post.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><i class="fas ${post.icon || 'fa-newspaper'}" style="display:none;"></i>`;
+                    } else if (post.video) {
+                        imageHtml = `<i class="fas fa-play-circle"></i>`;
+                    } else if (post.image) {
                         imageHtml = `<img src="${post.image}" alt="${post.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><i class="fas ${post.icon || 'fa-newspaper'}" style="display:none;"></i>`;
                     } else {
                         imageHtml = `<i class="fas ${post.icon || 'fa-newspaper'}"></i>`;
+                    }
+
+                    // Autor-Informationen
+                    let authorInfo = '';
+                    if (post.authorId && blogAuthors) {
+                        const author = blogAuthors.find(a => a.id === post.authorId);
+                        if (author) {
+                            authorInfo = `<span class="author-name"><i class="fas fa-user"></i> ${author.name}</span>`;
+                        }
                     }
 
                     const card = document.createElement('div');
@@ -1270,9 +1561,15 @@
                             <p>${excerpt}</p>
                             <div class="blog-meta">
                                 <span><i class="fas fa-calendar"></i> ${post.date || ''}</span>
+                                ${authorInfo}
                                 <span class="reading-time"><i class="fas fa-clock"></i> ${readingTime} Min.</span>
                                 <span class="read-more">Mehr lesen <i class="fas fa-arrow-right"></i></span>
                             </div>
+                            ${post.tags && post.tags.length > 0 ? `
+                                <div class="tags-container">
+                                    ${post.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); filterByTag('${tag}')">#${tag}</span>`).join('')}
+                                </div>
+                            ` : ''}
                         </div>
                     `;
                     
@@ -1286,6 +1583,46 @@
             if (validPosts === 0) {
                 blogGrid.innerHTML = '<p>Keine gültigen Blogbeiträge gefunden.</p>';
             }
+        }
+
+        // Volltextsuche
+        function searchPosts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (!searchTerm) {
+                const processedPosts = processArchive(blogPosts);
+                renderBlogPosts(processedPosts);
+                return;
+            }
+
+            const filteredPosts = blogPosts.filter(post => {
+                const title = post.title.toLowerCase();
+                const excerpt = (post.excerpt || '').toLowerCase();
+                const content = post.content.toLowerCase();
+                const tags = (post.tags || []).join(' ').toLowerCase();
+                const category = (categoryNames[post.category] || post.category).toLowerCase();
+                
+                return title.includes(searchTerm) || 
+                       excerpt.includes(searchTerm) || 
+                       content.includes(searchTerm) ||
+                       tags.includes(searchTerm) ||
+                       category.includes(searchTerm);
+            });
+
+            const processedPosts = processArchive(filteredPosts);
+            renderBlogPosts(processedPosts);
+        }
+
+        // Event-Listener für Suche bei Enter-Taste
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchPosts();
+            }
+        });
+
+        // Nach Tag filtern
+        function filterByTag(tag) {
+            document.getElementById('searchInput').value = tag;
+            searchPosts();
         }
         
         // Filter-Funktion
@@ -1322,12 +1659,39 @@
             // Lesezeit berechnen
             const readingTime = calculateReadingTime(post.content);
             
-            // Bild oder Icon für Modal
+            // Bildergalerie oder Video oder Icon für Modal
             let modalHeaderHtml;
-            if (post.image) {
+            if (post.video) {
+                modalHeaderHtml = `<div class="video-container"><iframe src="${post.video}" allowfullscreen></iframe></div>`;
+            } else if (post.images && post.images.length > 0) {
+                let thumbsHtml = post.images.length > 1 ? `
+                    <div class="gallery-thumbs">
+                        ${post.images.map((img, index) => `
+                            <img src="${img}" class="gallery-thumb ${index === 0 ? 'active' : ''}" onclick="changeGalleryImage(${index})">
+                        `).join('')}
+                    </div>
+                ` : '';
+                modalHeaderHtml = `
+                    <div class="gallery-container">
+                        <div class="gallery-main">
+                            <img src="${post.images[0]}" id="galleryMainImage" alt="${post.title}">
+                        </div>
+                        ${thumbsHtml}
+                    </div>
+                `;
+            } else if (post.image) {
                 modalHeaderHtml = `<img src="${post.image}" alt="${post.title}" style="width:100%;height:100%;object-fit:cover;">`;
             } else {
                 modalHeaderHtml = `<i class="fas ${post.icon || 'fa-newspaper'}"></i>`;
+            }
+            
+            // Autor-Informationen
+            let authorInfo = '<span><i class="fas fa-user"></i> Löschzug 19</span>';
+            if (post.authorId && blogAuthors) {
+                const author = blogAuthors.find(a => a.id === post.authorId);
+                if (author) {
+                    authorInfo = `<span><i class="fas fa-user"></i> ${author.name}</span>`;
+                }
             }
             
             document.getElementById('modalCategory').textContent = categoryNames[post.category] || post.category;
@@ -1335,13 +1699,68 @@
             document.getElementById('modalMeta').innerHTML = `
                 <span><i class="fas fa-calendar"></i> ${post.date || ''}</span>
                 <span><i class="fas fa-clock"></i> ${readingTime} Min.</span>
-                <span><i class="fas fa-user"></i> Löschzug 19</span>
+                ${authorInfo}
             `;
-            document.getElementById('modalText').innerHTML = post.content;
+            
+            // Content mit Bildergalerie/Video
+            let contentHtml = post.content;
+            if (post.images && post.images.length > 0) {
+                // Bilder im Content als Galerie einfügen
+                post.images.forEach(img => {
+                    contentHtml += `<img src="${img}" style="max-width:100%;margin:10px 0;border-radius:10px;">`;
+                });
+            }
+            
+            document.getElementById('modalText').innerHTML = contentHtml;
             document.getElementById('modalIcon').innerHTML = modalHeaderHtml;
+            
+            // Social Sharing Links aktualisieren
+            updateSocialLinks(post);
+            
+            // Tags im Modal anzeigen
+            if (post.tags && post.tags.length > 0) {
+                const tagsContainer = document.createElement('div');
+                tagsContainer.className = 'tags-container';
+                tagsContainer.style.marginTop = '20px';
+                tagsContainer.innerHTML = post.tags.map(tag => `<span class="tag">#${tag}</span>`).join('');
+                document.getElementById('modalText').appendChild(tagsContainer);
+            }
             
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+        }
+
+        // Bildergalerie wechseln
+        function changeGalleryImage(index) {
+            const post = blogPosts.find(p => p.id === document.querySelector('.blog-card.active')?.dataset.id);
+            if (!post || !post.images) return;
+            
+            const mainImage = document.getElementById('galleryMainImage');
+            if (mainImage) {
+                mainImage.src = post.images[index];
+            }
+            
+            document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        }
+
+        // Social Sharing Links aktualisieren
+        function updateSocialLinks(post) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(post.title);
+            const excerpt = encodeURIComponent(post.excerpt || '');
+            
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&t=${title}`;
+            const twitterUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            const whatsappUrl = `https://wa.me/?text=${title}%20${url}`;
+            const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}&summary=${excerpt}`;
+            
+            document.querySelector('.social-btn.facebook').href = facebookUrl;
+            document.querySelector('.social-btn.twitter').href = twitterUrl;
+            document.querySelector('.social-btn.whatsapp').href = whatsappUrl;
+            document.querySelector('.social-btn.linkedin').href = linkedinUrl;
+            // Instagram hat keine direkte Share-URL, daher bleibt es als Link zur App
         }
 
         function closeModal(event) {

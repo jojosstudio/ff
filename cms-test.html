@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Baukasten-System - Testseite zum Üben</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .test-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .test-header h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .test-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .test-header .badge {
+            background: #ffc107;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border: 2px solid #0c5460;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            color: #0c5460;
+        }
+
+        .info-box h3 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+        }
+
+        .info-box li {
+            margin-bottom: 5px;
+        }
+
+        .cms-main-content {
+            min-height: 400px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .edit-hint {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            color: #856404;
+        }
+
+        .edit-hint code {
+            background: #f8f9fa;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .test-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="test-header">
+            <h1><i class="fas fa-flask"></i> CMS Baukasten-System - Testseite</h1>
+            <p>Übungsumgebung für das Baukasten-CMS</p>
+            <span class="badge"><i class="fas fa-exclamation-triangle"></i> Nur zum Üben - Nicht produktiv!</span>
+        </div>
+
+        <div class="info-box">
+            <h3><i class="fas fa-info-circle"></i> Was können Sie hier tun?</h3>
+            <ul>
+                <li><strong>Elemente hinzufügen:</strong> Fügen Sie neue Elemente zum <code>elements</code>-Array hinzu</li>
+                <li><strong>Elemente entfernen:</strong> Löschen Sie Elemente aus dem Array</li>
+                <li><strong>Elemente verschieben:</strong> Ändern Sie die Position der Elemente im Array</li>
+                <li><strong>Inhalte ändern:</strong> Bearbeiten Sie die <code>data</code>-Objekte der Elemente</li>
+                <li><strong>Neue Element-Typen erstellen:</strong> Fügen Sie neue Typen zu <code>elementTypes</code> hinzu</li>
+            </ul>
+        </div>
+
+        <div class="edit-hint">
+            <h3><i class="fas fa-edit"></i> So bearbeiten Sie diese Seite:</h3>
+            <ol>
+                <li>Öffnen Sie die Datei <code>cms-test-config.js</code> im Editor</li>
+                <li>Ändern Sie die Elemente im <code>pages.test.elements</code>-Array</li>
+                <li>Speichern Sie die Datei</li>
+                <li>Laden Sie diese Seite neu (F5)</li>
+                <li>Die Änderungen sind sofort sichtbar!</li>
+            </ol>
+        </div>
+
+        <!-- CMS Main Content Container -->
+        <div id="cms-main-content" class="cms-main-content"></div>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="cms-demo.html"><i class="fas fa-eye"></i> Zur Demo-Seite</a>
+                <a href="anleitung/CMS_GUIDE.md"><i class="fas fa-book"></i> Zur Anleitung</a>
+                <a href="index.html"><i class="fas fa-home"></i> Zur Startseite</a>
+            </div>
+            <div class="copyright">
+                © 2026 CMS-Testseite - Nur zum Üben
+            </div>
+        </footer>
+    </div>
+
+    <!-- CMS-Test-Konfiguration laden -->
+    <script src="config/cms-test-config.js"></script>
+    <script src="render/cms-renderer.js"></script>
+
+    <script>
+        // Test-Renderer für die Test-Konfiguration
+        class CMSTestRenderer {
+            constructor() {
+                this.config = null;
+            }
+
+            loadConfig() {
+                if (typeof cmsTestConfig !== 'undefined') {
+                    this.config = cmsTestConfig;
+                    return true;
+                }
+                return false;
+            }
+
+            renderTestPage() {
+                if (!this.config || !this.config.pages.test) {
+                    console.error('Testseite nicht gefunden');
+                    return;
+                }
+
+                const page = this.config.pages.test;
+                const mainContent = document.getElementById('cms-main-content');
+                
+                if (!mainContent) {
+                    console.error('Container nicht gefunden');
+                    return;
+                }
+
+                // Alle Elemente rendern
+                let html = '';
+                page.elements.forEach(element => {
+                    html += this.renderElement(element);
+                });
+
+                mainContent.innerHTML = html;
+            }
+
+            renderElement(element) {
+                const elementType = this.config.elementTypes[element.type];
+                if (!elementType) {
+                    console.error('Element-Typ nicht gefunden:', element.type);
+                    return '';
+                }
+
+                return elementType.template(element.data);
+            }
+
+            renderFooter() {
+                if (!this.config || !this.config.footer) return;
+
+                const footerLinks = document.querySelector('.footer-links');
+                if (footerLinks) {
+                    footerLinks.innerHTML = this.config.footer.links.map(link => 
+                        `<a href="${link.url}"><i class="fas fa-link"></i> ${link.name}</a>`
+                    ).join(' ');
+                }
+
+                const copyright = document.querySelector('.copyright');
+                if (copyright) {
+                    copyright.textContent = this.config.footer.copyright;
+                }
+            }
+
+            renderAll() {
+                this.loadConfig();
+                this.renderTestPage();
+                this.renderFooter();
+            }
+        }
+
+        // Test-Renderer initialisieren
+        const cmsTestRenderer = new CMSTestRenderer();
+        document.addEventListener('DOMContentLoaded', () => {
+            cmsTestRenderer.renderAll();
+        });
+    </script>
+</body>
+</html>

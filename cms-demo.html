@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Baukasten-System Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .demo-header h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .demo-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .demo-section {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .demo-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .demo-section h2 i {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .preview-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px dashed #667eea;
+            margin-top: 20px;
+        }
+
+        /* Element Demo Styles */
+        
+        /* Hero Demo */
+        .hero-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .hero-demo h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .hero-demo p {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .hero-demo .button {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .hero-demo .button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Text Demo */
+        .text-demo {
+            padding: 20px;
+        }
+
+        .text-demo h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .text-demo p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Cards Demo */
+        .cards-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card-demo {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card-demo:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-demo i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .card-demo h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .card-demo p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Stats Demo */
+        .stats-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .stat-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-demo .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-demo .label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Demo */
+        .contact-demo {
+            padding: 20px;
+        }
+
+        .contact-item-demo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .contact-item-demo i {
+            font-size: 1.5rem;
+            color: #667eea;
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-item-demo .info {
+            flex: 1;
+        }
+
+        .contact-item-demo .info h5 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .contact-item-demo .info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Form Demo */
+        .form-demo {
+            padding: 20px;
+        }
+
+        .form-demo h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .form-demo .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-demo label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-demo input,
+        .form-demo textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-demo input:focus,
+        .form-demo textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-demo button {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .form-demo button:hover {
+            background: #764ba2;
+        }
+
+        /* Vehicle Demo */
+        .vehicle-demo {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .vehicle-demo .vehicle-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .vehicle-demo .vehicle-header i {
+            font-size: 3rem;
+            color: #667eea;
+        }
+
+        .vehicle-demo .vehicle-header h3 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .vehicle-demo .vehicle-description {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .vehicle-demo .vehicle-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .vehicle-demo .feature-tag {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .note {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            color: #856404;
+        }
+
+        .note i {
+            margin-right: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .demo-header h1 {
+                font-size: 2rem;
+            }
+
+            .hero-demo h1 {
+                font-size: 2rem;
+            }
+
+            .cards-demo {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="demo-header">
+            <h1><i class="fas fa-cubes"></i> CMS Baukasten-System Demo</h1>
+            <p>Visualisierung aller verfügbaren Element-Typen für das Baukasten-CMS</p>
+            <a href="anleitung/CMS_GUIDE.md" class="back-link"><i class="fas fa-arrow-left"></i> Zurück zur Anleitung</a>
+        </div>
+
+        <!-- Hero Element -->
+        <div class="demo-section">
+            <h2><i class="fas fa-heading"></i> 1. Hero Element</h2>
+            <div class="code-example">
+{
+    type: "hero",
+    data: {
+        title: "Titel",
+        subtitle: "Untertitel",
+        button: {
+            text: "Button-Text",
+            url: "#section"
+        }
+    }
+}
+            </div>
+            <div class="preview-box">
+                <div class="hero-demo">
+                    <h1>Willkommen bei der Feuerwehr</h1>
+                    <p>Wir sind rund um die Uhr einsatzbereit für Ihre Sicherheit</p>
+                    <a href="#" class="button">Mehr erfahren</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text Element -->
+        <div class="demo-section">
+            <h2><i class="fas fa-align-left"></i> 2. Text Element</h2>
+            <div class="code-example">
+{
+    type: "text",
+    data: {
+        title: "Überschrift",
+        text: "Hier steht der Textinhalt"
+    }
+}
+            </div>
+            <div class="preview-box">
+                <div class="text-demo">
+                    <h3>Über unseren Löschzug</h3>
+                    <p>Die Freiwillige Feuerwehr Löschzug 19 ist ein wichtiger Bestandteil des Brandschutzes in Gelsenkirchen. Wir sind eine engagierte Gemeinschaft von Ehrenamtlichen, die sich dem Schutz von Menschen, Tieren und Sachwerten verschrieben hat.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards Element -->
+        <div class="demo-section">
+            <h2><i class="fas fa-th-large"></i> 3. Cards Element</h2>
+            <div class="code-example">
+{
+    type: "cards",
+    data: {
+        title: "Überschrift",
+        items: [
+            {
+                icon: "fa-fire",
+                title: "Titel 1",
+                description: "Beschreibung 1"
+            },
+            {
+                icon: "fa-users",
+                title: "Titel 2",
+                description: "Beschreibung 2"
+            }
+        ]
+    }
+}
+            </div>
+            <div class="preview-box">
+                <h3 style="text-align: center; color: #667eea; margin-bottom: 20px;">Unsere Einsatzbereiche</h3>
+                <div class="cards-demo">
+                    <div class="card-demo">
+                        <i class="fas fa-fire"></i>
+                        <h4>Brandbekämpfung</h4>
+                        <p>Einsätze bei Bränden aller Art</p>
+                    </div>
+                    <div class="card-demo">
+                        <i class="fas fa-car-crash"></i>
+                        <h4>Technische Hilfe</h4>
+                        <p>Verkehrsunfälle und Sturmschäden</p>
+                    </div>
+                    <div class="card-demo">
+                        <i class="fas fa-heartbeat"></i>
+                        <h4>Erste Hilfe</h4>
+                        <p>Medizinische Erste Hilfe</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Element -->
+        <div class="demo-section">
+            <h2><i class="fas fa-chart-bar"></i> 4. Stats Element</h2>
+            <div class="code-example">
+{
+    type: "stats",
+    data: {
+        items: [
+            { number: "100+", label: "Jahre" },
+            { number: "45", label: "Mitglieder" },
+            { number: "150+", label: "Einsätze" }
+        ]
+    }
+}
+            </div>
+            <div class="preview-box">
+                <div class="stats-demo">
+                    <div class="stat-demo">
+                        <div class="number">100+</div>
+                        <div class="label">Jahre</div>
+                    </div>
+                    <div class="stat-demo">
+                        <div class="number">45</div>
+                        <div class="label">Mitglieder</div>
+                    </div>
+                    <div class="stat-demo">
+                        <div class="number">150+</div>
+                        <div class="label">Einsätze</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Element -->
+        <div class="demo-section">
+            <h2><i class="fas fa-address-book"></i> 5. Contact Element</h2>
+            <div class="code-example">
+{
+    type: "contact",
+    data: {
+        title: "Kontaktinformationen",
+        items: [
+            {
+                icon: "fa-phone",
+                title: "Telefon",
+                text: "0209 123456"
+            }
+        ]
+    }
+}
+            </div>
+            <div class="preview-box">
+                <h3 style="color: #667eea; margin-bottom: 20px;">Kontaktinformationen</h3>
+                <div class="contact-demo">
+                    <div class="contact-item-demo">
+                        <i class="fas fa-phone"></i>
+                        <div class="info">
+                            <h5>Telefon</h5>
+                            <p>0209 123456</p>
+                        </div>
+                    </div>
+                    <div class="contact-item-demo">
+                        <i class="fas fa-envelope"></i>
+                        <div class="info">
+                            <h5>E-Mail</h5>
+                            <p>info@feuerwehr-ge.de</p>
+                        </div>
+                    </div>
+                    <div class="contact-item-demo">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="info">
+                            <h5>Adresse</h5>
+                            <p>Feuerwehrhaus Heßler, Gelsenkirchen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Element -->
+        <div class="demo-section">
+            <h2><i class="fas fa-envelope"></i> 6. Form Element</h2>
+            <div class="code-example">
+{
+    type: "form",
+    data: {
+        title: "Nachricht senden",
+        fields: [
+            { label: "Name", type: "text", placeholder: "Ihr Name" },
+            { label: "E-Mail", type: "email", placeholder: "Ihre E-Mail" }
+        ],
+        submitText: "Absenden"
+    }
+}
+            </div>
+            <div class="preview-box">
+                <div class="form-demo">
+                    <h3>Nachricht senden</h3>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" placeholder="Ihr Name">
+                    </div>
+                    <div class="form-group">
+                        <label>E-Mail</label>
+                        <input type="email" placeholder="Ihre E-Mail">
+                    </div>
+                    <div class="form-group">
+                        <label>Nachricht</label>
+                        <textarea rows="4" placeholder="Ihre Nachricht"></textarea>
+                    </div>
+                    <button>Absenden</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vehicle Element -->
+        <div class="demo-section">
+            <h2><i class="fas fa-truck"></i> 7. Vehicle Element</h2>
+            <div class="code-example">
+{
+    type: "vehicle",
+    data: {
+        name: "HLF 20",
+        icon: "fa-truck",
+        description: "Beschreibung des Fahrzeugs",
+        features: [
+            "Feature 1",
+            "Feature 2",
+            "Feature 3"
+        ]
+    }
+}
+            </div>
+            <div class="preview-box">
+                <div class="vehicle-demo">
+                    <div class="vehicle-header">
+                        <i class="fas fa-truck"></i>
+                        <h3>HLF 20</h3>
+                    </div>
+                    <p class="vehicle-description">Das HLF 20 ist unser wichtigstes Einsatzfahrzeug und bei den meisten Einsätzen als erstes Fahrzeug vor Ort. Es vereint Lösch- und Hilfeleistungstechnik in einem Fahrzeug.</p>
+                    <div class="vehicle-features">
+                        <span class="feature-tag">Tragkraftspritze</span>
+                        <span class="feature-tag">Atemschutz</span>
+                        <span class="feature-tag">Schere & Spreizer</span>
+                        <span class="feature-tag">Stromerzeuger</span>
+                        <span class="feature-tag">Schlauchmaterial</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="note">
+            <i class="fas fa-info-circle"></i>
+            <strong>Hinweis:</strong> Dies ist eine Demo-Seite zur Visualisierung der Element-Typen. Diese Seite ersetzt nicht die eigentlichen Seiten der Website, sondern dient nur zur Anleitung und Dokumentation des Baukasten-CMS.
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="anleitung/CMS_GUIDE.md" class="back-link"><i class="fas fa-arrow-left"></i> Zurück zur Anleitung</a>
+        </div>
+    </div>
+</body>
+</html>
